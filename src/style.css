@@ -162,7 +162,7 @@ input[type=submit] {
 .option .checkbox:checked + label:before {
     background-color: #ec6608;
     border: 0;
-    background-image: url("../img/checked.svg");
+    background-image: url("../dist/img/checked.svg");
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: 11.3px 9px;
@@ -242,8 +242,8 @@ input[type=submit] {
 
 @font-face {
     font-family: 'Conv_RUBSN';
-  src: url("../fonts/RUBSN.eot");
-  src: local("☺"), url("../fonts/RUBSN.woff") format("woff"), url("../fonts/RUBSN.ttf") format("truetype"), url("../fonts/RUBSN.svg") format("svg");
+  src: url("../dist/fonts/RUBSN.eot");
+  src: local("☺"), url("../dist/fonts/RUBSN.woff") format("woff"), url("../dist/fonts/RUBSN.ttf") format("truetype"), url("../dist/fonts/RUBSN.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -470,7 +470,7 @@ body.stop-scrolling {
 
 .popup-all .popup-wraper .popup-content .popup-txt-3:before {
     content: '';
-    background-image: url("../img/attention-16.svg");
+    background-image: url("../dist/img/attention-16.svg");
     width: 20px;
     height: 20px;
     top: 3px;
@@ -1444,7 +1444,7 @@ input[type='submit'].styler[disabled] {
 }
 
 .an-navigator-wrap .option .checkbox:checked + label:before {
-    background-image: url(../img/an-navigator-ch.svg);
+    background-image: url(../dist/img/an-navigator-ch.svg);
     background-size: 14.3px 13px;
     background-color: #fd8440;
 }
@@ -1580,7 +1580,7 @@ input[type='submit'].styler[disabled] {
 .an-navigator-section-2 .an-navigator-section-2-nav .an-section-2-search {
     margin-left: auto;
     position: relative;
-    background-image: url("../img/an-navigator-search.svg");
+    background-image: url("../dist/img/an-navigator-search.svg");
     background-size: 17px 17px;
     background-repeat: no-repeat;
     background-position: 200px 16px;
@@ -1997,7 +1997,7 @@ input[type='submit'].styler[disabled] {
     display: inline-block;
     content: "";
     position: absolute;
-    background-image: url("../img/an-navigator-filter.svg");
+    background-image: url("../dist/img/an-navigator-filter.svg");
     width: 16px;
     height: 12px;
     background-size: cover;

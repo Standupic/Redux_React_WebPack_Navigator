@@ -1,0 +1,1 @@
+export default (count = 0,action) => (action.type === "INCREMENT" ? count + 1 : count)

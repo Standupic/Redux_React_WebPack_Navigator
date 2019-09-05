@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {Provider} from 'react-redux';
+import store from '../store';
+import App from '../components/app';
 import './style.css'
 
-const App = () => {
-  return <div className="helloworld">Hello React,Webpack 4 & Babel 7!</div>;
-};
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(
+    <Provider store={store}>
+       <App /> 
+    </Provider>, 
+document.querySelector("#root"));

@@ -21,10 +21,13 @@
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "redux": "^4.0.4",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-redux": "^7.1.1"
+  }
 }
