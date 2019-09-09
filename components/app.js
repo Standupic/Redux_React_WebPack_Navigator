@@ -19,12 +19,17 @@ class App extends Component{
                             <HeaderFilter/>
                         </div>
                     </section>
+                <section className="an-navigator-section-3">
+			        <div className="an-navigator-wrap">
+                        
+                    </div>
+                </section>
            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = (data) => {
-    data
+    return {data}
 }
 export default connect(mapStateToProps,{fetchData})(App)
