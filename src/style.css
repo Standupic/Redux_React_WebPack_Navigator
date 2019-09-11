@@ -7,11 +7,11 @@ body {
     color: #333333;
     margin: 0;
 }
-#app{
+#root{
      width: 1400px;
      margin: 0 auto;
     } 
-#app .loading{
+#loading{
     margin: 0 auto;
     width: 256px;
 }

@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import data from './app';
+import data from './tarifs';
+import sorting from './sortTarifs';
 
 const reducer = combineReducers({
-    data
+    data,
+    sorting
 })
 
 export default reducer;

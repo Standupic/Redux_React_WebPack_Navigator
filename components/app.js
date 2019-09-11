@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import Counter from './counter';
 import HeaderFilter from './headerFilter';
+import FilterTagList from './filterTagList';
 import {fetchData} from '../action';
-
+import Loader from './loader';
 
 class App extends Component{
     componentDidMount(){
-        this.props.fetchData()
+        this.props.dispatch(fetchData("../data/tarifs.json"))
     }
     render(){
+        // const {error, loading, tarifs} = this.props;
+        // if(loading){
+        //     return (
+        //         <React.Fragment>
+        //         <section className="an-setting-quickly-tags"></section>
+        //         <section className="an-navigator-section-2">
+        //             <Loader/>
+        //         </section>
+        //         </React.Fragment>
+        //     )
+        // }
         return(
            <React.Fragment>
                 <section className="an-setting-quickly-tags"></section>
@@ -19,9 +30,9 @@ class App extends Component{
                             <HeaderFilter/>
                         </div>
                     </section>
-                <section className="an-navigator-section-3">
+                <section className="an-navigator-section-2">
 			        <div className="an-navigator-wrap">
-                        
+                            <FilterTagList/>
                     </div>
                 </section>
            </React.Fragment>
@@ -29,7 +40,12 @@ class App extends Component{
     }
 }
 
-const mapStateToProps = (data) => {
-    return {data}
+const mapStateToProps = (state) => {
+   return {
+       tarifs: state.tarifs,
+       loading: state.loading,
+       error: state.error
+   }
 }
-export default connect(mapStateToProps,{fetchData})(App)
+
+export default connect(mapStateToProps)(App)

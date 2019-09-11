@@ -19,7 +19,7 @@ const HeaderFilter = (props) =>{
                             // handlePaginationCountTarifs={(i)=>{handlePaginationCountTarifs(i)}}
                             />
                     <div className="an-section-2-settings">
-                        <img src="/navigator/img/an-navigator-setings.svg" className="an-navigator-setings"/>
+                        <img src="../dist/img/an-navigator-setings.svg" className="an-navigator-setings"/>
                     </div>
                 </div>
             </div>
