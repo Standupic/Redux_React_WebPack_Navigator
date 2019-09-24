@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import Filter from './filter';
-// import SetTagSearchInput from './setTagSearch';
+import {connect} from 'react-redux';
+import SetTagSearch from './setTagSearch';
 
 
 const  FilterList = (props) => {
+    const {filters} = props;
+    console.log(filters)
     // const {filters,
     //     resetFilters,
     //     handleToggleFilter,
@@ -30,19 +33,14 @@ const  FilterList = (props) => {
                                 item={obj}
                                 toggle={obj['active']}
                                 checked={obj['checked']}
-                                handleToggleFilter={(name)=>{handleToggleFilter(name)}}
-                                handleFilter={(e,obj)=>{handleFilter(e,obj)}}
-                                onChangeSlider={(obj)=>{onChangeSlider(obj)}}
-                                resetRadio={(obj)=>{resetRadio(obj)}}
-                                hideFilters={hideFilters}
-                                display={obj['is_seen']}
+                                key={index}
                             />
                         )
                     })
                 }
                 {/* <div className="wrap_button_filter">
                     {setTagSearch ? 
-                    <SetTagSearchInput 
+                    <SetTagSearch
                         togglePopUp={togglePopUp}
                         saveTagSearch={saveTagSearch}
                         greatestValue={greatestValue}
@@ -82,4 +80,8 @@ const  FilterList = (props) => {
 
 // }
 
-export default FilterList;
+export default connect((state)=>{
+    return {
+        filters: state.data.filters
+    }
+})(FilterList);

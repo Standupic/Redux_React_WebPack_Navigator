@@ -82,11 +82,11 @@ export function separator(data, current, countTarifs){
 	const divided = data.slice(firstIndex,lastIndex);
 	const lastIndexSection = Math.ceil(data.length / countTarifs);
 		return {
-		lastIndex: lastIndex,
-		firstIndex: firstIndex,
-		divided: divided,
-		lastIndexSection: lastIndexSection,
-	}
+            lastIndex: lastIndex,
+            firstIndex: firstIndex,
+            divided: divided,
+            lastIndexSection: lastIndexSection,
+	    }
 }
 
 export function newStructure(data, defaultParams, tags){

@@ -1,6 +1,7 @@
 import {newStructure} from '../helper';
 import defaultParams from '../data/default_params';
 import tags from '../data/tags';
+
 import {FETCH_BEGIN,
         FETCH_SUCCESS,
         FETCH_FAILURE,
@@ -44,10 +45,10 @@ export const fetchFailure=(error)=>({
     payload: {error}
 })
 
-export const sortTarifs =(str)=>{
-    console.log(str)
-    return{
-        type: SORT_TARIFS,
-        payload: str
-    }
-}
+// export const sortTarifs =(str)=>{
+//     return{
+//         type: SORT_TARIFS,
+//         payload: str
+//     }
+// }
+

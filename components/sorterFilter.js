@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {sortTarifs} from '../action';
+import {sortTarifs} from '../action/sortTarif';
 
 class SorterFilter extends React.Component{
 

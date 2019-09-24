@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import HeaderFilter from './headerFilter';
 import FilterTagList from './filterTagList';
+import FilterList from './filterList';
+import Tarif from './tarif';
 import {fetchData} from '../action';
 import Loader from './loader';
 
@@ -35,6 +37,12 @@ class App extends Component{
                             <FilterTagList/>
                     </div>
                 </section>
+                <section className="an-navigator-section-3">
+			        <div className="an-navigator-wrap">
+                        <FilterList/>
+                        <Tarif/>
+                    </div>
+	    		</section>
            </React.Fragment>
         )
     }
