@@ -5,6 +5,7 @@ import HeaderFilter from './headerFilter';
 import FilterTagList from './filterTagList';
 import FilterList from './filterList';
 import Tarif from './tarif';
+import Pagination from './pagination';
 import {fetchData} from '../action';
 import Loader from './loader';
 
@@ -13,17 +14,6 @@ class App extends Component{
         this.props.dispatch(fetchData("../data/tarifs.json"))
     }
     render(){
-        // const {error, loading, tarifs} = this.props;
-        // if(loading){
-        //     return (
-        //         <React.Fragment>
-        //         <section className="an-setting-quickly-tags"></section>
-        //         <section className="an-navigator-section-2">
-        //             <Loader/>
-        //         </section>
-        //         </React.Fragment>
-        //     )
-        // }
         return(
            <React.Fragment>
                 <section className="an-setting-quickly-tags"></section>
@@ -42,6 +32,9 @@ class App extends Component{
                         <FilterList/>
                         <Tarif/>
                     </div>
+	    		</section>
+                <section className="pagination">
+	    			<Pagination/>
 	    		</section>
            </React.Fragment>
         )

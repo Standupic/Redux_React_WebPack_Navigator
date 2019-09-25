@@ -13,10 +13,12 @@ function Tarif(props){
         currentPage, 
         countTarifs, 
         labels,toggleModalGetTarifId} = props;
+        console.log(hideShowData)
     // const renderData = filtering ? !filteredData.length ? data : filteredData : data
     const renderData = filtering ? filteredData : data
     const currentTarifsObject = separator(renderData, currentPage, countTarifs)
     const {divided} = currentTarifsObject;
+    console.log(divided)
     if(divided.length){
         useEffect(() => {
             let obj = getSameHeightTarifs(document.querySelector(".wrap_tarifs"));
@@ -36,7 +38,7 @@ function Tarif(props){
                 :
                 divided.map((item,key)=>{
                     return(
-                        <div className="an-navigator-compare-options">
+                        <div className="an-navigator-compare-options" key={item.id}> 
                             <div className="an-navigator-compare-options-header">
                                 {
                                     (item.archive == "Действующий") ? 
@@ -63,11 +65,11 @@ function Tarif(props){
                             <div className="an-navigator-compare-options-list">
                             <div className="wrap-list">
                             { Object.entries(item).map((val,k)=>{
-                               
+                                
                                     {  
                                         if (val[0] !== "id" && !hideShowData[val[0]] && typeof val[1] === 'object') {
                                         return(
-                                            <div className="an-navigator-compare-row">
+                                            <div className="an-navigator-compare-row" key={k}>
                                                 <div className="an-navigator-compare-col">{labels[val[0]]}</div>
                                                 <div className="an-navigator-compare-col">{val[1].join(", ")}</div>
                                             </div>
@@ -76,7 +78,7 @@ function Tarif(props){
                                         } 
                                         if (val[0] !== "id" &&  !hideShowData[val[0]] && typeof val[1] !== 'object') {
                                         return(
-                                            <div className="an-navigator-compare-row">
+                                            <div className="an-navigator-compare-row" key={k}>
                                                 <div className="an-navigator-compare-col">{labels[val[0]]}</div>
                                                 <div className="an-navigator-compare-col">{val[1]}</div>
                                             </div>
@@ -142,7 +144,21 @@ function Tarif(props){
 // }
 
 export default connect((state)=>{
+    const {data,
+           hideShowData,
+           labels} = state.data;
+    const {filtering} = state;
+    const {countTarifs,
+           currentPage,
+           currentSectionPages} = state.pagination;
     return {
-        data: state.data.data
+        data,
+        filtering,
+        hideShowData,
+        labels,
+        countTarifs,
+        currentPage,
+        currentSectionPages,
+        filteredData: []
     }
 })(Tarif);

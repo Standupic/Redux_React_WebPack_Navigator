@@ -45,10 +45,3 @@ export const fetchFailure=(error)=>({
     payload: {error}
 })
 
-// export const sortTarifs =(str)=>{
-//     return{
-//         type: SORT_TARIFS,
-//         payload: str
-//     }
-// }
-
