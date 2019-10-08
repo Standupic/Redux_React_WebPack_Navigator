@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {separator,getSameHeightTarifs,setSameHeightTarifs} from '../helper';
 // import LoaderHoc from './loaderHoc';
 import {connect} from 'react-redux';
+import Loader from "./loader";
+import {getTarifId} from "../action/getTarifId";
 
 
 function Tarif(props){
@@ -12,15 +14,16 @@ function Tarif(props){
         filteredData,
         currentPage, 
         countTarifs, 
-        labels,toggleModalGetTarifId} = props;
-        console.log(hideShowData)
+        labels,getTarifId,
+        loading} = props;
     // const renderData = filtering ? !filteredData.length ? data : filteredData : data
     const renderData = filtering ? filteredData : data
     const currentTarifsObject = separator(renderData, currentPage, countTarifs)
     const {divided} = currentTarifsObject;
-    console.log(divided)
+
     if(divided.length){
         useEffect(() => {
+            if(!document.querySelector(".wrap_tarifs")) return
             let obj = getSameHeightTarifs(document.querySelector(".wrap_tarifs"));
             setSameHeightTarifs(".an-navigator-compare-options-header").
             forEach(elem => {elem.style.minHeight = `${obj.headerHeight}px`});
@@ -30,104 +33,109 @@ function Tarif(props){
         });
     }
 		return(
-            <div className="wrap_tarifs">
-            
-            {
-                !divided.length ?
-                <p>Результат вашего поиска: {`${!divided.length ? 0 : divided.length}`}</p>
+            <React.Fragment>
+                {loading ? 
+                    <Loader/>
                 :
-                divided.map((item,key)=>{
-                    return(
-                        <div className="an-navigator-compare-options" key={item.id}> 
-                            <div className="an-navigator-compare-options-header">
-                                {
-                                    (item.archive == "Действующий") ? 
-                                    <span className="an-no-pub au-orange">{item.archive}</span>
-                                   : 
-                                    <span className="an-archive">{item.archive}</span>
-                                }
-                                {
-                                    (item.internettv == "Интернет") ? 
-                                    <span className="an-no-pub au-magenta">{item.internettv}</span>
-                                   : 
-                                    <span className="an-no-pub au-blue">{item.internettv}</span>
-                                }
-                                <span className="an-navigator-compare-options-header-title">{item.nametariflk}</span>
-                                {/* {
-                                    (!hideShowData['nametariflk']) ? 
-                                     <span className="an-navigator-compare-options-header-title">{item.nametariflk}</span>
+            <div className="wrap_tarifs">
+                {
+                    !divided.length ?
+                    <p>Результат вашего поиска: {`${!divided.length ? 0 : divided.length}`}</p>
+                    :
+                    divided.map((item,key)=>{
+                        return(
+                            <div className="an-navigator-compare-options" key={item.id}> 
+                                <div className="an-navigator-compare-options-header">
+                                    {
+                                        (item.archive == "Действующий") ? 
+                                        <span className="an-no-pub au-orange">{item.archive}</span>
                                     : 
-                                    ""
-                                } */}
-                                <span className="an-navigator-option-more" onClick={(id)=>{toggleModalGetTarifId(item.id)}}>Подробные условия</span>
-                            </div>
-                            <div className="an-navigator-compare-options-header-s"></div>
-                            <div className="an-navigator-compare-options-list">
-                            <div className="wrap-list">
-                            { Object.entries(item).map((val,k)=>{
-                                
-                                    {  
-                                        if (val[0] !== "id" && !hideShowData[val[0]] && typeof val[1] === 'object') {
-                                        return(
-                                            <div className="an-navigator-compare-row" key={k}>
-                                                <div className="an-navigator-compare-col">{labels[val[0]]}</div>
-                                                <div className="an-navigator-compare-col">{val[1].join(", ")}</div>
-                                            </div>
-
-                                        ) 
-                                        } 
-                                        if (val[0] !== "id" &&  !hideShowData[val[0]] && typeof val[1] !== 'object') {
-                                        return(
-                                            <div className="an-navigator-compare-row" key={k}>
-                                                <div className="an-navigator-compare-col">{labels[val[0]]}</div>
-                                                <div className="an-navigator-compare-col">{val[1]}</div>
-                                            </div>
-
-                                        ) 
-                                        }
-                                        
+                                        <span className="an-archive">{item.archive}</span>
                                     }
-                                
-                                }) 
-                            } 
-                            </div>
-                            <div className="wrap-bottom">
-                                {/* {
-                                    (!hideShowData['onetimepayment']) ?
+                                    {
+                                        (item.internettv == "Интернет") ? 
+                                        <span className="an-no-pub au-magenta">{item.internettv}</span>
+                                    : 
+                                        <span className="an-no-pub au-blue">{item.internettv}</span>
+                                    }
+                                    <span className="an-navigator-compare-options-header-title">{item.nametariflk}</span>
+                                    {/* {
+                                        (!hideShowData['nametariflk']) ? 
+                                        <span className="an-navigator-compare-options-header-title">{item.nametariflk}</span>
+                                        : 
+                                        ""
+                                    } */}
+                                    <span className="an-navigator-option-more" onClick={(id)=>{getTarifId(item.id)}}>Подробные условия</span>
+                                </div>
+                                <div className="an-navigator-compare-options-header-s"></div>
+                                <div className="an-navigator-compare-options-list">
+                                <div className="wrap-list">
+                                { Object.entries(item).map((val,k)=>{
+                                    
+                                        {  
+                                            if (val[0] !== "id" && !hideShowData[val[0]] && typeof val[1] === 'object') {
+                                            return(
+                                                <div className="an-navigator-compare-row" key={k}>
+                                                    <div className="an-navigator-compare-col">{labels[val[0]]}</div>
+                                                    <div className="an-navigator-compare-col">{val[1].join(", ")}</div>
+                                                </div>
+
+                                            ) 
+                                            } 
+                                            if (val[0] !== "id" &&  !hideShowData[val[0]] && typeof val[1] !== 'object') {
+                                            return(
+                                                <div className="an-navigator-compare-row" key={k}>
+                                                    <div className="an-navigator-compare-col">{labels[val[0]]}</div>
+                                                    <div className="an-navigator-compare-col">{val[1]}</div>
+                                                </div>
+
+                                            ) 
+                                            }
+                                            
+                                        }
+                                    
+                                    }) 
+                                } 
+                                </div>
+                                <div className="wrap-bottom">
+                                    {/* {
+                                        (!hideShowData['onetimepayment']) ?
+                                        <div className="an-navigator-sum">
+                                            <p>{item.speed} <span className="">мб/сек</span></p>
+                                            <p>{item.onetimepayment} <span className="rub-font-b">/мес</span></p>
+                                        </div>
+                                        :
+                                        ""
+                                    } */}
                                     <div className="an-navigator-sum">
-                                        <p>{item.speed} <span className="">мб/сек</span></p>
-                                        <p>{item.onetimepayment} <span className="rub-font-b">/мес</span></p>
+                                            <p>{item.speed} <span className="">мб/сек</span></p>
+                                            <p>{item.onetimepayment} <span className="rub-font-b">/мес</span></p>
+                                        </div>
+                                    {/* <div className="an-navigator-compare-toggle an-toggle">
+                                        <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
+                                        <span className="an-an-navigator-compare-toggle-name">Добавить ТВ</span>
+                                        <input type="checkbox"/>
                                     </div>
-                                    :
-                                    ""
-                                } */}
-                                <div className="an-navigator-sum">
-                                        <p>{item.speed} <span className="">мб/сек</span></p>
-                                        <p>{item.onetimepayment} <span className="rub-font-b">/мес</span></p>
+                                    <div className="an-navigator-compare-toggle an-toggle">
+                                        <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
+                                        <span className="an-an-navigator-compare-toggle-name">Добавить ТВ</span>
+                                        <input type="checkbox"/>
                                     </div>
-                                {/* <div className="an-navigator-compare-toggle an-toggle">
-                                    <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
-                                    <span className="an-an-navigator-compare-toggle-name">Добавить ТВ</span>
-                                    <input type="checkbox"/>
-                                </div>
-                                <div className="an-navigator-compare-toggle an-toggle">
-                                    <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
-                                    <span className="an-an-navigator-compare-toggle-name">Добавить ТВ</span>
-                                    <input type="checkbox"/>
-                                </div>
-                                <div className="an-navigator-compare-toggle an-toggle">
-                                    <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
-                                    <span className="an-an-navigator-compare-toggle-name">Добавить ТВ</span>
-                                    <input type="checkbox"/>
-                                </div> */}
-                                {/* <button className="an-navigator-compare-btn">Подключить</button> */}
+                                    <div className="an-navigator-compare-toggle an-toggle">
+                                        <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
+                                        <span className="an-an-navigator-compare-toggle-name">Добавить ТВ</span>
+                                        <input type="checkbox"/>
+                                    </div> */}
+                                    {/* <button className="an-navigator-compare-btn">Подключить</button> */}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                })
-            }
+                        )
+                    })
+                }
             </div>
+            }
+         </React.Fragment>
 		)
 	}
 
@@ -146,7 +154,8 @@ function Tarif(props){
 export default connect((state)=>{
     const {data,
            hideShowData,
-           labels} = state.data;
+           labels,
+           loading} = state.data;
     const {filtering} = state;
     const {countTarifs,
            currentPage,
@@ -159,6 +168,7 @@ export default connect((state)=>{
         countTarifs,
         currentPage,
         currentSectionPages,
-        filteredData: []
+        filteredData: [],
+        loading
     }
-})(Tarif);
+},{getTarifId})(Tarif);

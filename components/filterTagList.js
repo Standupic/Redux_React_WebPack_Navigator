@@ -14,21 +14,26 @@ class FilterTagList extends React.Component{
 
  
 	render(){
-        const {greatestValue} = this.props;
+        const {greatestValue,loading} = this.props;
 		return(
 			<div className="an-navigator-section-2-tags">
-              {greatestValue ? greatestValue.map((item,key)=>{
-                return(
-                    <React.Fragment key={key}>
-                    <div className="an-navigator-section-2-tag">
-                        {item.title}</div>
-                        <span>&times;</span>
-                    </React.Fragment>
-                    )
-              })
+              {loading ? 
+                    <Loader/>
               :
-              <div><Loader/></div>
+               greatestValue.map((item,key)=>{
+                    return(
+                        <React.Fragment key={key}>
+                        <div className="an-navigator-section-2-tag">
+                            {item.title}</div>
+                            <span>&times;</span>
+                        </React.Fragment>
+                    )
+                })
               }
+             
+        
+              
+
             </div>
 		)
 	}
@@ -44,6 +49,7 @@ class FilterTagList extends React.Component{
 export default connect((state)=>{
     // console.log(state.data.tarifs.greatestValue, "state")
     return{
-        greatestValue: state.data.greatestValue
+        greatestValue: state.data.greatestValue,
+        loading: state.data.loading
     }
 })(FilterTagList);

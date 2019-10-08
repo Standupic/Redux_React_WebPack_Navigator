@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import InputList from "./inputList";
 
 class Filter extends React.Component{
-  constructor(props){
-    super(props)
-        this.state = {
+  state = {
         toggle: false
     }
-  }
   render(){
     const {item} = this.props;
     const {filter, param, checked, name} = item;

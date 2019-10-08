@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Filter from './filter';
 import {connect} from 'react-redux';
 import SetTagSearch from './setTagSearch';
+import Loader from './loader';
 
 
-const  FilterList = (props) => {
-    const {filters} = props;
-    console.log(filters)
+const FilterList = (props) => {
+    const {filters,loading} = props;
     // const {filters,
     //     resetFilters,
     //     handleToggleFilter,
@@ -27,6 +27,9 @@ const  FilterList = (props) => {
 		return(
             <div className="an-navigator-filters">
                 {
+                    loading ? 
+                        <Loader />
+                    :
                     filters.map((obj,index)=>{
                         return(
                             <Filter 
@@ -82,6 +85,7 @@ const  FilterList = (props) => {
 
 export default connect((state)=>{
     return {
-        filters: state.data.filters
+        filters: state.data.filters,
+        loading: state.data.loading
     }
 })(FilterList);

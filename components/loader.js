@@ -1,9 +1,11 @@
 import React from 'react'
 
 const Loader = () =>(
-	<div id="loading">
-		<img src="../dist/img/loading.gif"/>
-	</div>
+    <React.Fragment>
+        <div id="loading">
+            <img src="../dist/img/loading.gif" height="90"/>
+        </div>
+    </React.Fragment>
 )
 
 export default Loader

@@ -5,26 +5,30 @@ import HeaderFilter from './headerFilter';
 import FilterTagList from './filterTagList';
 import FilterList from './filterList';
 import Tarif from './tarif';
+import Modal from './modal';
+import DecoratorToggleOpen from './decorators/toggleOpen';
 import Pagination from './pagination';
 import {fetchData} from '../action';
-import Loader from './loader';
+
 
 class App extends Component{
     componentDidMount(){
         this.props.dispatch(fetchData("../data/tarifs.json"))
     }
     render(){
+        const {toggleHandle,loading,open} = this.props
         return(
            <React.Fragment>
                 <section className="an-setting-quickly-tags"></section>
 				    <section className="an-navigator-section-2">
 	       			    <div className="an-navigator-wrap">
-                            <HeaderFilter/>
+                         <HeaderFilter/>
                         </div>
                     </section>
                 <section className="an-navigator-section-2">
 			        <div className="an-navigator-wrap">
-                            <FilterTagList/>
+                       
+                         <FilterTagList/>
                     </div>
                 </section>
                 <section className="an-navigator-section-3">
@@ -36,6 +40,12 @@ class App extends Component{
                 <section className="pagination">
 	    			<Pagination/>
 	    		</section>
+                {open ? 
+                    <Modal toggleHandle={toggleHandle}/>
+                :
+                    null
+                }
+                
            </React.Fragment>
         )
     }
@@ -43,10 +53,8 @@ class App extends Component{
 
 const mapStateToProps = (state) => {
    return {
-       tarifs: state.tarifs,
-       loading: state.loading,
-       error: state.error
+       loading: state.data.loading,
    }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(DecoratorToggleOpen(App))

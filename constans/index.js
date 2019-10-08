@@ -6,3 +6,4 @@ export const SORT_TARIFS = "SORT_TARIFS"
 
 export const FILTERING = "FILTERING"
 
+export const GETTARIFID = "GETTARIFID"
