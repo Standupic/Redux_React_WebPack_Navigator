@@ -4,7 +4,7 @@ import {separator,getSameHeightTarifs,setSameHeightTarifs} from '../helper';
 // import LoaderHoc from './loaderHoc';
 import {connect} from 'react-redux';
 import Loader from "./loader";
-import {getTarifId} from "../action/getTarifId";
+import {showModal} from '../action/modal';
 
 
 function Tarif(props){
@@ -14,7 +14,7 @@ function Tarif(props){
         filteredData,
         currentPage, 
         countTarifs, 
-        labels,getTarifId,
+        labels,showModal,
         loading} = props;
     // const renderData = filtering ? !filteredData.length ? data : filteredData : data
     const renderData = filtering ? filteredData : data
@@ -65,7 +65,7 @@ function Tarif(props){
                                         : 
                                         ""
                                     } */}
-                                    <span className="an-navigator-option-more" onClick={(id)=>{getTarifId(item.id)}}>Подробные условия</span>
+                                    <span className="an-navigator-option-more" onClick={(id)=>{showModal(item.id)}}>Подробные условия</span>
                                 </div>
                                 <div className="an-navigator-compare-options-header-s"></div>
                                 <div className="an-navigator-compare-options-list">
@@ -171,4 +171,4 @@ export default connect((state)=>{
         filteredData: [],
         loading
     }
-},{getTarifId})(Tarif);
+},{showModal})(Tarif);

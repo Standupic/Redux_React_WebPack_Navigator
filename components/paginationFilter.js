@@ -1,19 +1,17 @@
-import React from "react";
+import React,{useEffect} from "react";
+import {connect} from 'react-redux';
+import {setQuantityTarifs} from '../action/pagination';
 
-class PaginationFilter extends React.Component{
-
+class QuantityDisaplyTarifs extends React.Component{
 	componentDidMount(){
-		const {anStyler2} = this.refs;
+        const {anStyler2} = this.refs;
+        const {setQuantityTarifs} = this.props;
 		$(anStyler2).styler({
-			// onSelectClosed: ()=>{
-			// 	this.onChange(this.refs.anStyler2.value)
-			// },
+			onSelectClosed: ()=>{
+                setQuantityTarifs(this.refs.anStyler2.value)
+			},
 		});
 	}
-
-	// onChange=(select)=>{
-	// 	this.props.handlePaginationCountTarifs(select)
-	// }
 	render(){
 		return(
 			 <select className="an-styler" ref="anStyler2">
@@ -28,4 +26,6 @@ class PaginationFilter extends React.Component{
 	
 }
 
-export default PaginationFilter;
+export default connect(
+    null,
+    {setQuantityTarifs})(QuantityDisaplyTarifs);

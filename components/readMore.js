@@ -8,17 +8,17 @@ const ReadMore = (props)=>{
         {data.map((item,key)=>{
             if(item.id == tarifId){
                 return(
-                    <React.Fragment>
-                    <span class="an-no-pub">{item.public}</span>
-                    <span class="an-archive">{item.archive}</span>
-                    <span class="an-navigator-compare-options-header-title">{item.nametariflk}</span>
+                    <React.Fragment key={key}>
+                    <span className="an-no-pub">{item.public}</span>
+                    <span className="an-archive">{item.archive}</span>
+                    <span className="an-navigator-compare-options-header-title">{item.nametariflk}</span>
                     <div className="popup-content">
                         { Object.entries(item).map((val,k)=>{
                
                             {  
                                 if ( typeof val[1] === 'object') {
                                 return(
-                                    <div className="an-navigator-compare-row">
+                                    <div className="an-navigator-compare-row" key={k}>
                                         <div className="an-navigator-compare-col">{labels[val[0]]}</div>
                                         <div className="an-navigator-compare-col">{val[1].join(", ")}</div>
                                     </div>
@@ -27,9 +27,9 @@ const ReadMore = (props)=>{
                                 } 
                                 if ( typeof val[1] !== 'object') {
                                 return(
-                                    <div class="an-navigator-compare-row">
-                                        <div class="an-navigator-compare-col">{labels[val[0]]}</div>
-                                        <div class="an-navigator-compare-col">{val[1]}</div>
+                                    <div className="an-navigator-compare-row" key={k}>
+                                        <div className="an-navigator-compare-col">{labels[val[0]]}</div>
+                                        <div className="an-navigator-compare-col">{val[1]}</div>
                                     </div>
 
                                     ) 

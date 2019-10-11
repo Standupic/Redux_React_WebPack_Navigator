@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import SorterFilter from './sorterFilter';
-import PaginationFilter from './paginationFilter';
+import QuantityDisaplyTarifs from './paginationFilter';
 import { connect } from "react-redux";
 import Loader from './loader';
+import {showModal} from '../action/modal';
 
 
 const HeaderFilter = (props) =>{
-        const {loading} = props;
+        const {loading,showModal} = props;
     // const {data,toggleModal,handlePaginationCountTarifs,search,handleSort} = props; 
         return(
             <div>
@@ -19,13 +20,15 @@ const HeaderFilter = (props) =>{
                         <input type="text" className="an-section-2-search" placeholder="Поиск"/>
                             <SorterFilter
                                 // handleSort={(data)=>{handleSort(data)}}
-                                // data={data}
                             />
-                            <PaginationFilter
+                            <QuantityDisaplyTarifs
                                 // handlePaginationCountTarifs={(i)=>{handlePaginationCountTarifs(i)}}
                                 />
                         <div className="an-section-2-settings">
-                            <img src="../dist/img/an-navigator-setings.svg" className="an-navigator-setings"/>
+                            <img 
+                                src="../dist/img/an-navigator-setings.svg" 
+                                className="an-navigator-setings"
+                                onClick={(id)=>{showModal(false)}}/>
                         </div>
                     </div>
                 }
@@ -46,4 +49,4 @@ export default connect(state=>{
     return{
         loading: state.data.loading
     }
-})(HeaderFilter)
+},{showModal})(HeaderFilter)

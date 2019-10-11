@@ -1,36 +1,38 @@
 import React, {useEffect} from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isNil from 'lodash/fp/isNil';
-// import ListParam from './listParam';
-// import ReadMore from './readMore';
+import {hideModal} from '../action/modal';
+import ListParam from './listParam';
+import ReadMore from './readMore';
 // import Pagination from './pagination';
 
 function Modal(props){
-    const {toggleHandle,open} = props;
-    console.log(open)
-    let modal;
-    useEffect(()=>{
-       function handleKeyUp(e){
-            // const {toggleModal} = this.props;
-            const keys = {
-                27: () => {
-                    e.preventDefault();
-                    toggleHandle()
-                    window.removeEventListener('keyup', handleKeyUp, false);
-                }
+    const {hideModal,modal,labels,data,checkboxHideShow} = props;
+    const {id} = modal;
+    let modalRef = React.createRef();
+    function handleKeyUp(e){
+        const keys = {
+            27: () => {
+                e.preventDefault();
+                hideModal()
+                window.addEventListener('keyup', handleKeyUp, false);
             }
-            if (keys[e.keyCode]) {keys[e.keyCode]()}
         }
+        if (keys[e.keyCode]) {keys[e.keyCode]()}
+   }
+   function outSideClick(e){
+        if(!isNil(modalRef.current)){
+            if(!modalRef.current.contains(e.target)){
+                hideModal();
+                document.addEventListener('click', outSideClick, false);
+            }
+        }
+    }
 
-        function outSideClick(e){
-            // const {toggleModal} = this.props;
-            if(!isNil(modal)){
-                if(!modal.contains(e.target)){
-                    toggleHandle();
-                    document.removeEventListener('click', outSideClick, false);
-                }
-            }
-        }
+    useEffect(()=>{
+        window.addEventListener('keyup', handleKeyUp, false);
+        document.addEventListener('click', outSideClick, false);
         return ()=>{
             window.removeEventListener('keyup', handleKeyUp, false);
 	        document.removeEventListener('click', outSideClick, false);
@@ -42,17 +44,21 @@ function Modal(props){
 			<div className="modalOverlay">
 				<div 
 					className="modal"
-					ref={node =>(modal = node)}>
-					<div id="popup-ext" className="popup-close"></div>
-                    {/* { tarifId ?        
-                        <ReadMore data={data} tarifId={tarifId} labels={labels}/>
-                        : 
-                        <React.Fragment>
-                        <ListParam onChange={(e,name)=>{this.props.headerModalCheck(e,name)}}
+					ref={modalRef}>
+					<div id="popup-ext" className="popup-close" onClick={hideModal}></div>
+                        { id ?        
+                            <ReadMore 
+                                data={data} 
+                                tarifId={id} 
+                                labels={labels}/>
+                            : 
+                            <React.Fragment>
+                            <ListParam 
+                                // onChange={(e,name)=>{this.props.headerModalCheck(e,name)}}
                                 checkboxHideShow={checkboxHideShow}/>
-                                <button className="an-navigator-save-btn" onClick={toggleModal}>Сохранить</button>
-                        </React.Fragment>            
-                    } */}
+                                <button className="an-navigator-save-btn" onClick={hideModal}>Сохранить</button>
+                            </React.Fragment>            
+                        }
 					</div>
 				</div>
 		    )
@@ -66,4 +72,11 @@ function Modal(props){
 //     labels: PropTypes.array.isRequired,
 //     checkboxHideShow: PropTypes.array.isRequired
 // }
-export default Modal;
+export default connect(state=>{
+    return{
+        modal: state.modal,
+        data: state.data.data,
+        checkboxHideShow: state.data.checkboxHideShow,
+        labels: state.data.labels,
+    }
+},{hideModal})(Modal);

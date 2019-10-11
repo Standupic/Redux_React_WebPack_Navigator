@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import HeaderFilter from './headerFilter';
 import FilterTagList from './filterTagList';
 import FilterList from './filterList';
@@ -16,7 +16,8 @@ class App extends Component{
         this.props.dispatch(fetchData("../data/tarifs.json"))
     }
     render(){
-        const {toggleHandle,loading,open} = this.props
+        const {modal} = this.props
+        const {id, open} = modal
         return(
            <React.Fragment>
                 <section className="an-setting-quickly-tags"></section>
@@ -41,11 +42,10 @@ class App extends Component{
 	    			<Pagination/>
 	    		</section>
                 {open ? 
-                    <Modal toggleHandle={toggleHandle}/>
+                    <Modal/>
                 :
-                    null
+                     null
                 }
-                
            </React.Fragment>
         )
     }
@@ -54,6 +54,7 @@ class App extends Component{
 const mapStateToProps = (state) => {
    return {
        loading: state.data.loading,
+       modal: state.modal
    }
 }
 

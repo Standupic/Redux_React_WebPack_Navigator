@@ -1,6 +1,5 @@
 import {SORT_TARIFS} from '../constans';
 
-
 export default(state = false, action)=>{
     const {type} = action;
     switch(type){
