@@ -1,4 +1,12 @@
-import {MOVE_PAGINATION, SET_QUANTITY_DISPALY_TARIF} from '../constans';
+import {
+        MOVE_PAGINATION,
+        SET_QUANTITY_DISPLAY_TARIF,
+        NEXT,
+        PREV,
+        FIRST_SECTION,
+        LAST_SECTION,
+        NUMBER
+        } from '../constans';
 import {isNumeric} from '../helper/';
 
 const initialState = {
@@ -11,7 +19,7 @@ export default (state = initialState, action)=>{
     const param = action.param;
     const{currentSectionPages,countTarifs,currentPage} = state
     switch(type){
-            case SET_QUANTITY_DISPALY_TARIF:
+            case SET_QUANTITY_DISPLAY_TARIF:
                 if(!isNumeric(param)) return;
                 return{
                     ...state,
@@ -21,20 +29,20 @@ export default (state = initialState, action)=>{
                 }
             case MOVE_PAGINATION:
                 switch(param[0]){
-                    case "firstSection":
+                    case FIRST_SECTION:
                         return{
                             ...state,
                             currentPage: 1,
                             currentSectionPages: 1
                         }
-                    case "lastSection":
+                    case LAST_SECTION:
                         return{
                             ...state,
                             currentPage: Math.ceil(param[2] / countTarifs),
                             currentSectionPages: param[1]
                         }
-                    case "next":
-                        if(currentPage == Math.ceil(param[1] / countTarifs)) return
+                    case NEXT:
+                        if(currentPage == Math.ceil(param[1] / countTarifs)) return state
                         return{
                             ...state,
                             currentPage: currentPage+1,
@@ -43,8 +51,8 @@ export default (state = initialState, action)=>{
                          :
                             currentSectionPages
                         }
-                    case "prev":
-                        if(currentPage == currentSectionPages) return
+                    case PREV:
+                        if(currentPage == currentSectionPages) return state 
                         let step = ((countTarifs * currentSectionPages) - countTarifs);
                         return{
                             ...state,
@@ -53,6 +61,11 @@ export default (state = initialState, action)=>{
                             :
                             step / countTarifs
                         }
+                    case NUMBER:
+                    return{
+                        ...state,
+                        currentPage: param[1]
+                    }
                 }
         default:
             return state

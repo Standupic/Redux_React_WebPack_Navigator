@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import SorterFilter from './sorterFilter';
-import QuantityDisaplyTarifs from './paginationFilter';
+import QuantityDisplayTarifs from './quantityDisplayTarifs';
 import { connect } from "react-redux";
 import Loader from './loader';
 import {showModal} from '../action/modal';
@@ -21,7 +21,7 @@ const HeaderFilter = (props) =>{
                             <SorterFilter
                                 // handleSort={(data)=>{handleSort(data)}}
                             />
-                            <QuantityDisaplyTarifs
+                            <QuantityDisplayTarifs
                                 // handlePaginationCountTarifs={(i)=>{handlePaginationCountTarifs(i)}}
                                 />
                         <div className="an-section-2-settings">

@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import {connect} from 'react-redux';
 import {setQuantityTarifs} from '../action/pagination';
 
-class QuantityDisaplyTarifs extends React.Component{
+class QuantityDisplayTarifs extends React.Component{
 	componentDidMount(){
         const {anStyler2} = this.refs;
         const {setQuantityTarifs} = this.props;
@@ -28,4 +28,4 @@ class QuantityDisaplyTarifs extends React.Component{
 
 export default connect(
     null,
-    {setQuantityTarifs})(QuantityDisaplyTarifs);
+    {setQuantityTarifs})(QuantityDisplayTarifs);

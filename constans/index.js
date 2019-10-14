@@ -2,8 +2,6 @@ export const FETCH_BEGIN = "FETCH_BEGIN";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
-export const SORT_TARIFS = "SORT_TARIFS";
-
 export const FILTERING = "FILTERING";
 
 // Modal
@@ -12,8 +10,21 @@ export const SHOW_MODAL = "SHOW_MODAL";
 
 // Pagination
 export const MOVE_PAGINATION = "MOVE_PAGINATION";
+export const FIRST_SECTION = "FIRST_SECTION";
+export const LAST_SECTION = "LAST_SECTION";
+export const NEXT = "NEXT";
+export const PREV = "PREV";
+export const NUMBER = "NUMBER";
 
 // HeaderFilter
-export const SET_QUANTITY_DISPALY_TARIF = "SET_QUANTITY_DISPALY_TARIF";
+export const SET_QUANTITY_DISPLAY_TARIF = "SET_QUANTITY_DISPLAY_TARIF";
+
+export const SORT_TARIFS = "SORT_TARIFS";
+export const ACS = "ACS";
+export const DES = "DES";
+export const TYPE_SUGGESTION_A_Я = "A-Я";
+export const TYPE_SUGGESTION_Я_A =  "Я-A";
+export const DEFAULT_VALUE = "Сортировать:"
+
 
 

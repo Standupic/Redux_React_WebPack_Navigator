@@ -13,11 +13,10 @@ const ListParam=(props)=>{
                 {
                     checkboxHideShow.map((item, key)=>{
                         return(
-                            <div className="an-navigator-compare-col">
+                            <div className="an-navigator-compare-col" key={key}>
                                 <Checkbox
                                     item={item.name}
                                     checked={(!item.hideShow) ? true : null}
-                                    key={key}
                                     // onChange={(e,name)=>{onChange(e,item.param)}}
                                     index={`${item.param+key}`}
                                 />

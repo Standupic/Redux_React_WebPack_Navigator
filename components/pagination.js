@@ -4,6 +4,13 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from "./loader";
 import {movePagination} from '../action/pagination';
+import {
+    NEXT,
+    PREV,
+    FIRST_SECTION,
+    LAST_SECTION,
+    NUMBER
+    } from '../constans';
 
 const Pagination =(props)=>{
     const {countTarifs,
@@ -36,18 +43,18 @@ const Pagination =(props)=>{
                 :  
                 "arrow"} 
                 value={"firstSection"}
-                onClick={(obj)=>{movePagination("firstSection")}}>В начало
+                onClick={(obj)=>{movePagination(FIRST_SECTION)}}>В начало
             </li>
             <li className="prev"
                 value={"prev"}
-                onClick={(obj)=>{movePagination("prev")}}>&lt;
+                onClick={(obj)=>{movePagination(PREV)}}>&lt;
             </li>
             {
                 divided.map((number, key)=>{
                     return(
                         <li value={number} 
                             key={key}
-                            onClick={(obj)=>{movePagination("numbers")}}
+                            onClick={(obj)=>{movePagination(NUMBER,number)}}
                             className={currentPage == number ? "active" : null}>{number}
                         </li>
                     )
@@ -55,7 +62,7 @@ const Pagination =(props)=>{
             } 
             <li className="next" 
                 value={"next"}
-                onClick={(obj)=>{movePagination("next",quantity)}}>
+                onClick={(obj)=>{movePagination(NEXT,quantity)}}>
             &gt;
             </li>
             <li className={(lastIndexSection == currentSectionPages) 
@@ -63,7 +70,7 @@ const Pagination =(props)=>{
                 "active arrow" 
                 : 
                 "arrow"} value={"lastSection"}
-                onClick={(obj)=>{movePagination("lastSection",lastIndexSection,quantity)}}>В конец
+                onClick={(obj)=>{movePagination(LAST_SECTION,lastIndexSection,quantity)}}>В конец
             </li>
 		</ul>
         }

@@ -1,4 +1,4 @@
-import {MOVE_PAGINATION,SET_QUANTITY_DISPALY_TARIF} from '../constans';
+import {MOVE_PAGINATION,SET_QUANTITY_DISPLAY_TARIF} from '../constans';
 
 export const movePagination = (...param) => {
     return{
@@ -9,7 +9,7 @@ export const movePagination = (...param) => {
 
 export const setQuantityTarifs = (str) => {
     return{
-        type: SET_QUANTITY_DISPALY_TARIF,
+        type: SET_QUANTITY_DISPLAY_TARIF,
         param: str * 1
     }
 }
