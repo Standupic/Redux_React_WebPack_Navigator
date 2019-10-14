@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { throws } from "assert";
 
 class Radio extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            checked: ""
-        }
-    }
+    // constructor(props){
+    //     super(props)
+    //     this.state = {
+    //         checked: ""
+    //     }
+    // }
 	// state = {
 	// 	checked: ""
 	// }
@@ -32,7 +32,7 @@ class Radio extends React.Component{
 	render(){
 		const radio = this.props.item
 		const name = this.props.param
-		const value = this.state.checked.value
+		const checked = this.props.checked
 		return(
 			 <div className="radio-group parser_main_pakets">
 			 	 {radio.map((item,key)=>{
@@ -41,7 +41,7 @@ class Radio extends React.Component{
 			 				<input 	name={`${name}-${key}`} type="radio" id={`${name}-${key}`}
 			 						value={item}
 							 		onChange={(e)=>{this.onChange(e,{value:{[name]:item}})}}
-							 		checked={value === item}/>
+							 		checked={checked === item}/>
 						     <label htmlFor={`${name}-${key}`}><span className="out-dot"><div className="in-dot"></div></span>{item}<b></b></label>
 						</React.Fragment>
 			 	 		)
@@ -52,14 +52,14 @@ class Radio extends React.Component{
 	}
 }
 
-Radio.getDerivedStateFromProps=(props)=>{
-	const {checked} = props;
-		if(checked){
-			return{
-				checked: checked
-		}
-	}
-}
+// Radio.getDerivedStateFromProps=(props)=>{
+// 	const {checked} = props;
+// 		if(checked){
+// 			return{
+// 				checked: checked
+// 		}
+// 	}
+// }
 
 // Radio.propTypes = {
 // 	item: PropTypes.array.isRequired,

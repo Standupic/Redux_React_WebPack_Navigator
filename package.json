@@ -35,6 +35,8 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "react-redux": "^7.1.1"
+    "immutable": "^4.0.0-rc.12",
+    "react-redux": "^7.1.1",
+    "reselect": "^4.0.0"
   }
 }

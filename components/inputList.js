@@ -30,7 +30,7 @@ class InputList extends React.Component{
                     <Radio 
                         item={values}
                         param={param}
-                        checked={checked}
+                        checked={checked[0]}
                     />
                     : ""
                 }

@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from 'react-redux';
 import {sortTarifs} from '../action/sortTarif';
+import {sortingTarifs} from '../selectors/';
+
 import {
 	ACS,
 	DES,
@@ -39,4 +41,7 @@ class SorterFilter extends React.Component{
 
  
 
-export default connect(null,{sortTarifs})(SorterFilter);
+export default connect((state) => ({
+    data: sortingTarifs(state)
+})
+,{sortTarifs})(SorterFilter);

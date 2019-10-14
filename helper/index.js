@@ -122,8 +122,8 @@ export function newStructure(data, defaultParams, tags){
 								['filter']: type,
 								['name']  : defaultParams[i]['name'],
 								['param'] : key,
-								['checked'] : type == "checkbox" ? [] : {},
-                                ['active'] : false,
+								['checked'] : type == "checkbox" ? [] : [],
+                                ['active'] : true,
                                 ['is_seen']: defaultParams[i]['is_seen']
 							})
 				}
