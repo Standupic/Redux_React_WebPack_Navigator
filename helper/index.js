@@ -1,4 +1,5 @@
 import array from 'lodash/array';
+import {Map} from 'immutable';
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -34,6 +35,16 @@ export function deleteElem(list, index){
         ...list.slice(index+1)
     ]
 }
+export function toMapImmutable(obj){
+   if(is_Array(obj)) return Map(obj)
+   if(is_Object(obj)){
+        for(let key in obj){
+            Map(obj[key])
+        }
+    return obj
+   }
+}
+
 export function isEmpty (prop){
     return prop === null || prop === undefined || 
     (prop.hasOwnProperty("length") && prop.length === 0) ||
@@ -123,7 +134,7 @@ export function newStructure(data, defaultParams, tags){
 								['name']  : defaultParams[i]['name'],
 								['param'] : key,
 								['checked'] : type == "checkbox" ? [] : [],
-                                ['active'] : true,
+                                ['active'] : false,
                                 ['is_seen']: defaultParams[i]['is_seen']
 							})
 				}

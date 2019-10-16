@@ -1,7 +1,9 @@
 import {FILTERING} from '../constans';
 
-export default () =>{
+export const performerFiltering = (obj) =>{
+   console.log("action")
    return {
-        type: FILTERING
+        type: FILTERING,
+        param: obj
     }
 }

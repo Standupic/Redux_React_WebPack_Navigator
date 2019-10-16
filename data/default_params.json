@@ -3,385 +3,440 @@
 	  "filter": "checkbox",
 	  "name": "Регион", 
 	  "param": "region",
-	  "read_more": false,
-	  "tag": true
+	  "read_more": true,
+      "tag": true,
+      "is_seen": true
 	},
 	{
 	  "filter": "checkbox",
 	  "name": "Локация", 
 	  "param": "location",
-	  "read_more": false,
-	  "tag": true
+	  "read_more": true,
+      "tag": true,
+      "is_seen": true
 	},
 	{
 	  "filter": "checkbox",
 	  "name": "Локация по приказу", 
 	  "param": "localizationbasis",
-	  "read_more": false,
-	  "tag": true
+	  "read_more": true,
+      "tag": true,
+      "is_seen": false
 	},
 	{
 	  "filter": "slider",
 	  "name": "Стоимость предложения в месяц, руб./мес.", 
 	  "param": "onetimepayment",
 	  "read_more": false,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "checkbox",
 	  "name": "Каналы продаж", 
 	  "param": "saleschannel",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": true
 	},
 	{
 	  "filter": "radio",
 	  "name": "Видимость в ЛК", 
 	  "param": "beingseen",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "radio",
 	  "name": "Интернет/Интернет+ТВ", 
 	  "param": "internettv",
-	  "read_more": true,
-	  "tag": false
+	  "read_more": false,
+      "tag": false,
+      "is_seen": true
 	},
 	{
 	  "filter": "checkbox",
 	  "name": "Тип линейки", 
 	  "param": "typeline",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "checkbox",
 	  "name": "Тип предложения", 
 	  "param": "typesuggestion",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Предоплата/Стоимость подключения (рассрочка), руб.", 
 	  "param": "prepayment",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Стоимость тарифа при внесении предоплаты, руб./мес.", 
 	  "param": "monthlypaymentafterprepayment",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Стоимость предложения в месяц, руб./мес.", 
 	  "param": "monthlypayment",
 	  "read_more": false,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "radio",
 	  "name": "Годовой контракт", 
 	  "param": "annualcontract",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "radio",
 	  "name": "Архив", 
 	  "param": "archive",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "radio",
 	  "name": "Публичный", 
 	  "param": "public",
 	  "read_more": true,
-	  "tag": true
+      "tag": true,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Разовый платеж по услуге ТВ, руб.", 
 	  "param": "onetimepaymenttv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "ID тарифа Интернет, Onyma", 
 	  "param": "idonyma",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "ID тарифа ТВ, Onyma", 
 	  "param": "idonymatv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование тарифа Интернет, Onyma", 
 	  "param": "nametarifonyma",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование тарифа ТВ, Onyma", 
 	  "param": "nametarifonymatv",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование тарифа Интернет после Промо-периода, Onyma", 
 	  "param": "nametarifafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование ТВ после Промо-периода, Onyma", 
 	  "param": "nametarifafterpromotv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование тарифа Интернет, ЛК", 
 	  "param": "nametariflk",
-	  "read_more": true,
-	  "tag": false
+	  "read_more": false,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование ТВ после Промо-периода, ЛК", 
 	  "param": "nametariflktvafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование тарифа ТВ, ЛК", 
 	  "param": "nametariflktv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Наименование тарифа Интернет после Промо-периода, ЛК", 
 	  "param": "nametariflkafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": "checkbox",
 	  "name": "Промо-период", 
 	  "param": "promoperiod",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	}, 
 	{
 	  "filter": false,
 	  "name": "АП предложения после Промо-периода, руб./мес.", 
 	  "param": "subscriptionfeeafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "АП Интернет после Промо-периода, руб./мес.", 
 	  "param": "subscriptionfeeafterpromoinet",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "АП ТВ после Промо-периода, руб/мес", 
 	  "param": "subscriptionfeeafterpromotv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Абоненская плата Интернет после промо-периода", 
 	  "param": "subscriptionfeeinternetafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Абоненская плата ТВ после промо-периода", 
 	  "param": "subscriptionfeetvafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Предоплата/Стоимость подключения (рассрочка) по услуге Интернет, руб.", 
 	  "param": "rassrochkainet",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Цена в мес. при разовом платеже по услуге Интернет, руб.", 
 	  "param": "monthlypaymentprepay",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Цена в мес. при разовом платеже по услуге ТВ, руб.", 
 	  "param": "monthlypaymentprepaytv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Ожидаемый платеж по услуге Интернет с рассрочкой, руб./мес.", 
 	  "param": "awaitmonthlypaymentprepay",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Ожидаемый платеж по услуге ТВ с рассрочкой, руб./мес.", 
 	  "param": "awaitmonthlypaymentprepaytv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "АП Интернет, руб./мес.", 
 	  "param": "monthlypaymentinet",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "АП ТВ, руб./мес.", 
 	  "param": "monthlypaymenttv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "ID тарифа Интернет после Промо-периода, Onyma", 
 	  "param": "idonymatvafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "ID тарифа ТВ после Промо-периода, Onyma", 
 	  "param": "idonymatvafterpromotv",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Скорость после Промо-периода, Мбит/с", 
 	  "param": "speedafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
-	  "filter": "slider",
+	  "filter": "checkbox",
 	  "name": "Скорость, Мбит/c", 
 	  "param": "speed",
 	  "read_more": false,
-	  "tag": false
+      "tag": false,
+      "is_seen": true
 	},
 	{
 	  "filter": false,
 	  "name": "Кол-во каналов ТВ", 
 	  "param": "kanals",
-	  "read_more": true,
-	  "tag": false
+	  "read_more": false,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Количество каналов ТВ после Промо-периода", 
 	  "param": "kanalsafterpromo",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Роутер в составе пакета", 
 	  "param": "router",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Цена роутера в составе пакета, руб/мес.", 
 	  "param": "pricerouterinpacket",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Тип роутера в составе пакета", 
 	  "param": "typerouter",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Приставка в составе пакета", 
 	  "param": "pristavka",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Тип приставки в составе пакета", 
 	  "param": "typepristavka",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Цена приставки в составе пакета, руб/мес.", 
 	  "param": "pricepristavkainpacket",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Дата старта", 
 	  "param": "datestart",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Дата окончания", 
 	  "param": "datestop",
-	  "read_more": false,
-	  "tag": false
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Комментарии", 
 	  "param": "comments",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	},
 	{
 	  "filter": false,
 	  "name": "Номер приказа в СЭД", 
 	  "param": "numberprikaza",
 	  "read_more": true,
-	  "tag": false
+      "tag": false,
+      "is_seen": false
 	}
   ]

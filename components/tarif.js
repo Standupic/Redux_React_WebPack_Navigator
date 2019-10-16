@@ -17,8 +17,8 @@ function Tarif(props){
         labels,showModal,
         loading} = props;
     // const renderData = filtering ? !filteredData.length ? data : filteredData : data
-    const renderData = filtering ? filteredData : data
-    const currentTarifsObject = separator(renderData, currentPage, countTarifs)
+    // const renderData = filtering ? filteredData : data
+    const currentTarifsObject = separator(data, currentPage, countTarifs)
     const {divided} = currentTarifsObject;
 
     if(divided.length){
@@ -162,7 +162,7 @@ export default connect((state)=>{
            currentSectionPages} = state.pagination;
     return {
         data,
-        filtering,
+        // filtering,
         hideShowData,
         labels,
         countTarifs,

@@ -21,8 +21,8 @@ render(){
                 <input 
                     data-id={`c${index}`} type="checkbox" className='checkbox' id={`c${index}`} 
                     // value={this.props.item}
-                    // checked={this.props.checked}
-                    // onChange={(e,obj)=>{this.onChange(e,{value:{[name]:e.target.value}})}}
+                    checked={this.props.checked}
+                    onChange={(e,obj)=>{console.log("!")}}
                 />
                 <label htmlFor={`c${index}`} className={hide ? "hide" : ""}>
                     <span>{item}</span>

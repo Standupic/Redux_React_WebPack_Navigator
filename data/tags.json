@@ -1,6 +1,6 @@
 [
 	{
-		"value": { "region": ["ЦФО"], "location" : ["Курск"], "beingseen": "да", "saleschannel": ["ОДП"]},
+		"value": { "region": ["ЦФО"], "location" : ["Курск"], "beingseen": ["да"], "saleschannel": ["ОДП"]},
 		"title" : "ЦФО Курск Видимый в ЛК ОДП",
 		"position": 1
 		},
