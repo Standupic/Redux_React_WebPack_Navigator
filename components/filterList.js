@@ -4,26 +4,11 @@ import Filter from './filter';
 import {connect} from 'react-redux';
 import SetTagSearch from './setTagSearch';
 import Loader from './loader';
+import {filterSelector} from '../selectors';
 
 
 const FilterList = (props) => {
     const {filters,loading} = props;
-    // const {filters,
-    //     resetFilters,
-    //     handleToggleFilter,
-    //     handleFilter,
-    //     hideFilters,
-    //     resetRadio,
-    //     togglePopUp,
-    //     setTagSearch,
-    //     saveTagSearch,
-    //     greatestValue,
-    //     filtering,
-    //     onChangeSlider,
-    //     hideRestFilters,
-    //     showAllFilters,
-    //     seenFilters
-    // } = props;
 		return(
             <div className="an-navigator-filters">
                 {
@@ -67,25 +52,10 @@ const FilterList = (props) => {
 		)
 	}
 // FilterList.propTypes = {
-// 	filters: PropTypes.array.isRequired,
-// 	handleFilter: PropTypes.func.isRequired,
-// 	handleToggleFilter: PropTypes.func.isRequired,
-//     onChangeSlider: PropTypes.func.isRequired,
-//     resetFilters: PropTypes.func.isRequired,
-//     hideFilters: PropTypes.array.isRequired,
-//     resetRadio: PropTypes.func.isRequired,
-//     togglePopUp: PropTypes.func.isRequired,
-//     setTagSearch: PropTypes.bool.isRequired,
-//     saveTagSearch: PropTypes.func.isRequired,
-//     greatestValue: PropTypes.array.isRequired,
-//     filtering: PropTypes.func.isRequired,
-//     onChangeSlider: PropTypes.func.isRequired
-
+	
 // }
 
-export default connect((state)=>{
-    return {
-        filters: state.data.filters,
-        loading: state.data.loading
-    }
-})(FilterList);
+export default connect((state)=> ({
+    filters: filterSelector(state),
+    loading: state.data.loading
+}),)(FilterList);

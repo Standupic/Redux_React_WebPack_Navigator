@@ -15,6 +15,7 @@ class Checkbox extends PureComponent{
 // }
 
 render(){
+    console.log("checkbox")
     const {item,name,index,hide} = this.props;
     return(
             <React.Fragment>

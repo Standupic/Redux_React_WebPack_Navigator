@@ -35,15 +35,6 @@ export function deleteElem(list, index){
         ...list.slice(index+1)
     ]
 }
-export function toMapImmutable(obj){
-   if(is_Array(obj)) return Map(obj)
-   if(is_Object(obj)){
-        for(let key in obj){
-            Map(obj[key])
-        }
-    return obj
-   }
-}
 
 export function isEmpty (prop){
     return prop === null || prop === undefined || 
@@ -140,9 +131,11 @@ export function newStructure(data, defaultParams, tags){
 				}
 				labels[defaultParams[i]['param']] = defaultParams[i]['name']
 		}
-
+        
 		return {
-			filters: filters,
+			filters: filters.reduce((acc, item) => {
+                return { ...acc, [item["param"]]: item };
+              }, {}),
 			labels
 		}
     }

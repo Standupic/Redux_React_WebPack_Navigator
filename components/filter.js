@@ -7,6 +7,7 @@ class Filter extends React.Component{
         toggle: false
     }
   render(){
+    console.log("Filter")
     const {item} = this.props;
     const {filter, param, checked, name} = item;
 	return(

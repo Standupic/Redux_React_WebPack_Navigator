@@ -1,6 +1,4 @@
 import {FILTERING} from '../constans';
-import {toMapImmutable} from '../helper';
-import {Map} from "immutable";
 
 const initialState = {
     "paramFilters": {},
@@ -20,17 +18,13 @@ const initialState = {
     }
 }
 
-export default (state = false, action)=>{
+export default (state = initialState, action)=>{
     const {type, param} = action;
-    console.log(action)
     if(type === FILTERING){
-        console.log(state)
-        // const merged = state['is_seen'].mergeWith((prev,next,key) =>{
-        //     return next
-        // }, Map(param))
-            return {
-                ...state,
-            }
+        return {
+            ...state,
+            paramFilters: Object.assign({},state.paramFilters,param)
+        }
     }
     return state
 }

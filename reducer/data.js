@@ -1,7 +1,9 @@
 import {FETCH_BEGIN,
     FETCH_SUCCESS,
     FETCH_FAILURE,
+    FILTERING,
     } from '../constans';
+import { fromJS } from "immutable";
 
 const initialState = {
     data:[],
@@ -46,6 +48,23 @@ export default(state = initialState, action)=>{
                 ...state,
                 loading: false,
                 error: payload.error,
+            }
+        case FILTERING:
+            return{
+                ...state,
+                filters: 
+                {
+                    ...state.filters,
+                    ['region']:{
+                        ...state.filters['region'],
+                        active: true,
+                        checked:[ ...state.filters['region']['checked'], ...["ЦФО","ПФО"]]
+                    },
+                    ['location']:{
+                        ...state.filters['location'],
+                        checked:[ ...state.filters['location']['checked'], "ЦФО"]
+                    }
+                }
             }
         default:
             return state;

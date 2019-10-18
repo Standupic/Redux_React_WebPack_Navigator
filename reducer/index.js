@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import data from './tarifs';
+import data from './data';
 import sort from './sortTarifs';
-import filtering from './filtering';
+import filters from './filters';
 import modal from './modal';
 import pagination from './pagination';
 
@@ -9,7 +9,7 @@ import pagination from './pagination';
 const reducer = combineReducers({
     data,
     sort,
-    filtering,
+    filters,
     modal,
     pagination,
 })

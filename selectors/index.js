@@ -25,6 +25,34 @@ export const sortingTarifs = createSelector(
                 return dataSelector.sort((a,b) => { return a.typesuggestion.localeCompare(b.typesuggestion)})
             case TYPE_SUGGESTION_Я_A:
                 return dataSelector.sort((a,b) => { return b.typesuggestion.localeCompare(a.typesuggestion)})
+            default:
+                return dataSelector
         }
     }
 )
+
+export const filterSelector = (state) => Object.values(state.data.filters)
+// export const filters = (state) => state.data.filters
+export const paramFilters = (state) => state.filters.paramFilters;
+
+
+export const changeFilters = createSelector(
+    filterSelector,
+    paramFilters,
+    (filterSelector,paramFilters) => { 
+       for(var key in paramFilters){
+           if(filterSelector[key]){
+               console.log("!")
+               const filter = filterSelector[key];
+               return{
+                   ...filterSelector,
+                   [filterSelector[key]]:{
+                       ...filters,
+                       checked: (filter.checked || []).concat(paramFilters[key])
+                   }
+               }
+           }
+       }
+    }
+)
+

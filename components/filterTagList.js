@@ -2,7 +2,9 @@ import React from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from './loader';
-import {performerFiltering} from '../action/filtering';
+import {performerFiltering} from '../action/filters';
+// import { changeFilters } from "../selectors/";
+
 
 class FilterTagList extends React.Component{
   
@@ -24,7 +26,8 @@ class FilterTagList extends React.Component{
                greatestValue.map((item,key)=>{
                     return(
                         <React.Fragment key={key}>
-                        <div className="an-navigator-section-2-tag" onClick={(obj)=>{performerFiltering(item.value)}}>
+                        <div className="an-navigator-section-2-tag" 
+                             onClick={(obj)=>{performerFiltering(item.value)}}>
                             {item.title}</div>
                             <span>&times;</span>
                         </React.Fragment>
@@ -47,10 +50,7 @@ class FilterTagList extends React.Component{
 //   handleTag: PropTypes.func.isRequired
 // }
 
-export default connect((state)=>{
-    // console.log(state.data.tarifs.greatestValue, "state")
-    return{
-        greatestValue: state.data.greatestValue,
-        loading: state.data.loading
-    }
-},{performerFiltering})(FilterTagList);
+export default connect((state)=>({
+    greatestValue: state.data.greatestValue,
+    loading: state.data.loading
+}),{performerFiltering})(FilterTagList);
