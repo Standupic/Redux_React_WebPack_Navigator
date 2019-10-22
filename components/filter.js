@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import InputList from "./inputList";
 
 class Filter extends React.Component{
-  state = {
+    state = {
         toggle: false
     }
   render(){
     console.log("Filter")
-    const {item} = this.props;
-    const {filter, param, checked, name} = item;
+    const {param,name,active} = this.props.item;
 	return(
 		<React.Fragment>
         <div>
-            <div className={this.state.toggle ? "an-navigator-filter util-open open-true" : "an-navigator-filter util-open"}> 
+            <div className={active ? "an-navigator-filter util-open open-true" : "an-navigator-filter util-open"}> 
             <div className="an-navigator-filter-header" onClick={(name)=>{handleToggleFilter(param)}}>
                 <img src="/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
                 <span className="an-navigator-filter-header-title">
@@ -21,11 +20,7 @@ class Filter extends React.Component{
                 </span>
             </div>
             <div className="scrollFilter">
-                <InputList 
-                    type={filter}
-                    values={item[item['param']]}
-                    checked={checked}
-                    param={param}
+                <InputList item = {this.props.item}
                 />
             </div>
         </div>

@@ -2,28 +2,25 @@ import React from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from './loader';
-import {performerFiltering} from '../action/filters';
+// import {performerFiltering} from '../action/filters';
 // import { changeFilters } from "../selectors/";
 
 
 class FilterTagList extends React.Component{
   
-//   componentDidMount(){
-    // this.props.dispatch(fetchData("../data/tags.json"))
-//   }
 //   shouldComponentUpdate(newProps, newState){
 //     return this.props.greatestValue != newProps.greatestValue
 //   }
 
   
 	render(){
-        const {greatestValue,loading,performerFiltering} = this.props;
+        const {tags} = this.props;
 		return(
 			<div className="an-navigator-section-2-tags">
-              {loading ? 
+              {!tags ? 
                     <Loader/>
               :
-               greatestValue.map((item,key)=>{
+               tags.map((item,key)=>{
                     return(
                         <React.Fragment key={key}>
                         <div className="an-navigator-section-2-tag" 
@@ -51,6 +48,6 @@ class FilterTagList extends React.Component{
 // }
 
 export default connect((state)=>({
-    greatestValue: state.data.greatestValue,
+    tags: state.tags.tags,
     loading: state.data.loading
-}),{performerFiltering})(FilterTagList);
+}))(FilterTagList);

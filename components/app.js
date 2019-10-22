@@ -8,12 +8,17 @@ import Tarif from './tarif';
 import Modal from './modal';
 import DecoratorToggleOpen from './decorators/toggleOpen';
 import Pagination from './pagination';
-import {fetchData} from '../action';
+import {callAPI,
+        filterAPI,
+        tagsAPI} from '../action';
+import {filterData} from '../action/filters';
 
 
 class App extends Component{
     componentDidMount(){
-        this.props.dispatch(fetchData("../data/tarifs.json"))
+        this.props.dispatch(callAPI())
+        this.props.dispatch(filterAPI())
+        this.props.dispatch(tagsAPI())
     }
     render(){
         const {modal} = this.props
@@ -28,24 +33,23 @@ class App extends Component{
                     </section>
                 <section className="an-navigator-section-2">
 			        <div className="an-navigator-wrap">
-                       
                          <FilterTagList/>
                     </div>
                 </section>
                 <section className="an-navigator-section-3">
 			        <div className="an-navigator-wrap">
                         <FilterList/>
-                        <Tarif/>
+                        {/* <Tarif/> */}
                     </div>
 	    		</section>
-                <section className="pagination">
+                {/* <section className="pagination">
 	    			<Pagination/>
 	    		</section>
                 {open ? 
                     <Modal/>
                 :
                      null
-                }
+                } */}
            </React.Fragment>
         )
     }

@@ -8,19 +8,17 @@ import {filterSelector} from '../selectors';
 
 
 const FilterList = (props) => {
-    const {filters,loading} = props;
+    const {filters} = props;
 		return(
             <div className="an-navigator-filters">
                 {
-                    loading ? 
+                    !filters ? 
                         <Loader />
                     :
                     filters.map((obj,index)=>{
                         return(
                             <Filter 
                                 item={obj}
-                                toggle={obj['active']}
-                                checked={obj['checked']}
                                 key={index}
                             />
                         )
@@ -56,6 +54,5 @@ const FilterList = (props) => {
 // }
 
 export default connect((state)=> ({
-    filters: filterSelector(state),
-    loading: state.data.loading
-}),)(FilterList);
+    filters: filterSelector(state)
+}))(FilterList);

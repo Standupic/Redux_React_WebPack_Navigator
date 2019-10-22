@@ -24,14 +24,6 @@
       "is_seen": false
 	},
 	{
-	  "filter": "slider",
-	  "name": "Стоимость предложения в месяц, руб./мес.", 
-	  "param": "onetimepayment",
-	  "read_more": false,
-      "tag": false,
-      "is_seen": false
-	},
-	{
 	  "filter": "checkbox",
 	  "name": "Каналы продаж", 
 	  "param": "saleschannel",

@@ -1,5 +1,8 @@
 import array from 'lodash/array';
 import {Map} from 'immutable';
+import defaultParams from '../data/default_params';
+import data from '../data/tarifs';
+// import tags from '../data/tags';
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -78,6 +81,7 @@ export function uniqArray(arr,type){
     }
 }
 
+
 export function separator(data, current, countTarifs){
 	const lastIndex = current  * countTarifs;
 	const firstIndex = lastIndex - countTarifs;
@@ -91,95 +95,127 @@ export function separator(data, current, countTarifs){
 	    }
 }
 
-export function newStructure(data, defaultParams, tags){
-    let deParL = defaultParams.length;
-    let daL = data.length;
- 	const createObjectProperty = (defaultParams) =>{
+const createObjectProperty = (defaultParams) =>{
         let obj = defaultParams.reduce(function(acc, tarif){
         return {...acc,[tarif['param']]:[]}
         },{})
 
-		for(let i = 0; i < daL; i++){
+		for(let i = 0; i < data.length; i++){
 			for(let key in data[i]){
                 obj[key] ? obj[key].push(data[i][key]) : obj
 			}
 		}
 		for(let key in obj){
 			obj[key] = array.uniq(obj[key])
-		}
+        }
+        // console.log(obj)
 		return obj
 	}
 
-	const createFiltersLabels = (defaultParams) =>{
+createObjectProperty(defaultParams)    
 
-		const obj = createObjectProperty(defaultParams);
-		const filters = [];
-        const labels = {}; 
-		for(let i = 0; i < deParL; i++){
-				if(defaultParams[i]['filter']){
-                    let type = defaultParams[i]['filter'];
-                    let key = defaultParams[i]["param"];
-					filters.push({	
-								[key]: uniqArray(obj[key],type),
-								['filter']: type,
-								['name']  : defaultParams[i]['name'],
-								['param'] : key,
-								['checked'] : type == "checkbox" ? [] : [],
-                                ['active'] : false,
-                                ['is_seen']: defaultParams[i]['is_seen']
-							})
-				}
-				labels[defaultParams[i]['param']] = defaultParams[i]['name']
-		}
-        
-		return {
-			filters: filters.reduce((acc, item) => {
-                return { ...acc, [item["param"]]: item };
-              }, {}),
-			labels
-		}
+export const createFiltersLabels = (defaultParams) =>{
+    const obj = createObjectProperty(defaultParams);
+    const filters = [];
+    const labels = {}; 
+    for(let i = 0; i < deParL; i++){
+            if(defaultParams[i]['filter']){
+                let type = defaultParams[i]['filter'];
+                let key = defaultParams[i]["param"];
+                filters.push({	
+                            [key]: uniqArray(obj[key],type),
+                            ['filter']: type,
+                            ['name']  : defaultParams[i]['name'],
+                            ['param'] : key,
+                            ['checked'] : type == "checkbox" ? [] : [],
+                            ['active'] : false,
+                            ['is_seen']: defaultParams[i]['is_seen']
+                        })
+            }
+            labels[defaultParams[i]['param']] = defaultParams[i]['name']
     }
-	
-	const maxMinValue = (arr) => {
-		arr.sort((a,b)=>{a - b})
-		return {from: arr[0], to: arr[arr.length-1]}
-	}
-
-	const trimString=(arr)=>{
-		for(let i = 0; i < arr.length; i++){
-			arr[i]+="";
-		}
-		return arr
-	}
-	
-	const hideShowData = (defaultParams) => {
-		var hideShow = {},
-            checkbox = []
-       
-		for(let i = 0; i < deParL; i++){
-            hideShow[defaultParams[i]['param']] = defaultParams[i]['read_more'];
-            checkbox.push({
-                "param" : defaultParams[i]['param'],
-                "name" : defaultParams[i]['name'],
-                "hideShow" : defaultParams[i]['read_more'],
-                [defaultParams[i]['param']] : defaultParams[i]['read_more']
-            })
-		}
-		return {
-			hideShow: hideShow,
-			checkbox: checkbox
-		}
-	}
-
-	var FiltersLabels = createFiltersLabels(defaultParams)
-	var hideShowCheckbox = hideShowData(defaultParams)
-
-	return {
-            filters: FiltersLabels.filters,
-			labels: FiltersLabels.labels,
-			hideShowData: hideShowCheckbox.hideShow,
-			checkboxHideShow: hideShowCheckbox.checkbox,
-			greatestValue: tags.sort(function(objA, objB){return objA.position - objB.position}),
-            data
-        }
+    
+    return {
+        filters: filters.reduce((acc, item) => {
+            return { ...acc, [item["param"]]: item };
+            }, {}),
+        labels
+    }
 }
+
+export const createFilters = (defaultParams)=>{
+    const obj = createObjectProperty(defaultParams);
+    return defaultParams.reduce((acc,item)=>{
+    if(item['filter']){
+        return {...acc, [item['param']] : {
+            ['values']: uniqArray(obj[item['param']]),
+            ['filter']: item['filter'],
+            ['name']: item['name'],
+            ['param']: item['param'],
+            ['checked'] : [],
+            ['active'] : true,
+            ['is_seen'] : item['is_seen']
+            }}
+        }
+        return {...acc} 
+    },{})
+}
+
+
+export const createLabels = (defaultParams)=>{
+    return defaultParams.reduce((acc,item)=>{
+        return {...acc, [item['param']]: item['name']}
+    },[])
+}
+
+
+export const hideShowData = (defaultParams) => {
+    return defaultParams.reduce((acc,item)=>{
+       return {...acc, [item['param']] : {
+                ['param']: item['param'],
+                ['name'] : item['name'],
+                ['read_more'] : item['read_more']
+              }
+            } 
+    },{})
+}
+
+export const greatestValue = (tags) =>{
+    return tags.sort(function(objA, objB){return objA.position - objB.position})
+}
+
+
+    // var hideShow = {},
+    //     checkbox = []
+    
+    // for(let i = 0; i < deParL; i++){
+    //     hideShow[defaultParams[i]['param']] = defaultParams[i]['read_more'];
+    //     checkbox.push({
+    //         "param" : defaultParams[i]['param'],
+    //         "name" : defaultParams[i]['name'],
+    //         "hideShow" : defaultParams[i]['read_more'],
+    //         [defaultParams[i]['param']] : defaultParams[i]['read_more']
+    //     })
+    // }
+    // return {
+    //     hideShow: hideShow,
+    //     checkbox: checkbox
+    // }
+// }
+    
+// export function newStructure(data, defaultParams, tags){
+//     let deParL = defaultParams.length;
+//     let daL = data.length;
+
+// 	var FiltersLabels = createFiltersLabels(defaultParams)
+// 	var hideShowCheckbox = hideShowData(defaultParams)
+
+// 	return {
+//             filters: FiltersLabels.filters,
+// 			labels: FiltersLabels.labels,
+// 			hideShowData: hideShowCheckbox.hideShow,
+//             checkboxHideShow: hideShowCheckbox.checkbox,
+// 			greatestValue: tags.sort(function(objA, objB){return objA.position - objB.position}),
+//             data
+//         }
+// }

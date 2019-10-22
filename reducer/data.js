@@ -3,17 +3,17 @@ import {FETCH_BEGIN,
     FETCH_FAILURE,
     FILTERING,
     } from '../constans';
-import { fromJS } from "immutable";
+
 
 const initialState = {
     data:[],
-    filters: [],
-    hideShowData: [],
-    checkboxHideShow: [],
-    greatestValue: [],
-    labels: [],
-    loading: false,
-    error: null
+    // filters: [],
+    // hideShowData: [],
+    // checkboxHideShow: [],
+    // greatestValue: [],
+    // labels: [],
+    // loading: false,
+    // error: null
 }
 
 export default(state = initialState, action)=>{
@@ -26,22 +26,10 @@ export default(state = initialState, action)=>{
                 error: null
             }
         case FETCH_SUCCESS:
-            const { filters,
-                    hideShowData,
-                    checkboxHideShow,
-                    greatestValue,
-                    labels,
-                    data
-                } = payload;
             return{
                 ...state,
-                loading: false,
-                data: data,
-                filters: filters,
-                hideShowData: hideShowData,
-                checkboxHideShow: checkboxHideShow,
-                labels: labels,
-                greatestValue: greatestValue
+                data: payload,
+                loading: false
             }
         case FETCH_FAILURE:
             return{
@@ -49,23 +37,23 @@ export default(state = initialState, action)=>{
                 loading: false,
                 error: payload.error,
             }
-        case FILTERING:
-            return{
-                ...state,
-                filters: 
-                {
-                    ...state.filters,
-                    ['region']:{
-                        ...state.filters['region'],
-                        active: true,
-                        checked:[ ...state.filters['region']['checked'], ...["ЦФО","ПФО"]]
-                    },
-                    ['location']:{
-                        ...state.filters['location'],
-                        checked:[ ...state.filters['location']['checked'], "ЦФО"]
-                    }
-                }
-            }
+        // case FILTERING:
+        //     return{
+        //         ...state,
+        //         filters: 
+        //         {
+        //             ...state.filters,
+        //             ['region']:{
+        //                 ...state.filters['region'],
+        //                 active: true,
+        //                 checked:[ ...state.filters['region']['checked'], ...["ЦФО","ПФО"]]
+        //             },
+        //             ['location']:{
+        //                 ...state.filters['location'],
+        //                 checked:[ ...state.filters['location']['checked'], "ЦФО"]
+        //             }
+        //         }
+        //     }
         default:
             return state;
     }

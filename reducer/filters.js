@@ -1,29 +1,13 @@
-import {FILTERING} from '../constans';
+import {FILTERING,SET_FILTERS} from '../constans';
+import {createFilters} from '../helper';
 
-const initialState = {
-    "paramFilters": {},
-    "is_seen": {
-        "region" : true,
-        "location" : true,
-        "saleschannel" : true,
-        "speed" : true,
-        "internettv" : true,
-    },
-    "hideCheckbox": {
-        "region" : [],
-        "location" : [],
-        "localizationbasis" : [],
-        "typesuggestion" : [],
-        "typeline" : []
-    }
-}
-
-export default (state = initialState, action)=>{
-    const {type, param} = action;
-    if(type === FILTERING){
+export default (state = {}, action)=>{
+    const {type, payload} = action;
+    if(type === SET_FILTERS){
+        const filters = createFilters(payload)
         return {
             ...state,
-            paramFilters: Object.assign({},state.paramFilters,param)
+            filters: filters
         }
     }
     return state

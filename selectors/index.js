@@ -5,6 +5,7 @@ import {
 	TYPE_SUGGESTION_A_Я,
 	TYPE_SUGGESTION_Я_A
     } from '../constans'
+import filters from '../reducer/filters';
 
 export const sortSelector = (state) => state.sort.type;
 export const dataSelector = (state) => state.data.data;
@@ -31,28 +32,33 @@ export const sortingTarifs = createSelector(
     }
 )
 
-export const filterSelector = (state) => Object.values(state.data.filters)
-// export const filters = (state) => state.data.filters
-export const paramFilters = (state) => state.filters.paramFilters;
-
-
-export const changeFilters = createSelector(
-    filterSelector,
-    paramFilters,
-    (filterSelector,paramFilters) => { 
-       for(var key in paramFilters){
-           if(filterSelector[key]){
-               console.log("!")
-               const filter = filterSelector[key];
-               return{
-                   ...filterSelector,
-                   [filterSelector[key]]:{
-                       ...filters,
-                       checked: (filter.checked || []).concat(paramFilters[key])
-                   }
-               }
-           }
-       }
+export const filterSelector = (state) => {
+    const obj = state.filters.filters
+    if(obj){
+        return Object.values(obj)
     }
-)
+}
+// export const filters = (state) => state.data.filters
+// export const paramFilters = (state) => state.filters.paramFilters;
+
+
+// export const changeFilters = createSelector(
+//     filterSelector,
+//     paramFilters,
+//     (filterSelector,paramFilters) => { 
+//        for(var key in paramFilters){
+//            if(filterSelector[key]){
+//                console.log("!")
+//                const filter = filterSelector[key];
+//                return{
+//                    ...filterSelector,
+//                    [filterSelector[key]]:{
+//                        ...filters,
+//                        checked: (filter.checked || []).concat(paramFilters[key])
+//                    }
+//                }
+//            }
+//        }
+//     }
+// )
 

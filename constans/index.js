@@ -2,7 +2,12 @@ export const FETCH_BEGIN = "FETCH_BEGIN";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
+// Filters
+export const SET_FILTERS = "SET_FILTERS"
 export const FILTERING = "FILTERING";
+
+// SearchTag
+export const SET_TAGS = "SET_TAGS";
 
 // Modal
 export const HIDE_MODAL = "HIDE_MODAL";
