@@ -2,16 +2,17 @@ import React from 'react';
 import Checkbox from "./checkbox";
 import Radio from "./radio";
 import filters from '../reducer/filters';
-// import Slider from './slider';
+import Slider from './slider';
 
 class InputList extends React.Component{
     state = {
         checkbox: Checkbox,
-        radio: Radio
+        radio: Radio,
+        slider: Slider
     }
     render(){
         const {values, filter, param, checked} = this.props.item
-        let Inputs = this.state['checkbox'];
+        let Inputs = this.state['slider'];
         // console.log(this.state['checkbox'])
 
         return(

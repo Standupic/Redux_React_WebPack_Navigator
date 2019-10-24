@@ -8,7 +8,7 @@ const Checkbox = (props) =>{
            {
                values.map((item,index)=>{
                    return(
-                    <React.Fragment>
+                    <React.Fragment key={index}>
                         <input 
                                 data-id={`c${index}`} type="checkbox" className='checkbox' id={`c${index}`} 
                                 // value={this.props.item}

@@ -1,3 +1,6 @@
+import "regenerator-runtime/runtime";
+import {createFilters,greatestValue} from '../helper';
+
 import 
     {FETCH_BEGIN,
     FETCH_SUCCESS,
@@ -6,57 +9,44 @@ import
     SET_TAGS,
     } from '../constans';
 
-export const API = store => next => action =>{
-    if(!action.meta || action.meta.type !== "API"){
+
+export default (store) => (next) => async (action) =>{
+    if(!action.meta || action.type !== "API"){
         return next(action)
     }
-    const {url,set} = action.meta;
-    store.dispatch(fetchBegin())
-    fetch(url)
-    .then(handleErrors)
-    .then(res => res.json())
-    .then(json => {
-        switch(set){
-            case SET_FILTERS:
-                store.dispatch(setFilters(json))
-            case SET_TAGS:
-                store.dispatch(setTags(json))
-            default:
-        }
-        store.dispatch(fetchSuccess(json))
-        return json
-    })
-    .catch(error => store.dispatch(fetchFailure(error)));
+    const {meta} = action
+    next({
+        type: FETCH_BEGIN
+    });
+
+    try {
+        const data = await doRequest(meta[0])
+        next({
+            type: FETCH_SUCCESS,
+            payload: data
+        })
+        const defaultParams = await doRequest(meta[1])
+        const filters  = await createFilters(defaultParams, data)
+        next({
+            type: SET_FILTERS,
+            payload: filters
+        })
+        const tagsParams = await doRequest(meta[2])
+        const tags = await greatestValue(tagsParams)
+        next({
+            type: SET_TAGS,
+            payload: tags
+        })
+    }catch(error){
+        next({
+            type: FETCH_FAILURE,
+            payload: {error}
+        })
+    };
 }
 
-
-const handleErrors = (res) =>{
-    if(!res.ok){
-        throw Error(res.statusText)
-    }
-    return res;
+const doRequest = async (url) =>{
+    const params = await fetch(url);
+    const data = await params.json();
+    return data;
 }
-
-const fetchBegin = ()=>({
-    type: FETCH_BEGIN
-})
-
-const fetchSuccess = (data)=>({
-    type: FETCH_SUCCESS,
-    payload: data
-});
-
-const fetchFailure = (error)=>({
-    type: FETCH_FAILURE,
-    payload: {error}
-})
-
-const setFilters = (data)=>({
-    type: SET_FILTERS,
-    payload: data
-})
-
-const setTags = (data)=>({
-    type: SET_TAGS,
-    payload: data
-})

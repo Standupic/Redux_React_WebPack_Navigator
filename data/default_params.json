@@ -24,6 +24,14 @@
       "is_seen": false
 	},
 	{
+	  "filter": false,
+	  "name": "Стоимость предложения в месяц, руб./мес.", 
+	  "param": "onetimepayment",
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
+	},
+	{
 	  "filter": "checkbox",
 	  "name": "Каналы продаж", 
 	  "param": "saleschannel",
@@ -41,9 +49,9 @@
 	},
 	{
 	  "filter": "radio",
-	  "name": "Интернет/Интернет+ТВ", 
+	  "name": "Состав предложения", 
 	  "param": "internettv",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
       "is_seen": true
 	},
@@ -83,7 +91,7 @@
 	  "filter": false,
 	  "name": "Стоимость предложения в месяц, руб./мес.", 
 	  "param": "monthlypayment",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
       "is_seen": false
 	},
@@ -97,11 +105,11 @@
 	},
 	{
 	  "filter": "radio",
-	  "name": "Архив", 
+	  "name": "Статус тарифа", 
 	  "param": "archive",
 	  "read_more": true,
       "tag": false,
-      "is_seen": false
+      "is_seen": true
 	},
 	{
 	  "filter": "radio",
@@ -171,7 +179,7 @@
 	  "filter": false,
 	  "name": "Наименование тарифа Интернет, ЛК", 
 	  "param": "nametariflk",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
       "is_seen": false
 	},
@@ -331,7 +339,7 @@
 	  "filter": "checkbox",
 	  "name": "Скорость, Мбит/c", 
 	  "param": "speed",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
       "is_seen": true
 	},
@@ -427,6 +435,30 @@
 	  "filter": false,
 	  "name": "Номер приказа в СЭД", 
 	  "param": "numberprikaza",
+	  "read_more": true,
+      "tag": false,
+      "is_seen": false
+	},
+	{
+	  "filter": "radio",
+	  "name": "Тип дома", 
+	  "param": "housetype",
+	  "read_more": false,
+      "tag": false,
+      "is_seen": true
+	},
+	{
+	  "filter": "radio",
+	  "name": "Тип платежа", 
+	  "param": "paymenttype",
+	  "read_more": false,
+      "tag": false,
+      "is_seen": true
+	},
+	{
+	  "filter": "slider",
+	  "name": "Цена для навигатора", 
+	  "param": "navigatorprice",
 	  "read_more": true,
       "tag": false,
       "is_seen": false

@@ -6,6 +6,8 @@ import {
 	TYPE_SUGGESTION_Я_A
     } from '../constans'
 import filters from '../reducer/filters';
+import { values } from 'regenerator-runtime';
+import { filter } from 'minimatch';
 
 export const sortSelector = (state) => state.sort.type;
 export const dataSelector = (state) => state.data.data;
@@ -38,6 +40,15 @@ export const filterSelector = (state) => {
         return Object.values(obj)
     }
 }
+
+export const sliderSelector = (state) => {
+    const slider = state.filters.filters['navigatorprice']
+    const values = slider['values'];
+    return values 
+}
+
+
+
 // export const filters = (state) => state.data.filters
 // export const paramFilters = (state) => state.filters.paramFilters;
 

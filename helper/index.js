@@ -1,8 +1,6 @@
 import array from 'lodash/array';
+import "regenerator-runtime/runtime";
 import {Map} from 'immutable';
-import defaultParams from '../data/default_params';
-import data from '../data/tarifs';
-// import tags from '../data/tags';
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -95,7 +93,7 @@ export function separator(data, current, countTarifs){
 	    }
 }
 
-const createObjectProperty = (defaultParams) =>{
+const createObjectProperty = (defaultParams,data) =>{
         let obj = defaultParams.reduce(function(acc, tarif){
         return {...acc,[tarif['param']]:[]}
         },{})
@@ -108,47 +106,18 @@ const createObjectProperty = (defaultParams) =>{
 		for(let key in obj){
 			obj[key] = array.uniq(obj[key])
         }
-        // console.log(obj)
 		return obj
 	}
 
-createObjectProperty(defaultParams)    
-
-export const createFiltersLabels = (defaultParams) =>{
-    const obj = createObjectProperty(defaultParams);
-    const filters = [];
-    const labels = {}; 
-    for(let i = 0; i < deParL; i++){
-            if(defaultParams[i]['filter']){
-                let type = defaultParams[i]['filter'];
-                let key = defaultParams[i]["param"];
-                filters.push({	
-                            [key]: uniqArray(obj[key],type),
-                            ['filter']: type,
-                            ['name']  : defaultParams[i]['name'],
-                            ['param'] : key,
-                            ['checked'] : type == "checkbox" ? [] : [],
-                            ['active'] : false,
-                            ['is_seen']: defaultParams[i]['is_seen']
-                        })
-            }
-            labels[defaultParams[i]['param']] = defaultParams[i]['name']
-    }
-    
-    return {
-        filters: filters.reduce((acc, item) => {
-            return { ...acc, [item["param"]]: item };
-            }, {}),
-        labels
-    }
-}
-
-export const createFilters = (defaultParams)=>{
-    const obj = createObjectProperty(defaultParams);
-    return defaultParams.reduce((acc,item)=>{
+export const createFilters = (defaultParams,data)=>{
+    const obj = createObjectProperty(defaultParams,data);
+    console.log(defaultParams)
+    return defaultParams.reduce((acc,item)=>{ 
     if(item['filter']){
         return {...acc, [item['param']] : {
-            ['values']: uniqArray(obj[item['param']]),
+            ['values']: item['filter'] === "slider" ?
+            [100,3000]:
+            [uniqArray(obj[item['param']])],
             ['filter']: item['filter'],
             ['name']: item['name'],
             ['param']: item['param'],

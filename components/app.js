@@ -8,17 +8,13 @@ import Tarif from './tarif';
 import Modal from './modal';
 import DecoratorToggleOpen from './decorators/toggleOpen';
 import Pagination from './pagination';
-import {callAPI,
-        filterAPI,
-        tagsAPI} from '../action';
+import {callAPI}from '../action';
 import {filterData} from '../action/filters';
 
 
 class App extends Component{
     componentDidMount(){
         this.props.dispatch(callAPI())
-        this.props.dispatch(filterAPI())
-        this.props.dispatch(tagsAPI())
     }
     render(){
         const {modal} = this.props
