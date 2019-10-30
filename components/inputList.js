@@ -12,14 +12,16 @@ class InputList extends React.Component{
     }
     render(){
         const {values, filter, param, checked} = this.props.item
-        let Inputs = this.state['slider'];
+        // console.log(filter)
+        let Inputs = this.state[filter];
         // console.log(this.state['checkbox'])
-
+        console.log("inpuList")
         return(
             <div className="option util-open-to-hide">
                 <Inputs
                     values={values} 
-                    checked={checked}
+                    // checked={checked}
+                    param={param}
                     hide={false}
                     />
                 {/* {

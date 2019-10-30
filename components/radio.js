@@ -1,13 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-const Radio = () =>{
-    const radio = this.props.item
-    const name = this.props.param
-    const checked = this.props.checked
+const Radio = (props) =>{
+     const {values,checked} = props;
+    // const radio = this.props.item
+    // const name = this.props.param
+    // const checked = this.props.checked
     return(
             <div className="radio-group parser_main_pakets">
-                {radio.map((item,key)=>{
+                {values.map((item,key)=>{
                 return(
                     <React.Fragment key={key}>
                         <input 	name={`${name}-${key}`} type="radio" id={`${name}-${key}`}

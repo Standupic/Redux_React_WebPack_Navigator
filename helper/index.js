@@ -117,7 +117,7 @@ export const createFilters = (defaultParams,data)=>{
         return {...acc, [item['param']] : {
             ['values']: item['filter'] === "slider" ?
             [100,3000]:
-            [uniqArray(obj[item['param']])],
+            uniqArray(obj[item['param']]),
             ['filter']: item['filter'],
             ['name']: item['name'],
             ['param']: item['param'],

@@ -23,24 +23,24 @@ export default (store) => (next) => async (action) =>{
         const data = await doRequest(meta[0])
         next({
             type: FETCH_SUCCESS,
-            payload: data
+            payload: data // replace on response
         })
         const defaultParams = await doRequest(meta[1])
         const filters  = await createFilters(defaultParams, data)
         next({
             type: SET_FILTERS,
-            payload: filters
+            payload: filters // replace on response
         })
         const tagsParams = await doRequest(meta[2])
         const tags = await greatestValue(tagsParams)
         next({
             type: SET_TAGS,
-            payload: tags
+            payload: tags // replace on response
         })
     }catch(error){
         next({
             type: FETCH_FAILURE,
-            payload: {error}
+            payload: {error} // replace on error
         })
     };
 }

@@ -1,8 +1,12 @@
-import React,{Component} from "react";
+import React,{useState} from "react";
 import PropTypes from 'prop-types';
 
 const Checkbox = (props) =>{
-    const {values,checked,hide} = props;
+    // const [checked, toggleChecked] = useState(false)
+    const {values,hide} = props; // values через родительский компонент 
+    //checked через connect store 
+    // const activeChecked = checked[param] ? checked[param] : [] 
+    console.log("Checkbox")
     return(
        <React.Fragment>
            {
@@ -12,8 +16,9 @@ const Checkbox = (props) =>{
                         <input 
                                 data-id={`c${index}`} type="checkbox" className='checkbox' id={`c${index}`} 
                                 // value={this.props.item}
-                                checked={checked}
-                                onChange={(e,obj)=>{console.log("!")}}
+                                // checked={toggleChecked} checked={activeChecked.indexOf(item) >= 0 ? true : false}
+                                // onChange={(e,obj)=>{console.log("!")}}
+                                // onChange={toggleChecked}
                                 />
                         <label htmlFor={`c${index}`} className={hide ? "hide" : ""}>
                                 <span>{item}</span>

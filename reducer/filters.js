@@ -1,17 +1,30 @@
 import {FILTERING,SET_FILTERS} from '../constans';
-import {fromJS,get,toJS} from 'immutable';
+import {Map, fromJS, toJS, OrderedMap} from 'immutable';
 
-export default (state = {}, action)=>{
-    const {type, payload} = action;
+
+export default (state={}, action)=>{
+    const {type, payload} = action; // Why have you done this, data returns on default 
     if(type === SET_FILTERS){
-        return {
-            ...state,
-            filters: payload
-        }
-    }
-    if(type === "ONCHANGE_SLIDER"){
+        // // console.log(payload,"payload")
+        // state = state.set("filters", OrderedMap(payload))
 
-        return fromJS(state.filters).get("navigatorprice").get("values").set(0,action.data[0]).set(1,action.data[1]).toJS()
+        // console.log(state.get("filters"), "reducer")
+        // return state = state.set("filters", OrderedMap(payload))
+    return {
+    filters: payload
+    }
+
+    }
+    if(type === "ACTIVE"){
+        return{
+                ...state,
+                filters:{...state.filters,
+                region:{
+                    ...state.filters.region,
+                    active: !state.filters.region.active
+                }
+            }
+        }
     }
     return state
 }

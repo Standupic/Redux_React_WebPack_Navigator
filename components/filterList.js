@@ -4,7 +4,7 @@ import Filter from './filter';
 import {connect} from 'react-redux';
 import SetTagSearch from './setTagSearch';
 import Loader from './loader';
-import {filterSelector} from '../selectors';
+import {createSelectorFilters} from '../selectors';
 
 
 const FilterList = (props) => {
@@ -15,7 +15,7 @@ const FilterList = (props) => {
                     !filters ? 
                         <Loader />
                     :
-                    filters.map((obj,index)=>{
+                    Object.values(filters).map((obj,index)=>{
                         return(
                             <Filter 
                                 item={obj}
@@ -54,5 +54,5 @@ const FilterList = (props) => {
 // }
 
 export default connect((state)=> ({
-    filters: filterSelector(state)
+    filters: createSelectorFilters(state)
 }))(FilterList);

@@ -1,4 +1,6 @@
 import {createSelector} from 'reselect';
+import {toJS} from 'immutable';
+
 import {
 	ACS,
 	DES,
@@ -35,11 +37,20 @@ export const sortingTarifs = createSelector(
 )
 
 export const filterSelector = (state) => {
+    console.log(state.filters, "state Filters")
+    // state.filters.toJS()
     const obj = state.filters.filters
     if(obj){
-        return Object.values(obj)
+        return obj
     }
 }
+
+export const createSelectorFilters = createSelector(
+    filterSelector,
+    (filterSelector) => {
+       return filterSelector
+    }
+)
 
 export const sliderSelector = (state) => {
     const slider = state.filters.filters['navigatorprice']
