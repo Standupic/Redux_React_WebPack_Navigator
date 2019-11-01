@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {toJS} from 'immutable';
+import {toArray, toIndexedSeq} from 'immutable';
 
 import {
 	ACS,
@@ -36,51 +36,37 @@ export const sortingTarifs = createSelector(
     }
 )
 
-export const filterSelector = (state) => {
-    console.log(state.filters, "state Filters")
-    // state.filters.toJS()
-    const obj = state.filters.filters
-    if(obj){
-        return obj
-    }
-}
-
+//FILTERS
+export const filterSelector = (state) => state.filters.filters.toIndexedSeq().toArray()
 export const createSelectorFilters = createSelector(
     filterSelector,
-    (filterSelector) => {
-       return filterSelector
+    (filterSelector) =>{
+        console.log(filterSelector,"FITLERSSELECTOR")
+        return filterSelector
     }
 )
+//END FILTERS
 
-export const sliderSelector = (state) => {
-    const slider = state.filters.filters['navigatorprice']
-    const values = slider['values'];
-    return values 
-}
+//CHECKED
+export const checkedSelector = (state) => state.filters.checked.toJS()
+export const createSelectorChecked = createSelector(
+    checkedSelector,
+    (checkedSelector) =>{
+        console.log(checkedSelector,"SELECTOR")
+        return checkedSelector
+    }
+)
+//END CHECKED
 
 
+//TAGS
+export const tagsSelector = (state) => state.tags.tags.toIndexedSeq().toArray()
+export const createSelectorTags = createSelector(
+    tagsSelector,
+    (tagsSelector) =>{
+        return tagsSelector
+    }
+)
+//END TAGS
 
-// export const filters = (state) => state.data.filters
-// export const paramFilters = (state) => state.filters.paramFilters;
-
-
-// export const changeFilters = createSelector(
-//     filterSelector,
-//     paramFilters,
-//     (filterSelector,paramFilters) => { 
-//        for(var key in paramFilters){
-//            if(filterSelector[key]){
-//                console.log("!")
-//                const filter = filterSelector[key];
-//                return{
-//                    ...filterSelector,
-//                    [filterSelector[key]]:{
-//                        ...filters,
-//                        checked: (filter.checked || []).concat(paramFilters[key])
-//                    }
-//                }
-//            }
-//        }
-//     }
-// )
-
+export const loadingSelector = (state) => state.data.loading

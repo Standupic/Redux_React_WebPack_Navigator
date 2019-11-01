@@ -2,23 +2,20 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HeaderFilter from './headerFilter';
-import FilterTagList from './filterTagList';
+import TagList from './tagList';
 import FilterList from './filterList';
 import Tarif from './tarif';
 import Modal from './modal';
-import DecoratorToggleOpen from './decorators/toggleOpen';
 import Pagination from './pagination';
 import {callAPI}from '../action';
-import {filterData} from '../action/filters';
 
 
 class App extends Component{
     componentDidMount(){
-        this.props.dispatch(callAPI())
+       const {callAPI} = this.props;
+       callAPI()
     }
     render(){
-        const {modal} = this.props
-        const {id, open} = modal
         return(
            <React.Fragment>
                 <section className="an-setting-quickly-tags"></section>
@@ -29,7 +26,7 @@ class App extends Component{
                     </section>
                 <section className="an-navigator-section-2">
 			        <div className="an-navigator-wrap">
-                         <FilterTagList/>
+                         <TagList/>
                     </div>
                 </section>
                 <section className="an-navigator-section-3">
@@ -51,11 +48,5 @@ class App extends Component{
     }
 }
 
-const mapStateToProps = (state) => {
-   return {
-       loading: state.data.loading,
-       modal: state.modal
-   }
-}
 
-export default connect(mapStateToProps)(DecoratorToggleOpen(App))
+export default connect(null,{callAPI})(App)

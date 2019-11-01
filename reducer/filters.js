@@ -1,30 +1,40 @@
-import {FILTERING,SET_FILTERS} from '../constans';
-import {Map, fromJS, toJS, OrderedMap} from 'immutable';
+import {
+    FILTERING,
+    LOAD_FILTERS,
+    TOGGLE_FILTER
+} from '../constans';
+import {Record, OrderedMap, List} from 'immutable';
+import {objToMap,objToList} from './utils';
+import {handleToggleFilter} from '../action';
+
+const StructureState = Record({
+    filters: new OrderedMap({}),
+    checked: new OrderedMap({})
+})
+
+const MapFilter = Record({
+    values: [],
+    filter: null,
+    name: null,
+    active: false,
+    param: null
+})
 
 
-export default (state={}, action)=>{
-    const {type, payload} = action; // Why have you done this, data returns on default 
-    if(type === SET_FILTERS){
-        // // console.log(payload,"payload")
-        // state = state.set("filters", OrderedMap(payload))
+export default (state = new StructureState(), action)=>{
+    const {type, response} = action; 
+    switch(type){
+        case LOAD_FILTERS:
+        return state
+        .update('filters',(filters) => filters.merge(objToMap(response.filters,MapFilter)))
+        .update('checked',(checked) => checked.merge(objToList(response.checked)))
 
-        // console.log(state.get("filters"), "reducer")
-        // return state = state.set("filters", OrderedMap(payload))
-    return {
-    filters: payload
+        case TOGGLE_FILTER:
+        const {param} = action;
+        param
+        return state
+        .updateIn(['filters',param,'active'], (active) => !active)
+        default: 
+            return state
     }
-
-    }
-    if(type === "ACTIVE"){
-        return{
-                ...state,
-                filters:{...state.filters,
-                region:{
-                    ...state.filters.region,
-                    active: !state.filters.region.active
-                }
-            }
-        }
-    }
-    return state
 }

@@ -4,21 +4,21 @@ import Filter from './filter';
 import {connect} from 'react-redux';
 import SetTagSearch from './setTagSearch';
 import Loader from './loader';
-import {createSelectorFilters} from '../selectors';
+import {createSelectorFilters,loadingSelector} from '../selectors';
 
 
 const FilterList = (props) => {
-    const {filters} = props;
+    const {filters,loading} = props;
 		return(
             <div className="an-navigator-filters">
                 {
-                    !filters ? 
+                    loading ? 
                         <Loader />
                     :
-                    Object.values(filters).map((obj,index)=>{
+                    filters.map((record,index)=>{
                         return(
                             <Filter 
-                                item={obj}
+                                instance={record}
                                 key={index}
                             />
                         )
@@ -54,5 +54,6 @@ const FilterList = (props) => {
 // }
 
 export default connect((state)=> ({
-    filters: createSelectorFilters(state)
+    filters: createSelectorFilters(state),
+    loading: loadingSelector(state)
 }))(FilterList);

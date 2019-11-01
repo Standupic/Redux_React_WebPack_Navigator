@@ -1,16 +1,13 @@
-import {Map} from "immutable";
-import data from '../data/tarifs';
-
+import {Record} from "immutable";
 import {SORT_TARIFS} from '../constans';
 
-export default(state = false, action)=>{
+const StructureState = new Record({
+    isSort: false
+})
+
+export default(state = new StructureState(), action)=>{
     const {type,payload} = action;
     switch(type){
-        case SORT_TARIFS:
-            return{
-                ...state,
-                type: payload
-            }
         default:
             return state;
     }

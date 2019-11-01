@@ -1,12 +1,16 @@
 import "regenerator-runtime/runtime";
-import {createFilters,greatestValue} from '../helper';
+import {createFilters,
+        greatestValue,
+        createLabels,
+        CreateHideShowData} from '../helper';
 
 import 
-    {FETCH_BEGIN,
-    FETCH_SUCCESS,
-    FETCH_FAILURE,
-    SET_FILTERS,
-    SET_TAGS,
+    {LOAD_DATA_BEGIN,
+    LOAD_DATA_SUCCESS,
+    LOAD_DATA_FAILURE,
+    LOAD_FILTERS,
+    LOAD_DATA,
+    LOAD_TAGS,
     } from '../constans';
 
 
@@ -16,31 +20,42 @@ export default (store) => (next) => async (action) =>{
     }
     const {meta} = action
     next({
-        type: FETCH_BEGIN
+        type: LOAD_DATA_BEGIN
     });
 
     try {
         const data = await doRequest(meta[0])
-        next({
-            type: FETCH_SUCCESS,
-            payload: data // replace on response
-        })
         const defaultParams = await doRequest(meta[1])
+        const labels = await createLabels(defaultParams)
+        const hideShowData = await CreateHideShowData(defaultParams)
+        next({
+            type: LOAD_DATA,
+            response: {
+                data,
+                labels,
+                hideShowData
+            }
+        })
         const filters  = await createFilters(defaultParams, data)
         next({
-            type: SET_FILTERS,
-            payload: filters // replace on response
+            type: LOAD_FILTERS,
+            response: filters
         })
         const tagsParams = await doRequest(meta[2])
         const tags = await greatestValue(tagsParams)
         next({
-            type: SET_TAGS,
-            payload: tags // replace on response
+            type: LOAD_TAGS,
+            response: {
+                tags
+            }
+        })
+        next({
+            type: LOAD_DATA_SUCCESS,
         })
     }catch(error){
         next({
-            type: FETCH_FAILURE,
-            payload: {error} // replace on error
+            type: LOAD_DATA_FAILURE,
+            response: {error} // replace on error
         })
     };
 }

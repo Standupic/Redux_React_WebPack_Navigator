@@ -1,4 +1,7 @@
-import {FILTERING,SET_FILTERS} from '../constans';
+import {
+    FILTERING,
+    TOGGLE_FILTER
+} from '../constans';
 
 export const performerFiltering = (obj) =>{
    return {
@@ -7,8 +10,14 @@ export const performerFiltering = (obj) =>{
     }
 }
 
-export const filterData = () =>{
+export const handleToggleFilter = (param) =>{ // {param:'region'}
     return{
-        type: SET_FILTERS
+        type: TOGGLE_FILTER,
+        param: param
+    }
+}
+export const handleToggleCheckbox = () =>{
+    return {
+
     }
 }

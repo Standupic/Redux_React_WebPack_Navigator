@@ -1,12 +1,12 @@
 import React,{useState} from "react";
 import PropTypes from 'prop-types';
+import {get} from 'immutable';
+import {connect} from 'react-redux';
+import {createSelectorChecked} from '../selectors';
 
 const Checkbox = (props) =>{
-    // const [checked, toggleChecked] = useState(false)
-    const {values,hide} = props; // values через родительский компонент 
-    //checked через connect store 
-    // const activeChecked = checked[param] ? checked[param] : [] 
-    console.log("Checkbox")
+    const {values,hide,param,checked} = props; 
+    console.log(checked,"CHECKED")
     return(
        <React.Fragment>
            {
@@ -14,13 +14,13 @@ const Checkbox = (props) =>{
                    return(
                     <React.Fragment key={index}>
                         <input 
-                                data-id={`c${index}`} type="checkbox" className='checkbox' id={`c${index}`} 
+                                 type="checkbox" className='checkbox' id={`${param}${index}`} 
                                 // value={this.props.item}
-                                // checked={toggleChecked} checked={activeChecked.indexOf(item) >= 0 ? true : false}
-                                // onChange={(e,obj)=>{console.log("!")}}
+                                  checked={checked[param].indexOf(item) >= 0 ? true : false}
+                                  onChange={(e,obj)=>{console.log("!")}}
                                 // onChange={toggleChecked}
                                 />
-                        <label htmlFor={`c${index}`} className={hide ? "hide" : ""}>
+                        <label htmlFor={`${param}${index}`} className={hide ? "hide" : ""}>
                                 <span>{item}</span>
                         </label>
                     </React.Fragment>
@@ -37,4 +37,6 @@ const Checkbox = (props) =>{
 // 	index: PropTypes.number.isRequired,
 // }
 
-export default Checkbox;
+export default connect((state) =>({
+    checked: createSelectorChecked(state)
+}))(Checkbox)

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import SorterFilter from './sorterFilter';
+import Sort from './sort';
 import QuantityDisplayTarifs from './quantityDisplayTarifs';
 import { connect } from "react-redux";
 import Loader from './loader';
@@ -18,7 +18,7 @@ const HeaderFilter = (props) =>{
                  <div className="an-navigator-section-2-nav">
                         <div className="an-section-title">Тарифы <span className="an-section-title-count">0</span></div>
                         <input type="text" className="an-section-2-search" placeholder="Поиск"/>
-                            <SorterFilter
+                            <Sort
                                 // handleSort={(data)=>{handleSort(data)}}
                             />
                             <QuantityDisplayTarifs

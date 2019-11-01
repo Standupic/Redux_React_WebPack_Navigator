@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const Radio = (props) =>{
-     const {values,checked} = props;
+     const {values,name} = props;
     // const radio = this.props.item
     // const name = this.props.param
     // const checked = this.props.checked
@@ -13,8 +13,9 @@ const Radio = (props) =>{
                     <React.Fragment key={key}>
                         <input 	name={`${name}-${key}`} type="radio" id={`${name}-${key}`}
                                 value={item}
-                                onChange={(e)=>{this.onChange(e,{value:{[name]:item}})}}
-                                checked={checked === item}/>
+                                // onChange={(e)=>{this.onChange(e,{value:{[name]:item}})}}
+                                // checked={checked === item}/>
+                                />
                             <label htmlFor={`${name}-${key}`}><span className="out-dot"><div className="in-dot"></div></span>{item}<b></b></label>
                     </React.Fragment>
                     )

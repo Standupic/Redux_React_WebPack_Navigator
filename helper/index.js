@@ -1,6 +1,5 @@
 import array from 'lodash/array';
 import "regenerator-runtime/runtime";
-import {Map} from 'immutable';
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -111,23 +110,29 @@ const createObjectProperty = (defaultParams,data) =>{
 
 export const createFilters = (defaultParams,data)=>{
     const obj = createObjectProperty(defaultParams,data);
-    console.log(defaultParams)
-    return defaultParams.reduce((acc,item)=>{ 
+    const filters = defaultParams.reduce((acc,item)=>{ 
     if(item['filter']){
         return {...acc, [item['param']] : {
-            ['values']: item['filter'] === "slider" ?
-            [100,3000]:
-            uniqArray(obj[item['param']]),
+            ['values']: uniqArray(obj[item['param']]),
             ['filter']: item['filter'],
             ['name']: item['name'],
             ['param']: item['param'],
-            ['checked'] : [],
             ['active'] : true,
             ['is_seen'] : item['is_seen']
             }}
         }
         return {...acc} 
     },{})
+    const checked = defaultParams.reduce((acc,item)=>{
+         if(item['filter']) {
+            return {...acc,[item['param']]:[]}
+         }
+         return {...acc}
+    },{})
+    return {
+        filters,
+        checked
+    }
 }
 
 
@@ -138,7 +143,7 @@ export const createLabels = (defaultParams)=>{
 }
 
 
-export const hideShowData = (defaultParams) => {
+export const CreateHideShowData = (defaultParams) => {
     return defaultParams.reduce((acc,item)=>{
        return {...acc, [item['param']] : {
                 ['param']: item['param'],
@@ -153,38 +158,3 @@ export const greatestValue = (tags) =>{
     return tags.sort(function(objA, objB){return objA.position - objB.position})
 }
 
-
-    // var hideShow = {},
-    //     checkbox = []
-    
-    // for(let i = 0; i < deParL; i++){
-    //     hideShow[defaultParams[i]['param']] = defaultParams[i]['read_more'];
-    //     checkbox.push({
-    //         "param" : defaultParams[i]['param'],
-    //         "name" : defaultParams[i]['name'],
-    //         "hideShow" : defaultParams[i]['read_more'],
-    //         [defaultParams[i]['param']] : defaultParams[i]['read_more']
-    //     })
-    // }
-    // return {
-    //     hideShow: hideShow,
-    //     checkbox: checkbox
-    // }
-// }
-    
-// export function newStructure(data, defaultParams, tags){
-//     let deParL = defaultParams.length;
-//     let daL = data.length;
-
-// 	var FiltersLabels = createFiltersLabels(defaultParams)
-// 	var hideShowCheckbox = hideShowData(defaultParams)
-
-// 	return {
-//             filters: FiltersLabels.filters,
-// 			labels: FiltersLabels.labels,
-// 			hideShowData: hideShowCheckbox.hideShow,
-//             checkboxHideShow: hideShowCheckbox.checkbox,
-// 			greatestValue: tags.sort(function(objA, objB){return objA.position - objB.position}),
-//             data
-//         }
-// }

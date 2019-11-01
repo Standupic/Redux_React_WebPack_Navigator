@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import {sortTarifs} from '../action/sortTarif';
-import {sortingTarifs} from '../selectors/';
+import {sortingTarifs} from '../selectors';
 
 import {
 	ACS,

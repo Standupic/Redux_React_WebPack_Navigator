@@ -2,8 +2,9 @@ import React from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from './loader';
+import {toArray} from 'immutable';
 // import {performerFiltering} from '../action/filters';
-// import { changeFilters } from "../selectors/";
+import { createSelectorTags } from "../selectors/";
 
 
 class FilterTagList extends React.Component{
@@ -14,7 +15,7 @@ class FilterTagList extends React.Component{
 
   
 	render(){
-        const {tags} = this.props;
+        const {tags,loading} = this.props;
 		return(
 			<div className="an-navigator-section-2-tags">
               {!tags ? 
@@ -48,6 +49,6 @@ class FilterTagList extends React.Component{
 // }
 
 export default connect((state)=>({
-    tags: state.tags.tags,
+    tags: createSelectorTags(state),
     loading: state.data.loading
 }))(FilterTagList);

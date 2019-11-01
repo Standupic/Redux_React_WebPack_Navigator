@@ -1,20 +1,23 @@
-export const FETCH_BEGIN = "FETCH_BEGIN";
-export const FETCH_SUCCESS = "FETCH_SUCCESS";
-export const FETCH_FAILURE = "FETCH_FAILURE";
-export const SET_DATA = "SET_DATA";
+//API
+export const LOAD_DATA_BEGIN = "LOAD_DATA_BEGIN";
+export const LOAD_DATA_SUCCESS = "LOAD_DATA_SUCCESS";
+export const LOAD_DATA_FAILURE = "LOAD_DATA_FAILURE";
 
-// Filters
-export const SET_FILTERS = "SET_FILTERS"
+// DATA
+export const LOAD_DATA = "LOAD_DATA";
+
+// FILTERS
+export const LOAD_FILTERS = "LOAD_FILTERS";
 export const FILTERING = "FILTERING";
+export const TOGGLE_FILTER = "TOGGLE_FILTER";
+// TAGS
+export const LOAD_TAGS = "LOAD_TAGS";
 
-// SearchTag
-export const SET_TAGS = "SET_TAGS";
-
-// Modal
+// MODAL
 export const HIDE_MODAL = "HIDE_MODAL";
 export const SHOW_MODAL = "SHOW_MODAL";
 
-// Pagination
+// PAGINATION
 export const MOVE_PAGINATION = "MOVE_PAGINATION";
 export const FIRST_SECTION = "FIRST_SECTION";
 export const LAST_SECTION = "LAST_SECTION";
