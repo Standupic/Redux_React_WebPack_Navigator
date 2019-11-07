@@ -6,8 +6,6 @@ import tags from './tags';
 import modal from './modal';
 import pagination from './pagination';
 
-
-
 const reducer = combineReducers({
     data,
     filters,

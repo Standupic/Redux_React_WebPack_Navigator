@@ -6,7 +6,7 @@ import {createSelectorChecked} from '../selectors';
 
 const Checkbox = (props) =>{
     const {values,hide,param,checked} = props; 
-    console.log(checked,"CHECKED")
+    // console.log(checked,"CHECKED")
     return(
        <React.Fragment>
            {

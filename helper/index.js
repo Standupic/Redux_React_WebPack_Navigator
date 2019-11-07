@@ -1,5 +1,4 @@
 import array from 'lodash/array';
-import "regenerator-runtime/runtime";
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -117,24 +116,46 @@ export const createFilters = (defaultParams,data)=>{
             ['filter']: item['filter'],
             ['name']: item['name'],
             ['param']: item['param'],
-            ['active'] : true,
+            ['active'] : false,
             ['is_seen'] : item['is_seen']
             }}
         }
         return {...acc} 
     },{})
+
+    const hide = defaultParams.reduce((acc,item)=>{
+        if(item['filter']){
+            return {...acc,[item['param']]:item['is_seen']} 
+        }else{
+            return  {...acc}
+        }
+      
+    },{})
+   
+
     const checked = defaultParams.reduce((acc,item)=>{
          if(item['filter']) {
-            return {...acc,[item['param']]:[]}
+            return {...acc,[item['param']]:["ЦФО"]}
          }
-         return {...acc}
+            return {...acc}
     },{})
+
     return {
         filters,
-        checked
+        checked,
+        hide
     }
 }
 
+export const objectChecked = (obj) =>{
+    let result = {}
+    for (var key in obj) {
+        if (arr[key].length) {
+            result = { ...result, [key]: obj[key]};
+        }
+    }
+    return result
+}
 
 export const createLabels = (defaultParams)=>{
     return defaultParams.reduce((acc,item)=>{

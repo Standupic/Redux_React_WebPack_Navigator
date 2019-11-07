@@ -1,6 +1,7 @@
 import {
     FILTERING,
-    TOGGLE_FILTER
+    TOGGLE_FILTER,
+    HIDE_SHOW_FITLERS
 } from '../constans';
 
 export const performerFiltering = (obj) =>{
@@ -16,8 +17,9 @@ export const handleToggleFilter = (param) =>{ // {param:'region'}
         param: param
     }
 }
-export const handleToggleCheckbox = () =>{
+export const handlerHideShowFilters = (flag) =>{
     return {
-
+        type: HIDE_SHOW_FITLERS,
+        flag: flag
     }
 }

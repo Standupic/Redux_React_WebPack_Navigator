@@ -10,6 +10,8 @@ export const LOAD_DATA = "LOAD_DATA";
 export const LOAD_FILTERS = "LOAD_FILTERS";
 export const FILTERING = "FILTERING";
 export const TOGGLE_FILTER = "TOGGLE_FILTER";
+export const HIDE_SHOW_FITLERS = "HIDE_SHOW_FITLERS";
+
 // TAGS
 export const LOAD_TAGS = "LOAD_TAGS";
 

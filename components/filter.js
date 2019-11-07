@@ -21,24 +21,23 @@ class Filter extends React.Component{
         return(
             <React.Fragment>
                 <div className={active ? "an-navigator-filter util-open open-true" : "an-navigator-filter util-open"}> 
-                <div className="an-navigator-filter-header" onClick={()=>(handleToggleFilter(param))}>
-                    <img src="/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
-                    <span className="an-navigator-filter-header-title">
-                    {name}
-                    </span>
-                </div>
-                <div className="scrollFilter">
-                    <div className="option util-open-to-hide">
-                        <TypeFilter 
-                            values={values}
-                            param={param}
-                            name={name}
-                            hide={false}
-                        />
+                    <div className="an-navigator-filter-header" onClick={()=>(handleToggleFilter(param))}>
+                        <img src="/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
+                        <span className="an-navigator-filter-header-title">
+                        {name}
+                        </span>
+                    </div>
+                    <div className="scrollFilter">
+                        <div className="option util-open-to-hide">
+                            <TypeFilter 
+                                values={values}
+                                param={param}
+                                name={name}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-    </React.Fragment>
+            </React.Fragment>
 		)
 	}
 }
@@ -48,8 +47,4 @@ class Filter extends React.Component{
 //     tag: PropTypes.object.isRequired
 // }
 
-export default connect((state)=>{
-    return {
-        ...state
-    }
-},{handleToggleFilter})(Filter);
+export default connect(null,{handleToggleFilter})(Filter);

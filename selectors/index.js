@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {toArray, toIndexedSeq} from 'immutable';
+import {toArray, toIndexedSeq, toJS} from 'immutable';
 
 import {
 	ACS,
@@ -13,6 +13,15 @@ import { filter } from 'minimatch';
 
 export const sortSelector = (state) => state.sort.type;
 export const dataSelector = (state) => state.data.data;
+
+export const filterSelector = (state) => state.filters.filters.toIndexedSeq()
+
+export const checkedSelector = (state) => state.filters.checked.toJS()
+
+// export const isSeenSelector = (state) => state.filters.is_seen.toJS()
+
+export const tagsSelector = (state) => state.tags.tags.toIndexedSeq()
+
 
 export const sortingTarifs = createSelector(
     dataSelector,
@@ -37,30 +46,51 @@ export const sortingTarifs = createSelector(
 )
 
 //FILTERS
-export const filterSelector = (state) => state.filters.filters.toIndexedSeq().toArray()
+
 export const createSelectorFilters = createSelector(
     filterSelector,
-    (filterSelector) =>{
-        console.log(filterSelector,"FITLERSSELECTOR")
-        return filterSelector
+    // isSeenSelector,
+    (filterSelector) =>{    
+        return filterSelector.filter((item)=>{
+            return item['is_seen'] == true
+        })
     }
 )
 //END FILTERS
 
 //CHECKED
-export const checkedSelector = (state) => state.filters.checked.toJS()
+
 export const createSelectorChecked = createSelector(
     checkedSelector,
     (checkedSelector) =>{
-        console.log(checkedSelector,"SELECTOR")
+        // console.log(checkedSelector,"SELECTORCHECKED")
         return checkedSelector
+    }
+)
+
+export const isFiltering = createSelector(
+    checkedSelector,
+    (checkedSelector) => {
+      return Object.values(checkedSelector).map((item)=>{
+            return item.length
+          }).reduce((acc,item) => {
+            return acc + item
+          },0)
     }
 )
 //END CHECKED
 
+//IS_SEEN
+// export const createSelectorIs_Seen = createSelector(
+//     isSeenSelector,
+//     (isSeenSelector) => {
+//         return isSeenSelector
+//     }
+// )
+
+//END IS_SEEN
 
 //TAGS
-export const tagsSelector = (state) => state.tags.tags.toIndexedSeq().toArray()
 export const createSelectorTags = createSelector(
     tagsSelector,
     (tagsSelector) =>{

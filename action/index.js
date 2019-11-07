@@ -5,7 +5,7 @@ export const callAPI = () => {
         meta:[
             // "http://cc.wifire.ru:4000/tarifs",
             "../data/tarifs.json",
-            "../data/d2.json",
+            "../data/default_params.json",
             "../data/tags.json"
         ]
     }

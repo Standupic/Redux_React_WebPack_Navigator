@@ -79,6 +79,9 @@ body {
       opacity: 1;
     }
   }
+.form_error{
+    border: 1px solid red !important;
+}
 .btn{
     margin: 3px 0px;
     width: 100%;
