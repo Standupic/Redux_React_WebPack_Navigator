@@ -1,12 +1,11 @@
 import React,{useState} from "react";
 import PropTypes from 'prop-types';
-import {get} from 'immutable';
-import {connect} from 'react-redux';
-import {createSelectorChecked} from '../selectors';
+
 
 const Checkbox = (props) =>{
-    const {values,hide,param,checked} = props; 
-    // console.log(checked,"CHECKED")
+    const {values,hide,param,checked,
+            methodes} = props;
+    const {handler} = methodes;
     return(
        <React.Fragment>
            {
@@ -17,7 +16,9 @@ const Checkbox = (props) =>{
                                  type="checkbox" className='checkbox' id={`${param}${index}`} 
                                 // value={this.props.item}
                                   checked={checked[param].indexOf(item) >= 0 ? true : false}
-                                  onChange={(e,obj)=>{console.log("!")}}
+                                  onChange={(obj)=>{
+                                      handler({'param':param,'value':item})}
+                                  }
                                 // onChange={toggleChecked}
                                 />
                         <label htmlFor={`${param}${index}`} className={hide ? "hide" : ""}>
@@ -30,13 +31,10 @@ const Checkbox = (props) =>{
        </React.Fragment>
      )
 }
-
 // Checkbox.propTypes = {
 // 	item: PropTypes.object.isRequired,
 // 	name: PropTypes.string.isRequired,
 // 	index: PropTypes.number.isRequired,
 // }
 
-export default connect((state) =>({
-    checked: createSelectorChecked(state)
-}))(Checkbox)
+export default Checkbox

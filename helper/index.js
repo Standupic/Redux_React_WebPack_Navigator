@@ -135,7 +135,7 @@ export const createFilters = (defaultParams,data)=>{
 
     const checked = defaultParams.reduce((acc,item)=>{
          if(item['filter']) {
-            return {...acc,[item['param']]:["ЦФО"]}
+            return {...acc,[item['param']]:[]}
          }
             return {...acc}
     },{})

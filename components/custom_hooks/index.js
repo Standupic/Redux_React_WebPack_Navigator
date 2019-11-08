@@ -4,7 +4,6 @@ import {useState} from 'react';
 export const hideShowFilters = () => {
     const [flag, setflag] = useState(false);
 
-
     function toggleFlag() {
         setflag(!flag);
     }

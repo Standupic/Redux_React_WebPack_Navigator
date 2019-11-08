@@ -1,9 +1,7 @@
 import React from "react";
-import {connect} from 'react-redux';
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-// import {sliderSelector} from "../selectors";
-// import {setValueSlider} from "../action";
+
 
 const wrapStyles = makeStyles({
   root: {
@@ -45,6 +43,22 @@ function valuetext(value) {
 }
 
 const RangeSlider = (props) => {
+  const {checked, param, methodes} = props;
+  const values = checked[param];
+  const {handler} = methodes;
+
+  console.log(values)
+
+  const defaultValues = {
+      "speed": {
+            "value" : [50,1000],
+            "max": 1000,
+      },
+      "navigatorprice": {
+          "value": [350,8500],
+          "max": 8500
+    }
+  }
   const classes = wrapStyles();
 //   const {value,setValueSlider} = props;
   const [value, setValue] = React.useState([20, 37]);
@@ -57,21 +71,16 @@ const RangeSlider = (props) => {
   return (
     <div className={classes.root}>
       <MySlider
-        value={value}
-        max={value[1]}
-        onChange={(event,obj)=>{setValue(event,obj)}}
+        value={values.length ? values : null}
+        max={defaultValues[param].max}
+        onChange={(event,obj)=>{handler(event,obj)}}
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        defaultValue={[]}
+        defaultValue={defaultValues[param].value}
       />
     </div>
   );
 }
 
 export default RangeSlider
-// export default connect((state) =>({
-//     value: sliderSelector(state)
-//     }),
-//     {setValueSlider}
-// )(RangeSlider)

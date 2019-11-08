@@ -2,7 +2,8 @@ import React from 'react';
 import CreateTagFilter from './createTagFilter';
 import {togglePopUp, hideShowFilters} from './custom_hooks';
 import Loader from './loader';
-import {handlerHideShowFilters} from '../action/filters';
+import {handlerHideShowFilters,
+        handlerResetFilters} from '../action/filters';
 import {connect} from 'react-redux';
 import {
     isFiltering,
@@ -12,7 +13,12 @@ import {
 
 
 const Buttons = (props) =>{
-    const {filtering, loading, tags, checked,handlerHideShowFilters} = props;
+    const {filtering, 
+           loading, 
+           tags, 
+           checked,
+           handlerHideShowFilters,
+           handlerResetFilters} = props;
     const {isShowing, toggle} = togglePopUp();
     const {flag, toggleFlag} = hideShowFilters();
 
@@ -34,12 +40,14 @@ const Buttons = (props) =>{
                     onClick={()=>{
                         toggleFlag()
                         handlerHideShowFilters(flag)
-                        }}>
+                    }}>
                     {!flag ? "Показать все фильтры" : "Скрыть фильтры"}
                 </button>
-                {/* <button 
-                    className="btn resetFilters" 
-                    onClick={resetFilters}>Сбросить фильтры</button> */}
+                <button 
+                    onClick={handlerResetFilters}
+                    className={filtering ? "btn resetFilters" : "btn errortag"} 
+                    >Сбросить фильтры
+                </button>
                 <button 
                     disabled={filtering ? false : true} 
                     className={filtering ? "btn savetag" : "btn errortag"}
@@ -53,8 +61,10 @@ const Buttons = (props) =>{
     )
 }
 
+
 export default connect((state)=>({
     filtering: isFiltering(state),
     tags: createSelectorTags(state),
     checked: createSelectorChecked(state)
-}),{handlerHideShowFilters})(Buttons)
+}),{handlerHideShowFilters,
+    handlerResetFilters})(Buttons)

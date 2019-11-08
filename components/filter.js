@@ -4,25 +4,55 @@ import Radio from "./radio";
 import Checkbox from './checkbox';
 import Slider from './slider';
 import {connect} from 'react-redux';
-import {handleToggleFilter} from '../action/filters';
+import {
+        handleToggleFilter,
+        handlerFilteringCheckbox,
+        handlerFilteringRadio,
+        handlerSlider,
+        handlerResetRadio
+        } from '../action/filters';
+import {createSelectorChecked} from "../selectors";
 
 class Filter extends React.Component{
 
     state = {
-        checkbox: Checkbox,
-        radio: Radio,
-        slider: Slider
+        "checkbox": Checkbox,    
+        "radio": Radio,
+        "slider": Slider,
     }
-    
     render(){
-        const {param,name,active,filter,values} = this.props.instance;
-        const {handleToggleFilter} = this.props;
-        let TypeFilter = this.state[filter];
+        const {param,
+               name,
+               active,
+               filter,
+               values,
+               } = this.props.instance;
+        const {
+            handleToggleFilter,
+            checked,
+            handlerFilteringCheckbox,
+            handlerFilteringRadio
+            } = this.props;
+
+        const methodes = {
+            "checkbox": {
+                "handler": handlerFilteringCheckbox,
+            },
+            "radio": {
+                "handler": handlerFilteringRadio,
+                "reset": handlerResetRadio,
+            },
+            "slider": {
+                "handler": handlerSlider
+            } 
+        }
+        let TypeFilter = this.state[filter]
+        
         return(
             <React.Fragment>
                 <div className={active ? "an-navigator-filter util-open open-true" : "an-navigator-filter util-open"}> 
                     <div className="an-navigator-filter-header" onClick={()=>(handleToggleFilter(param))}>
-                        <img src="/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
+                        <img src="../dist/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
                         <span className="an-navigator-filter-header-title">
                         {name}
                         </span>
@@ -33,6 +63,8 @@ class Filter extends React.Component{
                                 values={values}
                                 param={param}
                                 name={name}
+                                checked={checked}
+                                methodes={methodes[filter]}
                             />
                         </div>
                     </div>
@@ -47,4 +79,8 @@ class Filter extends React.Component{
 //     tag: PropTypes.object.isRequired
 // }
 
-export default connect(null,{handleToggleFilter})(Filter);
+export default connect((state) =>({
+    checked: createSelectorChecked(state)
+}),{handleToggleFilter,
+    handlerFilteringCheckbox,
+    handlerFilteringRadio})(Filter);

@@ -8,9 +8,15 @@ export const LOAD_DATA = "LOAD_DATA";
 
 // FILTERS
 export const LOAD_FILTERS = "LOAD_FILTERS";
-export const FILTERING = "FILTERING";
 export const TOGGLE_FILTER = "TOGGLE_FILTER";
+export const HANDLER_FILTERING_CHECKBOX = "HANDLER_FILTERING_CHECKBOX";
+export const HANDLER_SLIDER = "HANDLER_SLIDER";
+export const RESET_RADIO = "RESET_RADIO";
+export const HANDLER_FILTERING_RADIO = "HANDLER_FILTERING_RADIO";
+//BUTONS
 export const HIDE_SHOW_FITLERS = "HIDE_SHOW_FITLERS";
+export const RESET_FILTERS = "RESET_FILTERS";
+
 
 // TAGS
 export const LOAD_TAGS = "LOAD_TAGS";
@@ -27,7 +33,7 @@ export const NEXT = "NEXT";
 export const PREV = "PREV";
 export const NUMBER = "NUMBER";
 
-// HeaderFilter
+// HEADER_FILTER
 export const SET_QUANTITY_DISPLAY_TARIF = "SET_QUANTITY_DISPLAY_TARIF";
 
 export const SORT_TARIFS = "SORT_TARIFS";
