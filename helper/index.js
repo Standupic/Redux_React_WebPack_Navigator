@@ -41,6 +41,7 @@ export function isEmpty (prop){
     (prop.constructor === Object && Object.keys(prop).length === 0);
 }
 
+
 export function getSameHeightTarifs(node){
     let nodes = Array.prototype.slice.call(node.childNodes);
     let WL = getComputedStyle(document.querySelector(".wrap-list")).height.replace("px","") * 1
@@ -60,6 +61,13 @@ export function setSameHeightTarifs(selector){
 	return document.querySelectorAll(selector);
 }
 
+export function isEmptyFilters(obj){
+    return Object.values(obj).map((item)=>{
+        return item.length
+      }).reduce((acc,item) => {
+        return acc + item
+    },0)
+}
 export function uniqArray(arr,type){
     var allItem = []
     if(is_Array(arr[0])){
@@ -70,9 +78,6 @@ export function uniqArray(arr,type){
         }
         return array.uniq(allItem).sort()
     }else{
-        if(type == "slider"){
-            return {from: 0, to: 5000}
-        }
         return arr.sort()
     }
 }
@@ -132,25 +137,33 @@ export const createFilters = (defaultParams,data)=>{
       
     },{})
    
-
     const checked = defaultParams.reduce((acc,item)=>{
          if(item['filter']) {
-            return {...acc,[item['param']]:[]}
+            return {...acc, [item['param']]:[]}
          }
             return {...acc}
     },{})
 
+    const slider = defaultParams.reduce((acc,item)=>{
+        if(item['filter'] == "slider") {
+           return {...acc, [item['param']]:[]}
+        }
+           return {...acc}
+   },{})
+    
+
     return {
         filters,
         checked,
-        hide
+        hide,
+        slider
     }
 }
 
 export const objectChecked = (obj) =>{
     let result = {}
     for (var key in obj) {
-        if (arr[key].length) {
+        if (obj[key].length) {
             result = { ...result, [key]: obj[key]};
         }
     }

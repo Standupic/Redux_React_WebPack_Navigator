@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {find} from 'lodash/collection';
 import {indexOf} from 'lodash/array';
 import {objectChecked} from '../helper';
+import {toJS} from 'immutable';
 
 
 class createTagFilter extends React.Component{
@@ -16,7 +17,12 @@ class createTagFilter extends React.Component{
         e.preventDefault();
         const {name, position, index} = this.state;
         const {tags,checked} = this.props;
-        let elemIndex = indexOf(Object.values(tags),find(tags, objectChecked(checked)))
+        console.log(tags)
+        console.log(tags.toJS() ,checked)
+    
+        console.log(find(tags.toJS(), objectChecked(checked)))
+
+        let elemIndex = indexOf(Object.values(tags.toJS()), find(tags, objectChecked(checked)))
         console.log(elemIndex)
         if(elemIndex >= 0){
             this.setState({
@@ -81,7 +87,6 @@ class createTagFilter extends React.Component{
                             <button disabled={!this.isValid()}>Cохранить</button>
                             <button onClick={toggle}>Отмена</button>
                         </React.Fragment>
-    
                     }                  
                 </form>
             </React.Fragment>

@@ -38,16 +38,13 @@ const MySlider = withStyles({
   }
 })(Slider);
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+
 
 const RangeSlider = (props) => {
   const {checked, param, methodes} = props;
   const values = checked[param];
   const {handler} = methodes;
 
-  console.log(values)
 
   const defaultValues = {
       "speed": {
@@ -60,23 +57,15 @@ const RangeSlider = (props) => {
     }
   }
   const classes = wrapStyles();
-//   const {value,setValueSlider} = props;
-  const [value, setValue] = React.useState([20, 37]);
  
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <div className={classes.root}>
       <MySlider
-        value={values.length ? values : null}
+        value={values.length ? values : defaultValues[param].value}
         max={defaultValues[param].max}
-        onChange={(event,obj)=>{handler(event,obj)}}
+        onChange={(event,obj)=>{handler(event,{'param':param,'value':obj})}}
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
-        getAriaValueText={valuetext}
         defaultValue={defaultValues[param].value}
       />
     </div>

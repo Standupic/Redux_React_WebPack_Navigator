@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from './loader';
 import {toArray} from 'immutable';
-// import {performerFiltering} from '../action/filters';
+import {handlerTagsSearch} from '../action/tags';
 import { createSelectorTags } from "../selectors/";
 
 
@@ -15,7 +15,7 @@ class FilterTagList extends React.Component{
 
   
 	render(){
-        const {tags,loading} = this.props;
+        const {tags,handlerTagsSearch} = this.props;
 		return(
 			<div className="an-navigator-section-2-tags">
               {!tags ? 
@@ -25,7 +25,7 @@ class FilterTagList extends React.Component{
                     return(
                         <React.Fragment key={key}>
                         <div className="an-navigator-section-2-tag" 
-                             onClick={(obj)=>{performerFiltering(item.value)}}>
+                             onClick={(obj)=>{handlerTagsSearch(item.value)}}>
                             {item.title}</div>
                             <span>&times;</span>
                         </React.Fragment>
@@ -51,4 +51,4 @@ class FilterTagList extends React.Component{
 export default connect((state)=>({
     tags: createSelectorTags(state),
     loading: state.data.loading
-}))(FilterTagList);
+}),{handlerTagsSearch})(FilterTagList);

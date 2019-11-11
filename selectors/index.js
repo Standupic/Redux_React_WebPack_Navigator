@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
 import {toArray, toIndexedSeq, toJS} from 'immutable';
+import {isEmptyFilters} from '../helper';
 
 import {
 	ACS,
@@ -17,6 +18,7 @@ export const dataSelector = (state) => state.data.data;
 export const filterSelector = (state) => state.filters.filters.toIndexedSeq()
 
 export const checkedSelector = (state) => state.filters.checked.toJS()
+export const sliderSelector = (state) => state.filters.slider.toJS()
 
 // export const isSeenSelector = (state) => state.filters.is_seen.toJS()
 
@@ -58,24 +60,32 @@ export const createSelectorFilters = createSelector(
 )
 //END FILTERS
 
+//SLIDER
+export const createSelectorSlider = createSelector(
+    sliderSelector,
+    (sliderSelector) =>{
+        return sliderSelector
+    }
+)
+//END SLIDER
+
 //CHECKED
 
 export const createSelectorChecked = createSelector(
     checkedSelector,
     (checkedSelector) =>{
-        // console.log(checkedSelector,"SELECTORCHECKED")
         return checkedSelector
     }
 )
 
+
 export const isFiltering = createSelector(
     checkedSelector,
-    (checkedSelector) => {
-      return Object.values(checkedSelector).map((item)=>{
-            return item.length
-          }).reduce((acc,item) => {
-            return acc + item
-          },0)
+    sliderSelector,
+    (checkedSelector,sliderSelector) => {
+       var x = isEmptyFilters(checkedSelector)
+       var y = isEmptyFilters(sliderSelector)
+       return x+y
     }
 )
 //END CHECKED

@@ -36,11 +36,10 @@ export const handlerHideShowFilters = (flag) =>{ // boolen
         flag: flag
     }
 }
-export const handlerSlider = (ev,arr) => { // [num,num]
-    console.log(arr)
+export const handlerSlider = (ev,obj) => { // {param: str, value: []}
     return{
         type: HANDLER_SLIDER,
-        value: arr 
+        slider: obj 
     }
 }
 

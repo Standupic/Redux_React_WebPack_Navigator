@@ -1,5 +1,4 @@
 import {toJS, fromJS} from "immutable"
-import { immerable } from "immer"
 import { isImmutable } from "immutable"
 
 export default (store) => (next) => (action) =>{

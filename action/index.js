@@ -11,11 +11,3 @@ export const callAPI = () => {
     }
 }
 //end API
-
-export const setValueSlider = (event,obj) =>{
-    console.log(obj,"action")
-    return{
-        type: "ONCHANGE_SLIDER",
-        data: obj
-    }
-}

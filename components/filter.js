@@ -11,7 +11,8 @@ import {
         handlerSlider,
         handlerResetRadio
         } from '../action/filters';
-import {createSelectorChecked} from "../selectors";
+import {createSelectorChecked,
+        createSelectorSlider} from "../selectors";
 
 class Filter extends React.Component{
 
@@ -30,8 +31,10 @@ class Filter extends React.Component{
         const {
             handleToggleFilter,
             checked,
+            slider,
             handlerFilteringCheckbox,
-            handlerFilteringRadio
+            handlerFilteringRadio,
+            handlerSlider
             } = this.props;
 
         const methodes = {
@@ -43,9 +46,11 @@ class Filter extends React.Component{
                 "reset": handlerResetRadio,
             },
             "slider": {
-                "handler": handlerSlider
+                "handler": handlerSlider,
+                "value": slider,
             } 
         }
+        
         let TypeFilter = this.state[filter]
         
         return(
@@ -63,7 +68,7 @@ class Filter extends React.Component{
                                 values={values}
                                 param={param}
                                 name={name}
-                                checked={checked}
+                                checked={methodes[filter].value ? methodes[filter].value : checked}
                                 methodes={methodes[filter]}
                             />
                         </div>
@@ -80,7 +85,9 @@ class Filter extends React.Component{
 // }
 
 export default connect((state) =>({
-    checked: createSelectorChecked(state)
+    checked: createSelectorChecked(state),
+    slider: createSelectorSlider(state)
 }),{handleToggleFilter,
     handlerFilteringCheckbox,
+    handlerSlider,
     handlerFilteringRadio})(Filter);

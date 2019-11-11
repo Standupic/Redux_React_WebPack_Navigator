@@ -6,16 +6,19 @@ import {
     HANDLER_FILTERING_CHECKBOX,
     HANDLER_FILTERING_RADIO,
     HANDLER_SLIDER,
+    TAG_SEARCH,
     RESET_RADIO
 } from '../constans';
 import {Record, OrderedMap, List, toJS, clear} from 'immutable';
 import {objToMap,objToList} from './utils';
+
 // import {handleToggleFilter} from '../action';
 
 const StructureState = Record({
     filters: new OrderedMap({}),
     checked: new OrderedMap({}),
-    hide: new OrderedMap({})
+    hide: new OrderedMap({}),
+    slider: new OrderedMap({})
 })
 
 const MapFilter = Record({
@@ -36,6 +39,7 @@ export default (state = new StructureState(), action)=>{
         .update('filters', (filters) => filters.merge(objToMap(response.filters, MapFilter)))
         .update('checked', (checked) => checked.merge(objToList(response.checked)))
         .update('hide', (hide) => hide.merge(response.hide))
+        .update('slider', (slider) => slider.merge(objToList(response.slider)))
         break;
 
         case TOGGLE_FILTER:
@@ -43,7 +47,14 @@ export default (state = new StructureState(), action)=>{
         return state
         .updateIn(['filters',param,'active'], (active) => !active)
         break;
-
+        case TAG_SEARCH:
+        const {tag} = action;
+            return state
+            .updateIn(['checked'], item => item.merge(objToList(tag)))
+            .updateIn(['filters'], item => item.map((val, key) =>
+                tag[key] ? val.update('active',v => true) : val
+            ))
+        break;
         case HIDE_SHOW_FITLERS:
         const {flag} = action;
         const {hide} = state;
@@ -56,15 +67,21 @@ export default (state = new StructureState(), action)=>{
             case false:
             return state
             .updateIn(['filters'], item =>
-                item.map(val => !hide[val['param']] ? val.update('is_seen', v => true) : val))
+                item.map(val => !hide[val['param']] ?
+                val.update('is_seen', v => true) 
+                : 
+                val))
             break;
         }
         break;
-
         case RESET_FILTERS:
             return state
             .updateIn(['checked'], item => 
                 item.map((val, key ) => val.clear()))
+            .updateIn(['slider'], item => 
+                item.map((val, key ) => val.clear()))
+            .updateIn(['filters'], item => 
+                item.map(val => val.update('active', v => false)))
         break;
         case HANDLER_FILTERING_RADIO:
         const {radio} = action;
@@ -75,11 +92,15 @@ export default (state = new StructureState(), action)=>{
         const {checkbox} = action;
             return state
             .updateIn(['checked', checkbox.param], item =>
-             item.indexOf(checkbox.value) >= 0
-             ?
+             item.indexOf(checkbox.value) >= 0 ?
              item.delete(item.indexOf(checkbox.value))
              :
              item.push(checkbox.value))
+        break;
+        case HANDLER_SLIDER:
+        const {slider} = action;
+            return state
+            .updateIn(['slider', slider.param], item => List(slider.value))
         break;
         default:
             return state
