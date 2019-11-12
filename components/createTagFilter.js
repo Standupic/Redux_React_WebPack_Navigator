@@ -1,8 +1,10 @@
 import React,{Component} from 'react';
-import {find} from 'lodash/collection';
-import {indexOf} from 'lodash/array';
-import {objectChecked} from '../helper';
+import {reduce} from 'lodash/collection';
+import {isEqual} from 'lodash/lang';
+import {getIndexTag,getObjectChecked} from '../helper';
 import {toJS} from 'immutable';
+import {handlerSetTag} from '../action/tags';
+import {connect} from 'react-redux';
 
 
 class createTagFilter extends React.Component{
@@ -16,19 +18,25 @@ class createTagFilter extends React.Component{
      handleSubmit=(e)=>{
         e.preventDefault();
         const {name, position, index} = this.state;
-        const {tags,checked} = this.props;
-        console.log(tags)
-        console.log(tags.toJS() ,checked)
-    
-        console.log(find(tags.toJS(), objectChecked(checked)))
-
-        let elemIndex = indexOf(Object.values(tags.toJS()), find(tags, objectChecked(checked)))
-        console.log(elemIndex)
-        if(elemIndex >= 0){
+        const {tags, checked} = this.props;
+        const {handlerSetTag} = this.props;
+        const length =  Object.values(tags.toJS()).length;
+        if(getIndexTag(this.props) >= 0){
             this.setState({
-                index: elemIndex
+                index: getIndexTag(this.props)
             })
         }else{
+        const newTag = {
+            value: getObjectChecked(checked),
+            title: name,
+            position: length + 1 <= position ? length+1 : position*1 
+        }
+        handlerSetTag(newTag)
+        this.setState({
+            name: "",
+            position: "",
+            index: -1
+        })
             // run action to change state of tags
             // clear state of component
         }       
@@ -57,7 +65,8 @@ class createTagFilter extends React.Component{
                 <form className="setTag" onSubmit={this.handleSubmit}>
                     {(index >= 0) ?
                         <React.Fragment>
-                            <p>Фильтр {[index]['title']} уже существует!</p>
+                            <p>Фильтр "{tags.get(index)['title']}" уже существует!</p>
+                            <p>Попробуйте воспользоваться уже существующем или создайте новый!</p>
                             <button onClick={toggle}>Отмена</button>
                         </React.Fragment>                     
                     :                    
@@ -105,4 +114,6 @@ const limits = {
     }
 }
 
-export default createTagFilter;
+export default connect(null,{
+    handlerSetTag
+})(createTagFilter);

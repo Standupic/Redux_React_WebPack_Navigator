@@ -21,6 +21,7 @@ export const RESET_FILTERS = "RESET_FILTERS";
 // TAGS
 export const LOAD_TAGS = "LOAD_TAGS";
 export const TAG_SEARCH = "TAG_SEARCH";
+export const SET_TAG = "SET_TAG";
 
 // MODAL
 export const HIDE_MODAL = "HIDE_MODAL";

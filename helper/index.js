@@ -1,4 +1,7 @@
 import array from 'lodash/array';
+import {toJS,toArray, Record} from 'immutable';
+import {isEqual} from 'lodash/lang';
+import {objToMap} from '../reducer/utils';
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -20,12 +23,13 @@ export function is_String(item){
 	return Object.prototype.toString.call(item) == "[object String]"
 }
 
-export function pushElem(list, elem, position){
-    if(position == 1) position = 0
+export function pushElem(tags, elem, Record){
+    tags = tags.toArray();
+    if(elem.position == 1) elem.position = 0
     return [
-        ...list.slice(0,position),
-        elem,
-        ...list.slice(position)
+        ...tags.slice(0,elem.position),
+        [elem.position, new Record(elem)],
+        ...tags.slice(elem.position)
     ]
 }
 export function deleteElem(list, index){
@@ -160,7 +164,7 @@ export const createFilters = (defaultParams,data)=>{
     }
 }
 
-export const objectChecked = (obj) =>{
+export const getObjectChecked = (obj) =>{
     let result = {}
     for (var key in obj) {
         if (obj[key].length) {
@@ -168,6 +172,18 @@ export const objectChecked = (obj) =>{
         }
     }
     return result
+}
+
+
+const getValuesFromTags = (arr) =>{
+    return arr.reduce((acc,item)=>{
+        return [...acc, item.value]
+    },[])
+}
+
+export const getIndexTag = (props) =>{
+    const {tags, checked} = props;
+    return getValuesFromTags(tags.toJS()).findIndex(item => isEqual(item, getObjectChecked(checked)))
 }
 
 export const createLabels = (defaultParams)=>{

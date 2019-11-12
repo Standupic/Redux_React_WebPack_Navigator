@@ -8,9 +8,7 @@ export const arrToMap = (arr, Record) => {
 }
 
 export const arrToRecord = (arr, Record) =>{
-    console.log(arr)
-    console.log(Record)
-    arr = arr.map((item =>{
+    return arr = arr.map((item =>{
         return new Record(item)
     }))
 }
