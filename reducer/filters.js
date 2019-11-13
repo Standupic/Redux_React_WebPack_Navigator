@@ -50,7 +50,12 @@ export default (state = new StructureState(), action)=>{
         case TAG_SEARCH:
         const {tag} = action;
             return state
+            .updateIn(['checked'], item => 
+            item.map((val, key ) => val.clear()))
             .updateIn(['checked'], item => item.merge(objToList(tag)))
+            .updateIn(['filters'], item => item.map((val, key) =>
+                val.update('active',v => false)
+            ))
             .updateIn(['filters'], item => item.map((val, key) =>
                 tag[key] ? val.update('active',v => true) : val
             ))

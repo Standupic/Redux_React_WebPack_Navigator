@@ -1,10 +1,11 @@
-import {OrderedMap, Map, List} from 'immutable';
+import {OrderedMap, Map, List, toJS} from 'immutable';
 
 export const arrToMap = (arr, Record) => {
     return arr.reduce(
-        (acc,item) => acc.set(item.position, Record ? new Record(item) : item),
+        (acc,item,key) => acc.set(key, Record ? new Record(item) : item),
         new OrderedMap({}) 
     )
+    
 }
 
 export const arrToRecord = (arr, Record) =>{

@@ -25,12 +25,12 @@ export function is_String(item){
 	return Object.prototype.toString.call(item) == "[object String]"
 }
 
-export function pushElem(tags, elem, Record){
-    tags = tags.toArray();
+export function pushElem(tags, elem){
+    tags = Object.values(tags.toJS())
     if(elem.position == 1) elem.position = 0
     return [
         ...tags.slice(0,elem.position),
-        [elem.position, new Record(elem)],
+        elem,
         ...tags.slice(elem.position)
     ]
 }
