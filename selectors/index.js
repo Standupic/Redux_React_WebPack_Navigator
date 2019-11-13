@@ -85,7 +85,7 @@ export const isFiltering = createSelector(
     (checkedSelector,sliderSelector) => {
        var x = isEmptyFilters(checkedSelector)
        var y = isEmptyFilters(sliderSelector)
-       return x+y
+       return {...x,...y}
     }
 )
 //END CHECKED

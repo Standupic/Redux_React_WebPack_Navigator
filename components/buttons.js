@@ -5,6 +5,7 @@ import Loader from './loader';
 import {handlerHideShowFilters,
         handlerResetFilters} from '../action/filters';
 import {connect} from 'react-redux';
+import {isEmpty} from '../helper';
 import {
     isFiltering,
     createSelectorTags,
@@ -45,12 +46,12 @@ const Buttons = (props) =>{
                 </button>
                 <button 
                     onClick={handlerResetFilters}
-                    className={filtering ? "btn resetFilters" : "btn errortag"} 
+                    className={!isEmpty(filtering) ? "btn resetFilters" : "btn errortag"} 
                     >Сбросить фильтры
                 </button>
                 <button 
-                    disabled={filtering ? false : true} 
-                    className={filtering ? "btn savetag" : "btn errortag"}
+                    disabled={!isEmpty(filtering) ? false : true} 
+                    className={!isEmpty(filtering) ? "btn savetag" : "btn errortag"}
                     onClick={toggle}
                     >
                     Сохранить фильтр для быстрого поиска

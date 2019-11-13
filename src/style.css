@@ -2163,7 +2163,9 @@ input[type='submit'].styler[disabled] {
 .util-open {
     cursor: pointer;
 }
-
+.filter-true{
+    outline: 1px solid #ec6608;
+}
 .util-open .util-open-to-hide {
     display: none;
     z-index:;

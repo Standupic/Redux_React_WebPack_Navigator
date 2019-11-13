@@ -4,6 +4,7 @@ import Radio from "./radio";
 import Checkbox from './checkbox';
 import Slider from './slider';
 import {connect} from 'react-redux';
+
 import {
         handleToggleFilter,
         handlerFilteringCheckbox,
@@ -12,6 +13,7 @@ import {
         handlerResetRadio
         } from '../action/filters';
 import {createSelectorChecked,
+        isFiltering,
         createSelectorSlider} from "../selectors";
 
 class Filter extends React.Component{
@@ -32,6 +34,7 @@ class Filter extends React.Component{
             handleToggleFilter,
             checked,
             slider,
+            filtering,
             handlerFilteringCheckbox,
             handlerFilteringRadio,
             handlerSlider
@@ -53,9 +56,14 @@ class Filter extends React.Component{
         
         let TypeFilter = this.state[filter]
         
+
         return(
             <React.Fragment>
-                <div className={active ? "an-navigator-filter util-open open-true" : "an-navigator-filter util-open"}> 
+                <div className={
+                    active ? 
+                    "an-navigator-filter util-open open-true" 
+                    : 
+                    `${filtering[param] ? "an-navigator-filter util-open filter-true":"an-navigator-filter util-open"}`}> 
                     <div className="an-navigator-filter-header" onClick={()=>(handleToggleFilter(param))}>
                         <img src="../dist/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
                         <span className="an-navigator-filter-header-title">
@@ -85,6 +93,7 @@ class Filter extends React.Component{
 // }
 
 export default connect((state) =>({
+    filtering: isFiltering(state),
     checked: createSelectorChecked(state),
     slider: createSelectorSlider(state)
 }),{handleToggleFilter,

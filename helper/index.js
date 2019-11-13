@@ -2,6 +2,8 @@ import array from 'lodash/array';
 import {toJS,toArray, Record} from 'immutable';
 import {isEqual} from 'lodash/lang';
 import {objToMap} from '../reducer/utils';
+import {reduce} from 'lodash/collection';
+import { func } from 'prop-types';
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -39,10 +41,10 @@ export function deleteElem(list, index){
     ]
 }
 
-export function isEmpty (prop){
-    return prop === null || prop === undefined || 
-    (prop.hasOwnProperty("length") && prop.length === 0) ||
-    (prop.constructor === Object && Object.keys(prop).length === 0);
+export function isEmpty(obj){
+    return obj === null || obj === undefined || 
+    (obj.hasOwnProperty("length") && obj.length === 0) ||
+    (obj.constructor === Object && Object.keys(obj).length === 0)
 }
 
 
@@ -65,13 +67,24 @@ export function setSameHeightTarifs(selector){
 	return document.querySelectorAll(selector);
 }
 
-export function isEmptyFilters(obj){
-    return Object.values(obj).map((item)=>{
-        return item.length
-      }).reduce((acc,item) => {
-        return acc + item
-    },0)
+export function foo(obj){
+    return reduce(obj, (acc,item,key)=>{
+        if(item.length){
+            return {...acc,[key]:obj[key]}
+        }else{
+            return {...acc}
+        }
+    },{})
 }
+export function isEmptyFilters(obj){
+    return foo(obj)
+    // return Object.values(obj).map((item)=>{
+    //     return item.length
+    //   }).reduce((acc,item) => {
+    //     return acc + item
+    // },0)
+}
+
 export function uniqArray(arr,type){
     var allItem = []
     if(is_Array(arr[0])){
