@@ -1,6 +1,8 @@
 import {createSelector} from 'reselect';
 import {toArray, toIndexedSeq, toJS} from 'immutable';
-import {isEmptyFilters} from '../helper';
+import {isEmptyFilters,
+       separatorPage,
+       pageNumbers} from '../helper';
 
 import {
 	ACS,
@@ -18,6 +20,9 @@ export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
 
 export const tagsSelector = (state) => state.tags.tags
+
+export const paginationSelector = (state) => state.pagination.toJS()
+
 
 export const sortingTarifs = createSelector(
     dataSelector,
@@ -41,8 +46,9 @@ export const sortingTarifs = createSelector(
     }
 )
 
-//FILTERS
 
+
+//FILTERS
 export const createSelectorFilters = createSelector(
     filterSelector,
     // isSeenSelector,
@@ -97,4 +103,28 @@ export const createSelectorTags = createSelector(
 )
 //END TAGS
 
+// LOADING
 export const loadingSelector = (state) => state.data.loading
+// END LOADING
+
+
+//PAGINATION
+export const createSelectorDivided = createSelector(
+    paginationSelector,
+    dataSelector,
+    (paginationSelector,dataSelector)=>{
+        const {
+            countTarifs,
+            currentPage,
+            currentSectionPages
+         } = paginationSelector;
+         
+        const paginationObject = separatorPage(pageNumbers(dataSelector.length,countTarifs),currentSectionPages, countTarifs);
+        return {...paginationObject,
+                   currentPage,
+                   length:dataSelector.length,
+                   currentSectionPages}
+    
+    }
+)
+//END PAGINATION

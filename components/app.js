@@ -35,10 +35,10 @@ class App extends Component{
                         {/* <Tarif/> */}
                     </div>
 	    		</section>
-                {/* <section className="pagination">
+                <section className="pagination">
 	    			<Pagination/>
 	    		</section>
-                {open ? 
+                {/* {open ? 
                     <Modal/>
                 :
                      null

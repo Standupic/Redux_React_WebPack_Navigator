@@ -15,8 +15,7 @@ export const handlerSetTag = (obj, id) => { //{value:{},title:str,id:num}
     }
 }
 
-export const handlerDeleteTag = (id) =>{
-    console.log(id)
+export const handlerDeleteTag = (id) =>{ // num
     return {
         type: DELETE_TAG,
         id: id

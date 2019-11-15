@@ -90,8 +90,15 @@ export function uniqArray(arr,type){
     }
 }
 
+export const pageNumbers = (l,countTarifs) =>{
+    const pageNumbers = [];
+    for(let i = 1; i <= Math.ceil(l / countTarifs); i++){
+        pageNumbers.push(i)
+    }
+    return pageNumbers;
+}
 
-export function separator(data, current, countTarifs){
+export const separatorPage = (data, current, countTarifs) => {
 	const lastIndex = current  * countTarifs;
 	const firstIndex = lastIndex - countTarifs;
 	const divided = data.slice(firstIndex,lastIndex);

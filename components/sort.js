@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {sortTarifs} from '../action/sortTarif';
+import {sortTarifs} from '../action/sort';
 import {sortingTarifs} from '../selectors';
 
 import {

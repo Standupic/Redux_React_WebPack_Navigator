@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from "./loader";
 import {movePagination} from '../action/pagination';
+import {createSelectorDivided,loadingSelector} from '../selectors';
+
 import {
     NEXT,
     PREV,
@@ -13,24 +15,15 @@ import {
     } from '../constans';
 
 const Pagination =(props)=>{
-    const {countTarifs,
-          filteredData,
-          data,
-          currentPage,
-          currentSectionPages,
-          loading,
-          movePagination} = props;
+    const {paginationObject,
+          movePagination,loading} = props;
 
-    const renderData = filteredData.length ? filteredData : data;
-    const quantity = renderData.length;
-    
-	const pageNumbers = [];
-	for(let i = 1; i <= Math.ceil(renderData.length / countTarifs); i++){
-		pageNumbers.push(i)
-	}
-	const paginationObject = separator(pageNumbers, currentSectionPages, countTarifs);
-    const {divided,lastIndexSection} = paginationObject;
-    
+    const {currentSectionPages,
+        currentPage,
+        divided,
+        lastIndexSection,
+        length} = paginationObject;
+    console.log(paginationObject)
 	return(
         <React.Fragment>
         {loading ? 
@@ -62,7 +55,7 @@ const Pagination =(props)=>{
             } 
             <li className="next" 
                 value={"next"}
-                onClick={(obj)=>{movePagination(NEXT,quantity)}}>
+                onClick={(obj)=>{movePagination(NEXT,length)}}>
             &gt;
             </li>
             <li className={(lastIndexSection == currentSectionPages) 
@@ -70,7 +63,7 @@ const Pagination =(props)=>{
                 "active arrow" 
                 : 
                 "arrow"} value={"lastSection"}
-                onClick={(obj)=>{movePagination(LAST_SECTION,lastIndexSection,quantity)}}>В конец
+                onClick={(obj)=>{movePagination(LAST_SECTION,lastIndexSection,length)}}>В конец
             </li>
 		</ul>
         }
@@ -78,23 +71,15 @@ const Pagination =(props)=>{
 	)
 }
 
-Pagination.propTypes = {
-	countTarifs: PropTypes.number.isRequired,
-	// filteredData: PropTypes.array.isRequired,
-    data: PropTypes.array.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    currentSectionPages: PropTypes.number.isRequired
-}
+// Pagination.propTypes = {
+// 	countTarifs: PropTypes.number.isRequired,
+// 	// filteredData: PropTypes.array.isRequired,
+//     data: PropTypes.array.isRequired,
+//     currentPage: PropTypes.number.isRequired,
+//     currentSectionPages: PropTypes.number.isRequired
+// }
 
-export default connect((state)=>{
-    const {data,loading} = state.data
-    const {countTarifs, currentPage, currentSectionPages} = state.pagination;
-    return {
-        data,
-        countTarifs,
-        currentPage,
-        currentSectionPages,
-        filteredData: [],
-        loading
-    }
-},{movePagination})(Pagination);
+export default connect((state)=>({
+   paginationObject: createSelectorDivided(state),
+   loading: loadingSelector(state)
+}),{movePagination})(Pagination);

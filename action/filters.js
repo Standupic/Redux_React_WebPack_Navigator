@@ -9,7 +9,6 @@ import {
 } from '../constans';
 
 export const handlerFilteringCheckbox = (obj) =>{ // {param:str,value:str}
-   console.log(obj)
    return {
         type: HANDLER_FILTERING_CHECKBOX,
         checkbox: obj
@@ -17,7 +16,6 @@ export const handlerFilteringCheckbox = (obj) =>{ // {param:str,value:str}
 }
 
 export const handlerFilteringRadio = (obj) => { // {param:str, value: str}
-    console.log(obj)
     return {
         type: HANDLER_FILTERING_RADIO,
         radio: obj
