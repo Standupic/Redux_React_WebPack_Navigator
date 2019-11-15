@@ -47,7 +47,7 @@ export default (store) => (next) => async (action) =>{
             type: LOAD_TAGS,
             response: {
                 tags
-            }
+            },
         })
         next({
             type: LOAD_DATA_SUCCESS,

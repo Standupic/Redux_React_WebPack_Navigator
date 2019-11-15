@@ -8,9 +8,6 @@ import {
 	TYPE_SUGGESTION_A_Я,
 	TYPE_SUGGESTION_Я_A
     } from '../constans'
-import filters from '../reducer/filters';
-import { values } from 'regenerator-runtime';
-import { filter } from 'minimatch';
 
 export const sortSelector = (state) => state.sort.type;
 export const dataSelector = (state) => state.data.data;
@@ -20,10 +17,7 @@ export const filterSelector = (state) => state.filters.filters.toIndexedSeq()
 export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
 
-// export const isSeenSelector = (state) => state.filters.is_seen.toJS()
-
-export const tagsSelector = (state) => state.tags.tags.toIndexedSeq()
-
+export const tagsSelector = (state) => state.tags.tags
 
 export const sortingTarifs = createSelector(
     dataSelector,
@@ -91,12 +85,6 @@ export const isFiltering = createSelector(
 //END CHECKED
 
 //IS_SEEN
-// export const createSelectorIs_Seen = createSelector(
-//     isSeenSelector,
-//     (isSeenSelector) => {
-//         return isSeenSelector
-//     }
-// )
 
 //END IS_SEEN
 

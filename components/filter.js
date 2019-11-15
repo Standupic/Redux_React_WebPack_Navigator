@@ -37,7 +37,8 @@ class Filter extends React.Component{
             filtering,
             handlerFilteringCheckbox,
             handlerFilteringRadio,
-            handlerSlider
+            handlerSlider,
+            handlerResetRadio
             } = this.props;
 
         const methodes = {
@@ -102,4 +103,5 @@ export default connect((state) =>({
 }),{handleToggleFilter,
     handlerFilteringCheckbox,
     handlerSlider,
+    handlerResetRadio,
     handlerFilteringRadio})(Filter);

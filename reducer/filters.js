@@ -51,13 +51,12 @@ export default (state = new StructureState(), action)=>{
         const {tag} = action;
             return state
             .updateIn(['checked'], item => 
-            item.map((val, key ) => val.clear()))
-            .updateIn(['checked'], item => item.merge(objToList(tag)))
-            .updateIn(['filters'], item => item.map((val, key) =>
-                val.update('active',v => false)
-            ))
-            .updateIn(['filters'], item => item.map((val, key) =>
-                tag[key] ? val.update('active',v => true) : val
+                item.map(val => val.clear()))
+            .updateIn(['checked'], 
+                item => item.merge(objToList(tag)))
+            .updateIn(['filters'], 
+                item => item.map((val, key) =>
+                tag[key] ? val.update('active',v => true) : val.update('active', v => false)
             ))
         break;
         case HIDE_SHOW_FITLERS:
@@ -82,9 +81,9 @@ export default (state = new StructureState(), action)=>{
         case RESET_FILTERS:
             return state
             .updateIn(['checked'], item => 
-                item.map((val, key ) => val.clear()))
+                item.map(val => val.clear()))
             .updateIn(['slider'], item => 
-                item.map((val, key ) => val.clear()))
+                item.map(val => val.clear()))
             .updateIn(['filters'], item => 
                 item.map(val => val.update('active', v => false)))
         break;
@@ -92,6 +91,10 @@ export default (state = new StructureState(), action)=>{
         const {radio} = action;
             return state
             .updateIn(['checked', radio.param], item => List([radio.value]))
+        break;
+        case RESET_RADIO:
+            return state
+            .updateIn(['checked', action.param], item => item.clear())
         break;
         case HANDLER_FILTERING_CHECKBOX:
         const {checkbox} = action;

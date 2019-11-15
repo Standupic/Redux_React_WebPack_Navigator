@@ -1,17 +1,19 @@
 import {LOAD_TAGS,
-        SET_TAG} from '../constans';
-import {Record, OrderedMap} from 'immutable';
+        SET_TAG,
+        DELETE_TAG} from '../constans';
+import {Record, deleteIn} from 'immutable';
 import {arrToRecord,arrToMap} from './utils';
 import {pushElem} from '../helper';
 
 const StructureState = new Record({
-    tags: arrToMap([],MapTag)
+    tags: []
 })
 
 const MapTag = new Record({
     value: {},
     title: null,
-    position: null
+    position: null,
+    id: null
 })
 
 
@@ -19,14 +21,17 @@ export default (state = new StructureState(), action) =>{
     const {type, response} = action;
     switch(type){
         case LOAD_TAGS:
-        return state
-        .update('tags',(tags) => arrToMap(response.tags,MapTag).merge(tags))
+            return state
+            .update('tags',(tags) => arrToRecord(response.tags,MapTag))
         break;
         case SET_TAG:
-        const {newTag} = action
-        console.log(pushElem(state.tags,newTag))
-        return state
-        .update('tags', tags => arrToMap(pushElem(state.tags,newTag),MapTag))
+            const {newTag} = action
+            return state
+            .update('tags', tags => pushElem(state.tags,newTag))
+        break;
+        case DELETE_TAG:
+            return state
+            .deleteIn(['tags', action.id])
         break;
 
     }

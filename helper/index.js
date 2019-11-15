@@ -1,5 +1,5 @@
 import array from 'lodash/array';
-import {toJS,toArray, Record} from 'immutable';
+import {toJS,toArray, Record,insert,findIndex,isImmutable,fromJS,List} from 'immutable';
 import {isEqual} from 'lodash/lang';
 import {objToMap} from '../reducer/utils';
 import {reduce} from 'lodash/collection';
@@ -25,13 +25,12 @@ export function is_String(item){
 	return Object.prototype.toString.call(item) == "[object String]"
 }
 
-export function pushElem(tags, elem){
-    tags = Object.values(tags.toJS())
-    if(elem.position == 1) elem.position = 0
+export function pushElem(tags, obj){
+    if(obj.position == 1) obj.position = 0
     return [
-        ...tags.slice(0,elem.position),
-        elem,
-        ...tags.slice(elem.position)
+        ...tags.slice(0,obj.position),
+        obj,
+        ...tags.slice(obj.position)
     ]
 }
 export function deleteElem(list, index){
@@ -67,7 +66,7 @@ export function setSameHeightTarifs(selector){
 	return document.querySelectorAll(selector);
 }
 
-export function foo(obj){
+export function isEmptyFilters(obj){
     return reduce(obj, (acc,item,key)=>{
         if(item.length){
             return {...acc,[key]:obj[key]}
@@ -75,14 +74,6 @@ export function foo(obj){
             return {...acc}
         }
     },{})
-}
-export function isEmptyFilters(obj){
-    return foo(obj)
-    // return Object.values(obj).map((item)=>{
-    //     return item.length
-    //   }).reduce((acc,item) => {
-    //     return acc + item
-    // },0)
 }
 
 export function uniqArray(arr,type){
@@ -181,22 +172,23 @@ export const getObjectChecked = (obj) =>{
     let result = {}
     for (var key in obj) {
         if (obj[key].length) {
-            result = { ...result, [key]: obj[key]};
+            result = { ...result, [key]: List(obj[key])};
         }
     }
     return result
 }
 
 
-const getValuesFromTags = (arr) =>{
-    return arr.reduce((acc,item)=>{
-        return [...acc, item.value]
-    },[])
-}
+// const getValuesFromTags = (arr) =>{
+//     console.log(arr)
+//     console.log(arr.findIndex(item => console.log(isImmutable(item.value))))
+//     return arr.reduce((acc,item)=>{
+//         return [...acc, item.value]
+//     },[])
+// }
 
-export const getIndexTag = (props) =>{
-    const {tags, checked} = props;
-    return getValuesFromTags(tags.toJS()).findIndex(item => isEqual(item, getObjectChecked(checked)))
+export const getIndexTag = (tags,checked) =>{
+    return tags.findIndex((item,index) => isEqual(item.value, getObjectChecked(checked)))
 }
 
 export const createLabels = (defaultParams)=>{

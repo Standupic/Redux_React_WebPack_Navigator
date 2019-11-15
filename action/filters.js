@@ -44,7 +44,6 @@ export const handlerSlider = (ev,obj) => { // {param: str, value: []}
 }
 
 export const handlerResetRadio = (param) => { // str
-    console.log(param)
     return{
         type: RESET_RADIO,
         param: param

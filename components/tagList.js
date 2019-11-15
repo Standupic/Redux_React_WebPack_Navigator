@@ -2,8 +2,8 @@ import React from "react";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from './loader';
-import {toArray} from 'immutable';
-import {handlerTagsSearch} from '../action/tags';
+import {handlerTagsSearch,
+        handlerDeleteTag} from '../action/tags';
 import { createSelectorTags } from "../selectors/";
 
 
@@ -15,27 +15,24 @@ class FilterTagList extends React.Component{
 
   
 	render(){
-        const {tags,handlerTagsSearch} = this.props;
+        const {tags,handlerTagsSearch,handlerDeleteTag} = this.props;
 		return(
 			<div className="an-navigator-section-2-tags">
               {!tags ? 
                     <Loader/>
               :
-               tags.map((item,key)=>{
+               tags.map((item,index)=>{
                     return(
-                        <React.Fragment key={key}>
+                        <React.Fragment key={item.id}>
                         <div className="an-navigator-section-2-tag" 
                              onClick={(obj)=>{handlerTagsSearch(item.value)}}>
-                            {item.title}</div>
-                            <span>&times;</span>
+                            {item.title}
+                        </div>
+                         <span onClick={(id)=>{handlerDeleteTag(index)}}>&times;</span>
                         </React.Fragment>
                     )
                 })
               }
-             
-        
-              
-
             </div>
 		)
 	}
@@ -51,4 +48,5 @@ class FilterTagList extends React.Component{
 export default connect((state)=>({
     tags: createSelectorTags(state),
     loading: state.data.loading
-}),{handlerTagsSearch})(FilterTagList);
+}),{handlerTagsSearch,
+    handlerDeleteTag})(FilterTagList);

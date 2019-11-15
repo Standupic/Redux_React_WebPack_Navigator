@@ -1,4 +1,4 @@
-import {TAG_SEARCH,SET_TAG} from '../constans';
+import {TAG_SEARCH,SET_TAG,DELETE_TAG} from '../constans';
 
 export const handlerTagsSearch = (obj) =>{
     return {
@@ -7,10 +7,18 @@ export const handlerTagsSearch = (obj) =>{
     }
 }
 
-export const handlerSetTag = (obj) => {
-    console.log(obj)
+export const handlerSetTag = (obj, id) => { //{value:{},title:str,id:num}
     return{
         type: SET_TAG,
-        newTag: obj
+        newTag: {...obj, id},
+        generateId: true
     }
+}
+
+export const handlerDeleteTag = (id) =>{
+    console.log(id)
+    return {
+        type: DELETE_TAG,
+        id: id
+    } 
 }
