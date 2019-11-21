@@ -24,11 +24,11 @@ class FilterTagList extends React.Component{
                tags.map((item,index)=>{
                     return(
                         <React.Fragment key={item.id}>
-                        <div className="an-navigator-section-2-tag" 
-                             onClick={(obj)=>{handlerTagsSearch(item.value)}}>
-                            {item.title}
-                        </div>
-                         <span onClick={(id)=>{handlerDeleteTag(index)}}>&times;</span>
+                            <div className="an-navigator-section-2-tag" 
+                                onClick={(obj)=>{handlerTagsSearch(item.value)}}>
+                                {item.title}
+                            </div>
+                            <span onClick={(id)=>{handlerDeleteTag(index)}}>&times;</span>
                         </React.Fragment>
                     )
                 })

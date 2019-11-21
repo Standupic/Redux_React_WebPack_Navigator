@@ -28,7 +28,7 @@ class createTagFilter extends React.Component{
         const newTag = {
             value: getObjectChecked(checked),
             title: name,
-            position: length + 1 <= position ? length+1 : position*1 
+            position: length + 1 <= position ? length + 1 : position * 1 
         }
         handlerSetTag(newTag)
         toggle()

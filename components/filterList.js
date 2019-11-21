@@ -42,5 +42,5 @@ const FilterList = (props) => {
 
 export default connect((state)=> ({
     filters: createSelectorFilters(state),
-    loading: loadingSelector(state)
+    loading: state.data.loading
 }))(FilterList);

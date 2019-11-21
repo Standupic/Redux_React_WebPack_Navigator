@@ -1,9 +1,8 @@
 import array from 'lodash/array';
-import {toJS,toArray, Record,insert,findIndex,isImmutable,fromJS,List} from 'immutable';
+import {List} from 'immutable';
 import {isEqual} from 'lodash/lang';
-import {objToMap} from '../reducer/utils';
 import {reduce} from 'lodash/collection';
-import { func } from 'prop-types';
+
 
 export function uniqId(){
 	return '_' + Math.random().toString(36).substr(2, 9);
@@ -25,6 +24,21 @@ export function is_String(item){
 	return Object.prototype.toString.call(item) == "[object String]"
 }
 
+
+export function debounce(func, wait = 250, immediate = true) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
 export function pushElem(tags, obj){
     if(obj.position == 1) obj.position = 0
     return [
@@ -66,7 +80,7 @@ export function setSameHeightTarifs(selector){
 	return document.querySelectorAll(selector);
 }
 
-export function isEmptyFilters(obj){
+export function reduceObject(obj){
     return reduce(obj, (acc,item,key)=>{
         if(item.length){
             return {...acc,[key]:obj[key]}
@@ -74,6 +88,35 @@ export function isEmptyFilters(obj){
             return {...acc}
         }
     },{})
+}
+
+export function multipleSearchRanging(data,checked,keys,sliderObj){
+    return rangingTarifs(keys,multipleSearch(data,checked),sliderObj)
+}
+
+export function rangingTarifs(keys,data,sliderObj) {
+    return data.filter(item=>{
+      return keys.every(key =>{
+        return (item[key] >= sliderObj[key][0] && item[key] <= sliderObj[key][1])
+      })
+     }) 
+}
+
+export const multipleSearch = (data,checked) =>{
+    return data.filter(item => {
+        return Object.keys(checked).every(key => {
+          if (!checked[key].length) return true;
+          if (is_Array(item[key])) {
+            for (var i = 0; i < item[key].length; i++) {
+              if (checked[key].indexOf(item[key][i]) >= 0) {
+                return true;
+              }
+            }
+          } else {
+            return checked[key].includes(item[key]);
+          }
+        });
+    });
 }
 
 export function uniqArray(arr,type){
@@ -111,6 +154,16 @@ export const separatorPage = (data, current, countTarifs) => {
 	    }
 }
 
+export const getIndexTag = (tags,checked) =>{
+    return tags.findIndex((item,index) => isEqual(item.value, getObjectChecked(checked)))
+}
+
+export const greatestValue = (tags) =>{
+    return tags.sort(function(objA, objB){return objA.position - objB.position})
+}
+
+
+// IMAGE YOU GET DATA FROM DATA BASE ofcouse in perfect world :-)
 const createObjectProperty = (defaultParams,data) =>{
         let obj = defaultParams.reduce(function(acc, tarif){
         return {...acc,[tarif['param']]:[]}
@@ -186,18 +239,6 @@ export const getObjectChecked = (obj) =>{
 }
 
 
-// const getValuesFromTags = (arr) =>{
-//     console.log(arr)
-//     console.log(arr.findIndex(item => console.log(isImmutable(item.value))))
-//     return arr.reduce((acc,item)=>{
-//         return [...acc, item.value]
-//     },[])
-// }
-
-export const getIndexTag = (tags,checked) =>{
-    return tags.findIndex((item,index) => isEqual(item.value, getObjectChecked(checked)))
-}
-
 export const createLabels = (defaultParams)=>{
     return defaultParams.reduce((acc,item)=>{
         return {...acc, [item['param']]: item['name']}
@@ -214,9 +255,5 @@ export const CreateHideShowData = (defaultParams) => {
               }
             } 
     },{})
-}
-
-export const greatestValue = (tags) =>{
-    return tags.sort(function(objA, objB){return objA.position - objB.position})
 }
 

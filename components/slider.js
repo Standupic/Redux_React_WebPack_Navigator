@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import {debounce} from "../helper";
 
 
 const wrapStyles = makeStyles({
@@ -63,7 +64,7 @@ const RangeSlider = (props) => {
       <MySlider
         value={values.length ? values : defaultValues[param].value}
         max={defaultValues[param].max}
-        onChange={(event,obj)=>{handler(event,{'param':param,'value':obj})}}
+        onChange={(event,obj)=>{debounce(handler(event,{'param':param,'value':obj}))}}
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         defaultValue={defaultValues[param].value}

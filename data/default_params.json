@@ -461,6 +461,6 @@
 	  "param": "navigatorprice",
 	  "read_more": true,
       "tag": false,
-      "is_seen": false
-	}
-  ]
+      "is_seen": true
+    }
+]

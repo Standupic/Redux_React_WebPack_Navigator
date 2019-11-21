@@ -12,7 +12,7 @@
         "id": 2
 	},
 	{
-		"value": {"beingseen": ["Да"]},
+		"value": {"beingseen": ["да"]},
 		"title" : "Видимость в ЛК",
         "position": 3,
         "id": 3

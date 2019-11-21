@@ -5,25 +5,23 @@ import QuantityDisplayTarifs from './quantityDisplayTarifs';
 import { connect } from "react-redux";
 import Loader from './loader';
 import {showModal} from '../action/modal';
+import {createSelectorData} from '../selectors';
 
 
 const HeaderFilter = (props) =>{
-        const {loading,showModal} = props;
-    // const {data,toggleModal,handlePaginationCountTarifs,search,handleSort} = props; 
+        const {loading,showModal,data} = props;
         return(
             <div>
                 {loading ?
                  <Loader/>
                  :
                  <div className="an-navigator-section-2-nav">
-                        <div className="an-section-title">Тарифы <span className="an-section-title-count">0</span></div>
+                        <div className="an-section-title">Тарифы 
+                <span className="an-section-title-count">{data.length}</span>
+                        </div>
                         <input type="text" className="an-section-2-search" placeholder="Поиск"/>
-                            <Sort
-                                // handleSort={(data)=>{handleSort(data)}}
-                            />
-                            <QuantityDisplayTarifs
-                                // handlePaginationCountTarifs={(i)=>{handlePaginationCountTarifs(i)}}
-                                />
+                            <Sort/>
+                            <QuantityDisplayTarifs/>
                         <div className="an-section-2-settings">
                             <img 
                                 src="../dist/img/an-navigator-setings.svg" 
@@ -45,8 +43,8 @@ const HeaderFilter = (props) =>{
 //     handlePaginationCountTarifs: PropTypes.func.isRequired
 // }
 
-export default connect(state=>{
-    return{
-        loading: state.data.loading
-    }
-},{showModal})(HeaderFilter)
+export default connect((state) =>({
+    data: createSelectorData(state),
+    loading: state.data.loading
+
+}),{showModal})(HeaderFilter)

@@ -23,14 +23,14 @@ const Pagination =(props)=>{
         divided,
         lastIndexSection,
         length} = paginationObject;
-    console.log(paginationObject)
+
 	return(
         <React.Fragment>
         {loading ? 
             <Loader/>
         :
 		<ul>
-            <li className={(1 == currentSectionPages) 
+            <li className={(currentPage === currentSectionPages) 
                 ? 
                 "active arrow" 
                 :  
@@ -58,7 +58,7 @@ const Pagination =(props)=>{
                 onClick={(obj)=>{movePagination(NEXT,length)}}>
             &gt;
             </li>
-            <li className={(lastIndexSection == currentSectionPages) 
+            <li className={currentSectionPages  === lastIndexSection
                 ? 
                 "active arrow" 
                 : 

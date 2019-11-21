@@ -1,8 +1,12 @@
 import {createSelector} from 'reselect';
 import {toArray, toIndexedSeq, toJS} from 'immutable';
-import {isEmptyFilters,
+import {reduceObject,
        separatorPage,
-       pageNumbers} from '../helper';
+       pageNumbers,
+       rangingTarifs,
+       multipleSearch,
+       multipleSearchRanging,
+       isEmpty} from '../helper';
 
 import {
 	ACS,
@@ -11,7 +15,7 @@ import {
 	TYPE_SUGGESTION_Я_A
     } from '../constans'
 
-export const sortSelector = (state) => state.sort.type;
+
 export const dataSelector = (state) => state.data.data;
 
 export const filterSelector = (state) => state.filters.filters.toIndexedSeq()
@@ -23,6 +27,7 @@ export const tagsSelector = (state) => state.tags.tags
 
 export const paginationSelector = (state) => state.pagination.toJS()
 
+export const sortSelector = (state) => state.sort.isSort
 
 export const sortingTarifs = createSelector(
     dataSelector,
@@ -30,11 +35,11 @@ export const sortingTarifs = createSelector(
     (dataSelector,sortSelector) => {
         switch(sortSelector){
             case ACS:
-                return dataSelector.sort((a,b) =>{ return a.onetimepayment - b.onetimepayment})
+                return dataSelector.sort((a,b) =>{ return a.navigatorprice - b.navigatorprice})
             case DES:
                 return dataSelector.sort((a,b) =>{
-                    if(a.onetimepayment > b.onetimepayment) return -1;
-                    if(a.onetimepayment < b.onetimepayment) return 1;
+                    if(a.navigatorprice > b.navigatorprice) return -1;
+                    if(a.navigatorprice < b.navigatorprice) return 1;
                 })
             case TYPE_SUGGESTION_A_Я:
                 return dataSelector.sort((a,b) => { return a.typesuggestion.localeCompare(b.typesuggestion)})
@@ -46,6 +51,30 @@ export const sortingTarifs = createSelector(
     }
 )
 
+// DATA
+
+export const createSelectorData = createSelector(
+    dataSelector,
+    checkedSelector,
+    sliderSelector,
+    sortSelector,
+    paginationSelector,
+    (dataSelector,
+    checkedSelector,sliderSelector,
+    ) =>{
+        // if(!isEmpty(reduceObject(sliderSelector))){
+            let keys = Object.keys(reduceObject(sliderSelector))
+            return multipleSearchRanging(dataSelector,checkedSelector,keys,sliderSelector)
+        // }else{
+        //     return multipleSearch(dataSelector,checkedSelector)
+        // }
+    }    
+)
+
+
+
+
+// END DATA 
 
 
 //FILTERS
@@ -83,8 +112,8 @@ export const isFiltering = createSelector(
     checkedSelector,
     sliderSelector,
     (checkedSelector,sliderSelector) => {
-       var x = isEmptyFilters(checkedSelector)
-       var y = isEmptyFilters(sliderSelector)
+       var x = reduceObject(checkedSelector)
+       var y = reduceObject(sliderSelector)
        return {...x,...y}
     }
 )
@@ -111,20 +140,26 @@ export const loadingSelector = (state) => state.data.loading
 //PAGINATION
 export const createSelectorDivided = createSelector(
     paginationSelector,
-    dataSelector,
-    (paginationSelector,dataSelector)=>{
-        const {
-            countTarifs,
-            currentPage,
-            currentSectionPages
-         } = paginationSelector;
-         
-        const paginationObject = separatorPage(pageNumbers(dataSelector.length,countTarifs),currentSectionPages, countTarifs);
-        return {...paginationObject,
-                   currentPage,
-                   length:dataSelector.length,
-                   currentSectionPages}
-    
+    createSelectorData,
+    (paginationSelector,createSelectorData)=>{
+
+    const {
+        countTarifs,
+        currentPage,
+        currentSectionPages
+        } = paginationSelector;
+
+    const getPageNumbers = pageNumbers(createSelectorData.length,countTarifs)
+    const paginationObject = separatorPage(getPageNumbers,currentSectionPages,countTarifs); 
+    const data = separatorPage(createSelectorData,currentPage,countTarifs).divided
+
+    return {...paginationObject,
+                currentPage,
+                length:createSelectorData.length,
+                currentSectionPages,
+                data: data
+            }
+
     }
 )
 //END PAGINATION

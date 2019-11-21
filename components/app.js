@@ -32,7 +32,7 @@ class App extends Component{
                 <section className="an-navigator-section-3">
 			        <div className="an-navigator-wrap">
                         <FilterList/>
-                        {/* <Tarif/> */}
+                        <Tarif/>
                     </div>
 	    		</section>
                 <section className="pagination">

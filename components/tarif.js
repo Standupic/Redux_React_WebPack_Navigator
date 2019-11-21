@@ -1,27 +1,25 @@
 import React, {useEffect} from "react";
 import PropTypes from 'prop-types';
-import {separator,getSameHeightTarifs,setSameHeightTarifs} from '../helper';
+import {getSameHeightTarifs,setSameHeightTarifs,separatorPage} from '../helper';
 // import LoaderHoc from './loaderHoc';
 import {connect} from 'react-redux';
 import Loader from "./loader";
 import {showModal} from '../action/modal';
+import {createSelectorData,createSelectorDivided} from '../selectors';
 
 
 function Tarif(props){
-    const {data, 
-        hideShowData, 
-        filtering,
-        filteredData,
-        currentPage, 
-        countTarifs, 
-        labels,showModal,
+    const { 
+        hideShowData,
+        // divided,
+        labels,
+        data,
         loading} = props;
     // const renderData = filtering ? !filteredData.length ? data : filteredData : data
     // const renderData = filtering ? filteredData : data
-    const currentTarifsObject = separator(data, currentPage, countTarifs)
-    const {divided} = currentTarifsObject;
-
-    if(divided.length){
+    // const {divided} = currentTarifsObject;
+    
+    if(data.length){
         useEffect(() => {
             if(!document.querySelector(".wrap_tarifs")) return
             let obj = getSameHeightTarifs(document.querySelector(".wrap_tarifs"));
@@ -39,10 +37,11 @@ function Tarif(props){
                 :
             <div className="wrap_tarifs">
                 {
-                    !divided.length ?
-                    <p>Результат вашего поиска: {`${!divided.length ? 0 : divided.length}`}</p>
+                    !data.length ?
+                    // <p>Результат вашего поиска: {`${!data.length ? 0 : data.length}`}</p>
+                    <Loader/>
                     :
-                    divided.map((item,key)=>{
+                    data.map((item,key)=>{
                         return(
                             <div className="an-navigator-compare-options" key={item.id}> 
                                 <div className="an-navigator-compare-options-header">
@@ -70,8 +69,8 @@ function Tarif(props){
                                 <div className="an-navigator-compare-options-header-s"></div>
                                 <div className="an-navigator-compare-options-list">
                                 <div className="wrap-list">
-                                { Object.entries(item).map((val,k)=>{
-                                    
+                                {/* { Object.entries(item).map((val,k)=>{
+                                 
                                         {  
                                             if (val[0] !== "id" && !hideShowData[val[0]] && typeof val[1] === 'object') {
                                             return(
@@ -95,7 +94,7 @@ function Tarif(props){
                                         }
                                     
                                     }) 
-                                } 
+                                }  */}
                                 </div>
                                 <div className="wrap-bottom">
                                     {/* {
@@ -109,7 +108,7 @@ function Tarif(props){
                                     } */}
                                     <div className="an-navigator-sum">
                                             <p>{item.speed} <span className="">мб/сек</span></p>
-                                            <p>{item.onetimepayment} <span className="rub-font-b">/мес</span></p>
+                                            <p>{item.navigatorprice} <span className="rub-font-b">/мес</span></p>
                                         </div>
                                     {/* <div className="an-navigator-compare-toggle an-toggle">
                                         <img src="/navigator/img/an-navigator-tv.svg" className="an-navigator-tv"/>
@@ -151,24 +150,10 @@ function Tarif(props){
 //   toggleModalGetTarifId: PropTypes.func.isRequired
 // }
 
-export default connect((state)=>{
-    const {data,
-           hideShowData,
-           labels,
-           loading} = state.data;
-    const {filtering} = state;
-    const {countTarifs,
-           currentPage,
-           currentSectionPages} = state.pagination;
-    return {
-        data,
-        // filtering,
-        hideShowData,
-        labels,
-        countTarifs,
-        currentPage,
-        currentSectionPages,
-        filteredData: [],
-        loading
-    }
-},{showModal})(Tarif);
+export default connect((state) => ({
+    data: createSelectorDivided(state).data,
+    hideShowData: state.data.hideShowData,
+    labels: state.data.labels,
+    loading: state.loading
+   
+}),{showModal})(Tarif);

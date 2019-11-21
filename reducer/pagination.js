@@ -13,7 +13,9 @@ import {
         PREV,
         FIRST_SECTION,
         LAST_SECTION,
-        NUMBER
+        NUMBER,
+        TAG_SEARCH,
+        RESET_FILTERS
         } from '../constans';
 
 import {isNumeric} from '../helper/';
@@ -26,8 +28,17 @@ export default (state = new StructureState(), action)=>{
             const param = action.param;
             return state
             .updateIn(['countTarifs'], v => !isNumeric(param) ? 8 : param)
+        case TAG_SEARCH:
+            return state
+            .updateIn(['currentPage'], v => 1)
+            .updateIn(['currentSectionPages'], v => 1)
+        case RESET_FILTERS:
+            return state
+            .updateIn(['currentPage'], v => 1)
+            .updateIn(['currentSectionPages'], v => 1)
         case MOVE_PAGINATION:
                 console.log(action.param)
+
             switch(action.param[0]){
                 case FIRST_SECTION:
                     return state

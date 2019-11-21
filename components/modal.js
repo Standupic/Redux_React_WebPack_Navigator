@@ -8,10 +8,12 @@ import ReadMore from './readMore';
 // import Pagination from './pagination';
 
 function Modal(props){
-    const {hideModal,modal,labels,data,checkboxHideShow} = props;
+
+    // const {hideModal,modal,labels,data,checkboxHideShow} = props;
     const {id} = modal;
     let modalRef = React.createRef();
-    function handleKeyUp(e){
+
+   function handleKeyUp(e){
         const keys = {
             27: () => {
                 e.preventDefault();
@@ -21,6 +23,7 @@ function Modal(props){
         }
         if (keys[e.keyCode]) {keys[e.keyCode]()}
    }
+
    function outSideClick(e){
         if(!isNil(modalRef.current)){
             if(!modalRef.current.contains(e.target)){

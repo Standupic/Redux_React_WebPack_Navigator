@@ -66,6 +66,7 @@ const Buttons = (props) =>{
 export default connect((state)=>({
     filtering: isFiltering(state),
     tags: createSelectorTags(state),
-    checked: createSelectorChecked(state)
+    checked: createSelectorChecked(state),
+    loading: state.data.loading
 }),{handlerHideShowFilters,
     handlerResetFilters})(Buttons)
