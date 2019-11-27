@@ -12,7 +12,6 @@ import {
 import {Record, OrderedMap, List, toJS, clear} from 'immutable';
 import {objToMap,objToList} from './utils';
 
-// import {handleToggleFilter} from '../action';
 
 const StructureState = Record({
     filters: new OrderedMap({}),

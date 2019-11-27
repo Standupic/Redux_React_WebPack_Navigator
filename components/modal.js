@@ -2,15 +2,15 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import isNil from 'lodash/fp/isNil';
-import {hideModal} from '../action/modal';
+import {hideModal,hideShowParam} from '../action/modal';
 import ListParam from './listParam';
 import ReadMore from './readMore';
-// import Pagination from './pagination';
+import {createSelectorDivided,hideShowSelector} from '../selectors';
+
 
 function Modal(props){
 
-    // const {hideModal,modal,labels,data,checkboxHideShow} = props;
-    const {id} = modal;
+    const {hideModal,id,labels,data,checkboxHideShow,hideShowParam} = props;
     let modalRef = React.createRef();
 
    function handleKeyUp(e){
@@ -41,31 +41,29 @@ function Modal(props){
 	        document.removeEventListener('click', outSideClick, false);
         }
     })
-	// render(){
-		// const {toggleModal, data, tarifId,labels, checkboxHideShow} = this.props;
-		return(
-			<div className="modalOverlay">
-				<div 
-					className="modal"
-					ref={modalRef}>
-					<div id="popup-ext" className="popup-close" onClick={hideModal}></div>
-                        { id ?        
-                            <ReadMore 
-                                data={data} 
-                                tarifId={id} 
-                                labels={labels}/>
-                            : 
-                            <React.Fragment>
-                            <ListParam 
-                                // onChange={(e,name)=>{this.props.headerModalCheck(e,name)}}
-                                checkboxHideShow={checkboxHideShow}/>
-                                <button className="an-navigator-save-btn" onClick={hideModal}>Сохранить</button>
-                            </React.Fragment>            
-                        }
-					</div>
-				</div>
-		    )
-	    // }
+    return(
+        <div className="modalOverlay">
+            <div 
+                className="modal"
+                ref={modalRef}>
+                <div id="popup-ext" className="popup-close" onClick={hideModal}></div>
+                    { id ?        
+                        <ReadMore 
+                            data={data} 
+                            tarifId={id} 
+                            labels={labels}
+                            />
+                        : 
+                        <React.Fragment>
+                        <ListParam
+                            checkboxHideShow={checkboxHideShow}
+                            hideShowParam={hideShowParam}
+                        />
+                        </React.Fragment>            
+                    }
+                </div>
+            </div>
+        )
 }
 
 // Pagination.propTypes = {
@@ -75,11 +73,10 @@ function Modal(props){
 //     labels: PropTypes.array.isRequired,
 //     checkboxHideShow: PropTypes.array.isRequired
 // }
-export default connect(state=>{
-    return{
-        modal: state.modal,
-        data: state.data.data,
-        checkboxHideShow: state.data.checkboxHideShow,
-        labels: state.data.labels,
-    }
-},{hideModal})(Modal);
+
+export default connect((state) =>({
+    id: state.modal.get('id'),
+    data: createSelectorDivided(state).data,
+    checkboxHideShow: hideShowSelector(state),
+    labels: state.data.labels,
+}),{hideModal,hideShowParam})(Modal);

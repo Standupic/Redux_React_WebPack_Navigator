@@ -24,7 +24,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": false,
+	  "filter": "slider",
 	  "name": "Стоимость предложения в месяц, руб./мес.", 
 	  "param": "onetimepayment",
 	  "read_more": true,
@@ -53,7 +53,7 @@
 	  "param": "internettv",
 	  "read_more": true,
       "tag": false,
-      "is_seen": true
+      "is_seen": false
 	},
 	{
 	  "filter": "checkbox",
@@ -109,14 +109,6 @@
 	  "param": "archive",
 	  "read_more": true,
       "tag": false,
-      "is_seen": true
-	},
-	{
-	  "filter": "radio",
-	  "name": "Публичный", 
-	  "param": "public",
-	  "read_more": true,
-      "tag": true,
       "is_seen": false
 	},
 	{
@@ -336,7 +328,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": "slider",
+	  "filter": "checkbox",
 	  "name": "Скорость, Мбит/c", 
 	  "param": "speed",
 	  "read_more": true,
@@ -344,12 +336,12 @@
       "is_seen": true
 	},
 	{
-	  "filter": false,
+	  "filter": "checkbox",
 	  "name": "Кол-во каналов ТВ", 
 	  "param": "kanals",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
-      "is_seen": false
+      "is_seen": true
 	},
 	{
 	  "filter": false,
@@ -443,24 +435,24 @@
 	  "filter": "radio",
 	  "name": "Тип дома", 
 	  "param": "housetype",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
-      "is_seen": true
+      "is_seen": false
 	},
 	{
-	  "filter": "radio",
+	  "filter": "checkbox",
 	  "name": "Тип платежа", 
 	  "param": "paymenttype",
-	  "read_more": false,
+	  "read_more": true,
       "tag": false,
-      "is_seen": true
+      "is_seen": false
 	},
 	{
-	  "filter": "slider",
+	  "filter": false,
 	  "name": "Цена для навигатора", 
 	  "param": "navigatorprice",
 	  "read_more": true,
       "tag": false,
-      "is_seen": true
-    }
-]
+      "is_seen": false
+	}
+  ]

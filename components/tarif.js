@@ -1,24 +1,21 @@
 import React, {useEffect} from "react";
 import PropTypes from 'prop-types';
-import {getSameHeightTarifs,setSameHeightTarifs,separatorPage} from '../helper';
-// import LoaderHoc from './loaderHoc';
+import {getSameHeightTarifs,setSameHeightTarifs,isEmpty} from '../helper';
 import {connect} from 'react-redux';
 import Loader from "./loader";
 import {showModal} from '../action/modal';
-import {createSelectorData,createSelectorDivided} from '../selectors';
+import {createSelectorDivided,isFiltering} from '../selectors';
 
 
 function Tarif(props){
     const { 
         hideShowData,
-        // divided,
         labels,
+        showModal,
+        filtering,
         data,
         loading} = props;
-    // const renderData = filtering ? !filteredData.length ? data : filteredData : data
-    // const renderData = filtering ? filteredData : data
-    // const {divided} = currentTarifsObject;
-    
+  
     if(data.length){
         useEffect(() => {
             if(!document.querySelector(".wrap_tarifs")) return
@@ -37,9 +34,8 @@ function Tarif(props){
                 :
             <div className="wrap_tarifs">
                 {
-                    !data.length ?
-                    // <p>Результат вашего поиска: {`${!data.length ? 0 : data.length}`}</p>
-                    <Loader/>
+                    !data.length && !isEmpty(filtering) ?
+                    <p>Результат вашего поиска: {`${!data.length ? 0 : null}`}</p>
                     :
                     data.map((item,key)=>{
                         return(
@@ -69,22 +65,21 @@ function Tarif(props){
                                 <div className="an-navigator-compare-options-header-s"></div>
                                 <div className="an-navigator-compare-options-list">
                                 <div className="wrap-list">
-                                {/* { Object.entries(item).map((val,k)=>{
-                                 
+                                { Object.entries(item).map((val,k)=>{
                                         {  
-                                            if (val[0] !== "id" && !hideShowData[val[0]] && typeof val[1] === 'object') {
+                                            if (val[0] !== "id" && !hideShowData.get(val[0]).read_more && typeof val[1] === 'object') {
                                             return(
                                                 <div className="an-navigator-compare-row" key={k}>
-                                                    <div className="an-navigator-compare-col">{labels[val[0]]}</div>
+                                                    <div className="an-navigator-compare-col">{labels.get(val[0])}</div>
                                                     <div className="an-navigator-compare-col">{val[1].join(", ")}</div>
                                                 </div>
 
                                             ) 
                                             } 
-                                            if (val[0] !== "id" &&  !hideShowData[val[0]] && typeof val[1] !== 'object') {
+                                            if (val[0] !== "id" &&  !hideShowData.get(val[0]).read_more && typeof val[1] !== 'object') {
                                             return(
                                                 <div className="an-navigator-compare-row" key={k}>
-                                                    <div className="an-navigator-compare-col">{labels[val[0]]}</div>
+                                                    <div className="an-navigator-compare-col">{labels.get(val[0])}</div>
                                                     <div className="an-navigator-compare-col">{val[1]}</div>
                                                 </div>
 
@@ -94,7 +89,7 @@ function Tarif(props){
                                         }
                                     
                                     }) 
-                                }  */}
+                                } 
                                 </div>
                                 <div className="wrap-bottom">
                                     {/* {
@@ -152,6 +147,7 @@ function Tarif(props){
 
 export default connect((state) => ({
     data: createSelectorDivided(state).data,
+    filtering: isFiltering(state),
     hideShowData: state.data.hideShowData,
     labels: state.data.labels,
     loading: state.loading

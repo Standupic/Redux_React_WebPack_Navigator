@@ -1,10 +1,20 @@
 import React from 'react';
 import Checkbox from './checkbox';
-// import {uniqId} from'./helper';
 import PropTypes from 'prop-types';
 
+
 const ListParam=(props)=>{
-    const {checkboxHideShow} = props;
+
+    const {checkboxHideShow,hideShowParam} = props;
+
+    const defaultParam = {
+        "archive": false,
+        "internettv": false,
+        "nametariflk": false,
+        "speed": false,
+        "navigatorprice": false
+    }
+
     return(
         <React.Fragment>
             <h3>Параметры</h3>
@@ -14,12 +24,19 @@ const ListParam=(props)=>{
                     checkboxHideShow.map((item, key)=>{
                         return(
                             <div className="an-navigator-compare-col" key={key}>
-                                <Checkbox
-                                    item={item.name}
-                                    checked={(!item.hideShow) ? true : null}
-                                    // onChange={(e,name)=>{onChange(e,item.param)}}
-                                    index={`${item.param+key}`}
-                                />
+                                <input 
+                                    type="checkbox"
+                                    className='checkbox'
+                                    id={key}
+                                    checked={defaultParam[item.param] == false ? true : !item.read_more}
+                                    onChange={(obj)=>{
+                                            if(defaultParam[item.param] == false) return
+                                            hideShowParam({'param':item.param,'read_more': !item.read_more})}
+                                        }
+                                    />
+                            <label htmlFor={key}>
+                                <span>{item.name}</span>
+                            </label>
                             </div>
                         )
                     })

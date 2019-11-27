@@ -14,7 +14,8 @@ import {
         } from '../action/filters';
 import {createSelectorChecked,
         isFiltering,
-        createSelectorSlider} from "../selectors";
+        createSelectorSlider,
+        createSelectorHideShowInputs} from "../selectors";
 
 class Filter extends React.Component{
 
@@ -38,7 +39,8 @@ class Filter extends React.Component{
             handlerFilteringCheckbox,
             handlerFilteringRadio,
             handlerSlider,
-            handlerResetRadio
+            handlerResetRadio,
+            hideShowInputs
             } = this.props;
 
         const methodes = {
@@ -79,7 +81,7 @@ class Filter extends React.Component{
                             <TypeFilter 
                                 values={values}
                                 param={param}
-                                name={name}
+                                hideShow={hideShowInputs}
                                 checked={methodes[filter].value ? methodes[filter].value : checked}
                                 methodes={methodes[filter]}
                             />
@@ -99,7 +101,8 @@ class Filter extends React.Component{
 export default connect((state) =>({
     filtering: isFiltering(state),
     checked: createSelectorChecked(state),
-    slider: createSelectorSlider(state)
+    slider: createSelectorSlider(state),
+    hideShowInputs: createSelectorHideShowInputs(state)
 }),{handleToggleFilter,
     handlerFilteringCheckbox,
     handlerSlider,

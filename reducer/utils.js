@@ -2,7 +2,7 @@ import {OrderedMap, Map, List, toJS} from 'immutable';
 
 export const arrToMap = (arr, Record) => {
     return arr.reduce(
-        (acc,item) => acc.set(item.id, Record ? new Record(item) : item),
+        (acc, item) => acc.set(item.id, Record ? new Record(item) : item),
         new OrderedMap({}) 
     )
 }
@@ -25,5 +25,4 @@ export const objToList = (obj) =>{
      }
      return obj
 }
-// input arr
-// output Record{OrderedMap{name:Record{property}}}
+

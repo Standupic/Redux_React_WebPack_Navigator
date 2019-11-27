@@ -38,15 +38,15 @@ class App extends Component{
                 <section className="pagination">
 	    			<Pagination/>
 	    		</section>
-                {/* {open ? 
-                    <Modal/>
-                :
-                     null
-                } */}
+                {this.props.open ? <Modal/> : null}
            </React.Fragment>
         )
     }
 }
 
-
-export default connect(null,{callAPI})(App)
+export default connect((state)=>{
+    console.log(state)
+    return{
+        open: state.modal.get('open')
+    }
+},{callAPI})(App)

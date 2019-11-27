@@ -2,6 +2,7 @@ import array from 'lodash/array';
 import {List} from 'immutable';
 import {isEqual} from 'lodash/lang';
 import {reduce} from 'lodash/collection';
+import { isObject } from 'util';
 
 
 export function uniqId(){
@@ -39,6 +40,7 @@ export function debounce(func, wait = 250, immediate = true) {
       if (callNow) func.apply(context, args);
     };
   };
+
 export function pushElem(tags, obj){
     if(obj.position == 1) obj.position = 0
     return [
@@ -90,8 +92,8 @@ export function reduceObject(obj){
     },{})
 }
 
-export function multipleSearchRanging(data,checked,keys,sliderObj){
-    return rangingTarifs(keys,multipleSearch(data,checked),sliderObj)
+export function filteringRanging(data,checked,sliderObj){
+    return rangingTarifs(Object.keys(reduceObject(sliderObj)),multipleFiltering(data,checked),sliderObj)
 }
 
 export function rangingTarifs(keys,data,sliderObj) {
@@ -102,7 +104,36 @@ export function rangingTarifs(keys,data,sliderObj) {
      }) 
 }
 
-export const multipleSearch = (data,checked) =>{
+export const hideShowFiltersInputs = (data, checked) =>{
+   
+    if (isEmpty(reduceObject(checked))) return false
+
+    const hideFilters = {
+        "region" : [],
+        "location" : [],
+        "localizationbasis" : [],
+    }
+
+     multipleFiltering(data, checked).map( item =>{
+        for(let key in hideFilters){
+            if(item[key]){
+                if(is_Array(item[key])){
+                    for(let i = 0; i < item[key].length; i++){
+                        hideFilters[key].push(item[key][i])
+                    }
+                }else{
+                    hideFilters[key].push(item[key])
+                }
+            }
+        }
+    })
+    for(let key in hideFilters){
+        hideFilters[key] = array.uniq(hideFilters[key])
+    }
+    return hideFilters
+}
+
+export const multipleFiltering = (data,checked) =>{
     return data.filter(item => {
         return Object.keys(checked).every(key => {
           if (!checked[key].length) return true;
@@ -119,7 +150,7 @@ export const multipleSearch = (data,checked) =>{
     });
 }
 
-export function uniqArray(arr,type){
+export function uniqArray(arr){
     var allItem = []
     if(is_Array(arr[0])){
         for(let i = 0; i < arr.length; i++){
@@ -133,19 +164,19 @@ export function uniqArray(arr,type){
     }
 }
 
-export const pageNumbers = (l,countTarifs) =>{
+export const pageNumbers = (l,count) =>{
     const pageNumbers = [];
-    for(let i = 1; i <= Math.ceil(l / countTarifs); i++){
+    for(let i = 1; i <= Math.ceil(l / count); i++){
         pageNumbers.push(i)
     }
     return pageNumbers;
 }
 
-export const separatorPage = (data, current, countTarifs) => {
-	const lastIndex = current  * countTarifs;
-	const firstIndex = lastIndex - countTarifs;
+export const separatorPage = (data, current, count) => {
+	const lastIndex = current  * count;
+    const firstIndex = lastIndex - count;
 	const divided = data.slice(firstIndex,lastIndex);
-	const lastIndexSection = Math.ceil(data.length / countTarifs);
+	const lastIndexSection = Math.ceil(data.length / count);
 		return {
             lastIndex: lastIndex,
             firstIndex: firstIndex,
@@ -182,7 +213,7 @@ const createObjectProperty = (defaultParams,data) =>{
 
 export const createFilters = (defaultParams,data)=>{
     const obj = createObjectProperty(defaultParams,data);
-    const filters = defaultParams.reduce((acc,item)=>{ 
+    const filters = defaultParams.reduce((acc,item,index)=>{ 
     if(item['filter']){
         return {...acc, [item['param']] : {
             ['values']: uniqArray(obj[item['param']]),

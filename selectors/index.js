@@ -5,7 +5,8 @@ import {reduceObject,
        pageNumbers,
        rangingTarifs,
        multipleSearch,
-       multipleSearchRanging,
+       filteringRanging,
+       hideShowFiltersInputs,
        isEmpty} from '../helper';
 
 import {
@@ -20,14 +21,19 @@ export const dataSelector = (state) => state.data.data;
 
 export const filterSelector = (state) => state.filters.filters.toIndexedSeq()
 
+export const sortSelector = (state) => state.sort.isSort
+
 export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
 
 export const tagsSelector = (state) => state.tags.tags
 
+export const hideShowSelector = (state) => state.data.hideShowData.toIndexedSeq().toJS()
+
+
 export const paginationSelector = (state) => state.pagination.toJS()
 
-export const sortSelector = (state) => state.sort.isSort
+
 
 export const sortingTarifs = createSelector(
     dataSelector,
@@ -57,17 +63,12 @@ export const createSelectorData = createSelector(
     dataSelector,
     checkedSelector,
     sliderSelector,
-    sortSelector,
+    sortingTarifs, 
     paginationSelector,
     (dataSelector,
-    checkedSelector,sliderSelector,
+    checkedSelector,sliderSelector
     ) =>{
-        // if(!isEmpty(reduceObject(sliderSelector))){
-            let keys = Object.keys(reduceObject(sliderSelector))
-            return multipleSearchRanging(dataSelector,checkedSelector,keys,sliderSelector)
-        // }else{
-        //     return multipleSearch(dataSelector,checkedSelector)
-        // }
+        return filteringRanging(dataSelector,checkedSelector,sliderSelector)
     }    
 )
 
@@ -81,7 +82,7 @@ export const createSelectorData = createSelector(
 export const createSelectorFilters = createSelector(
     filterSelector,
     // isSeenSelector,
-    (filterSelector) =>{    
+    (filterSelector) =>{   
         return filterSelector.filter((item)=>{
             return item['is_seen'] == true
         })
@@ -117,6 +118,14 @@ export const isFiltering = createSelector(
        return {...x,...y}
     }
 )
+
+export const createSelectorHideShowInputs = createSelector(
+    dataSelector,
+    checkedSelector,
+    (dataSelector,checkedSelector) =>{
+        return hideShowFiltersInputs(dataSelector,checkedSelector)
+    }
+)
 //END CHECKED
 
 //IS_SEEN
@@ -142,22 +151,21 @@ export const createSelectorDivided = createSelector(
     paginationSelector,
     createSelectorData,
     (paginationSelector,createSelectorData)=>{
-
     const {
         countTarifs,
         currentPage,
         currentSectionPages
         } = paginationSelector;
 
-    const getPageNumbers = pageNumbers(createSelectorData.length,countTarifs)
-    const paginationObject = separatorPage(getPageNumbers,currentSectionPages,countTarifs); 
+    const getPageNumbers = pageNumbers(createSelectorData.length,countTarifs); 
+    const paginationObject = separatorPage(getPageNumbers,currentSectionPages,countTarifs);
     const data = separatorPage(createSelectorData,currentPage,countTarifs).divided
 
     return {...paginationObject,
                 currentPage,
                 length:createSelectorData.length,
                 currentSectionPages,
-                data: data
+                data,
             }
 
     }

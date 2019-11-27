@@ -14,27 +14,12 @@ const ReadMore = (props)=>{
                     <span className="an-navigator-compare-options-header-title">{item.nametariflk}</span>
                     <div className="popup-content">
                         { Object.entries(item).map((val,k)=>{
-               
-                            {  
-                                if ( typeof val[1] === 'object') {
-                                return(
-                                    <div className="an-navigator-compare-row" key={k}>
-                                        <div className="an-navigator-compare-col">{labels[val[0]]}</div>
-                                        <div className="an-navigator-compare-col">{val[1].join(", ")}</div>
-                                    </div>
-
-                                ) 
-                                } 
-                                if ( typeof val[1] !== 'object') {
-                                return(
-                                    <div className="an-navigator-compare-row" key={k}>
-                                        <div className="an-navigator-compare-col">{labels[val[0]]}</div>
-                                        <div className="an-navigator-compare-col">{val[1]}</div>
-                                    </div>
-
-                                    ) 
-                                }
-                            } 
+                            {return(
+                                <div className="an-navigator-compare-row" key={k}>
+                                    <div className="an-navigator-compare-col">{labels.get(val[0])}</div>
+                                    <div className="an-navigator-compare-col">{val[1]}</div>
+                                </div>
+                            )}
                         })}
                     </div>
                     </React.Fragment>

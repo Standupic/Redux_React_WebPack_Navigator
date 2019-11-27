@@ -3,10 +3,11 @@ import {
     LOAD_DATA_BEGIN,
     LOAD_DATA_SUCCESS,
     LOAD_DATA_FAILURE,
+    HIDE_SHOW
     } from '../constans';
 
 import {Record, OrderedMap} from 'immutable';
-import {objToMap} from './utils';
+import {objToMap,arrToMap} from './utils';
 
 const StructureState = new Record({
     labels: new OrderedMap({}),
@@ -39,6 +40,10 @@ export default(state = new StructureState(), action)=>{
         case LOAD_DATA_FAILURE:
             return state
             .set('error', response.error)
+        case HIDE_SHOW:
+            const {param,read_more} = action;
+            return state
+            .updateIn(['hideShowData',param,'read_more'], (item) => read_more)
         default:
             return state;
     }

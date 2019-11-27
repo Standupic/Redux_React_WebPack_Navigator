@@ -1,4 +1,4 @@
-import {HIDE_MODAL, SHOW_MODAL} from '../constans';
+import {HIDE_MODAL, SHOW_MODAL,HIDE_SHOW} from '../constans';
 
 export const hideModal = () => {
     return{
@@ -12,5 +12,12 @@ export const showModal = (id) => {
         type: SHOW_MODAL,
         open: true,
         id: id
+    }
+}
+
+export const hideShowParam = (obj) => {
+    return{
+        type: HIDE_SHOW,
+        ...obj
     }
 }

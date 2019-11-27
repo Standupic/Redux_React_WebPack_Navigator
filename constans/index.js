@@ -28,6 +28,7 @@ export const DELETE_TAG = "DELETE_TAG";
 // MODAL
 export const HIDE_MODAL = "HIDE_MODAL";
 export const SHOW_MODAL = "SHOW_MODAL";
+export const HIDE_SHOW = "HIDE_SHOW";
 
 // PAGINATION
 export const MOVE_PAGINATION = "MOVE_PAGINATION";
