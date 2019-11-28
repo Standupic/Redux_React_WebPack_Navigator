@@ -24,7 +24,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": "slider",
+	  "filter": false,
 	  "name": "Стоимость предложения в месяц, руб./мес.", 
 	  "param": "onetimepayment",
 	  "read_more": true,
@@ -328,7 +328,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": "checkbox",
+	  "filter": "slider",
 	  "name": "Скорость, Мбит/c", 
 	  "param": "speed",
 	  "read_more": true,
@@ -448,7 +448,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": false,
+	  "filter": "slider",
 	  "name": "Цена для навигатора", 
 	  "param": "navigatorprice",
 	  "read_more": true,

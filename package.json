@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --hot --mode development",
-    "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +17,7 @@
     "@babel/preset-react": "^7.0.0",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
+    "babel-minify-webpack-plugin": "^0.3.1",
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
@@ -25,20 +25,25 @@
     "import-loader": "^1.0.1",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "style-loader": "^1.0.0",
+    "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "immer": "^4.0.2",
     "immutable": "^4.0.0-rc.12",
     "react-redux": "^7.1.1",
+    "redux-devtools-extension": "^2.13.8",
     "regenerator-runtime": "^0.13.3",
     "reselect": "^4.0.0"
   }

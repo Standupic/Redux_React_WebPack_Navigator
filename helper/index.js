@@ -277,7 +277,7 @@ export const createLabels = (defaultParams)=>{
 }
 
 
-export const CreateHideShowData = (defaultParams) => {
+export const createHideShowData = (defaultParams) => {
     return defaultParams.reduce((acc,item)=>{
        return {...acc, [item['param']] : {
                 ['param']: item['param'],
