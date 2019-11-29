@@ -1,5 +1,8 @@
 import {createSelector} from 'reselect';
 import {toArray, toIndexedSeq, toJS} from 'immutable';
+import {filter,includes} from 'lodash/collection';
+import {isNumeric} from '../helper';
+
 import {reduceObject,
        separatorPage,
        pageNumbers,
@@ -23,6 +26,8 @@ export const filterSelector = (state) => state.filters.filters.toIndexedSeq()
 
 export const sortSelector = (state) => state.sort.isSort
 
+export const searchSelector = (state) => state.search.search
+
 export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
 
@@ -35,24 +40,37 @@ export const paginationSelector = (state) => state.pagination.toJS()
 
 
 
-export const sortingTarifs = createSelector(
+export const searchingTarifs = createSelector(
     dataSelector,
+    searchSelector,
+    (dataSelector, searchSelector) => {
+        if(searchSelector === "") return dataSelector
+        return filter(dataSelector,(obj)=>{
+            const str = isNumeric(searchSelector*1) ? searchSelector*1 : searchSelector
+                return includes(obj,str)
+          })
+    }
+)
+
+
+export const sortingTarifs = createSelector(
+    searchingTarifs,
     sortSelector,
-    (dataSelector,sortSelector) => {
+    (searchingTarifs,sortSelector) => {
         switch(sortSelector){
             case ACS:
-                return dataSelector.sort((a,b) =>{ return a.navigatorprice - b.navigatorprice})
+                return searchingTarifs.sort((a,b) =>{ return a.navigatorprice - b.navigatorprice})
             case DES:
-                return dataSelector.sort((a,b) =>{
+                return searchingTarifs.sort((a,b) =>{
                     if(a.navigatorprice > b.navigatorprice) return -1;
                     if(a.navigatorprice < b.navigatorprice) return 1;
                 })
             case TYPE_SUGGESTION_A_Я:
-                return dataSelector.sort((a,b) => { return a.typesuggestion.localeCompare(b.typesuggestion)})
+                return searchingTarifs.sort((a,b) => { return a.typesuggestion.localeCompare(b.typesuggestion)})
             case TYPE_SUGGESTION_Я_A:
-                return dataSelector.sort((a,b) => { return b.typesuggestion.localeCompare(a.typesuggestion)})
+                return searchingTarifs.sort((a,b) => { return b.typesuggestion.localeCompare(a.typesuggestion)})
             default:
-                return dataSelector
+                return searchingTarifs
         }
     }
 )
@@ -60,15 +78,16 @@ export const sortingTarifs = createSelector(
 // DATA
 
 export const createSelectorData = createSelector(
-    dataSelector,
+    searchingTarifs,
     checkedSelector,
     sliderSelector,
-    sortingTarifs, 
+    searchSelector,
+    sortingTarifs,
     paginationSelector,
-    (dataSelector,
+    (searchingTarifs,
     checkedSelector,sliderSelector
     ) =>{
-        return filteringRanging(dataSelector,checkedSelector,sliderSelector)
+        return filteringRanging(searchingTarifs,checkedSelector,sliderSelector)
     }    
 )
 

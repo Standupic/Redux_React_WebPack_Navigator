@@ -6,6 +6,9 @@ export const LOAD_DATA_FAILURE = "LOAD_DATA_FAILURE";
 // DATA
 export const LOAD_DATA = "LOAD_DATA";
 
+// SEARCH
+export const SEARCH = "SEARCH";
+
 // FILTERS
 export const LOAD_FILTERS = "LOAD_FILTERS";
 export const TOGGLE_FILTER = "TOGGLE_FILTER";

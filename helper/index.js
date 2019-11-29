@@ -220,7 +220,7 @@ export const createFilters = (defaultParams,data)=>{
             ['filter']: item['filter'],
             ['name']: item['name'],
             ['param']: item['param'],
-            ['active'] : false,
+            ['active'] : item['param'] == 'navigatorprice' ? true : false,
             ['is_seen'] : item['is_seen']
             }}
         }

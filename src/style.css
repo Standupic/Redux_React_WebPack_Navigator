@@ -1426,7 +1426,7 @@ input[type='submit'].styler[disabled] {
     font-size: 15px;
     font-weight: normal;
     color: #989898;
-    padding: 13px 26px 13px 26px;
+    padding: 12px 30px 13px 10px;
     border: 1px solid #ddd;
 }
 
@@ -1588,7 +1588,7 @@ input[type='submit'].styler[disabled] {
     background-image: url("../dist/img/an-navigator-search.svg");
     background-size: 17px 17px;
     background-repeat: no-repeat;
-    background-position: 200px 16px;
+    background-position: 185px 16px;
 }
 
 .an-navigator-section-2 .an-navigator-section-2-nav .an-section-2-settings {

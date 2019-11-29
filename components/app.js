@@ -45,7 +45,6 @@ class App extends Component{
 }
 
 export default connect((state)=>{
-    console.log(state)
     return{
         open: state.modal.get('open')
     }

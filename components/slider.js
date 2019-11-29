@@ -55,7 +55,7 @@ const RangeSlider = (props) => {
       "navigatorprice": {
           "value": [350,8500],
           "max": 8500
-    }
+    },
   }
   const classes = wrapStyles();
  

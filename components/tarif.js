@@ -15,7 +15,6 @@ function Tarif(props){
         filtering,
         data,
         loading} = props;
-  
     if(data.length){
         useEffect(() => {
             if(!document.querySelector(".wrap_tarifs")) return

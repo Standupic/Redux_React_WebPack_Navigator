@@ -37,8 +37,6 @@ export default (state = new StructureState(), action)=>{
             .updateIn(['currentPage'], v => 1)
             .updateIn(['currentSectionPages'], v => 1)
         case MOVE_PAGINATION:
-                console.log(action.param)
-
             switch(action.param[0]){
                 case FIRST_SECTION:
                     return state
