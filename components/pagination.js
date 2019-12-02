@@ -1,5 +1,4 @@
 import React from "react";
-import {separator} from '../helper';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from "./loader";
@@ -71,13 +70,9 @@ const Pagination =(props)=>{
 	)
 }
 
-// Pagination.propTypes = {
-// 	countTarifs: PropTypes.number.isRequired,
-// 	// filteredData: PropTypes.array.isRequired,
-//     data: PropTypes.array.isRequired,
-//     currentPage: PropTypes.number.isRequired,
-//     currentSectionPages: PropTypes.number.isRequired
-// }
+Pagination.propTypes = {
+	paginationObject: PropTypes.object.isRequired,
+}
 
 export default connect((state)=>({
    paginationObject: createSelectorDivided(state),

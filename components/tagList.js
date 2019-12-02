@@ -7,43 +7,37 @@ import {handlerTagsSearch,
 import { createSelectorTags } from "../selectors/";
 
 
-class FilterTagList extends React.Component{
-  
-//   shouldComponentUpdate(newProps, newState){
-//     return this.props.greatestValue != newProps.greatestValue
-//   }
-
-  
-	render(){
-        const {tags,handlerTagsSearch,handlerDeleteTag} = this.props;
-		return(
-			<div className="an-navigator-section-2-tags">
-              {!tags ? 
-                    <Loader/>
-              :
-               tags.map((item,index)=>{
-                    return(
-                        <React.Fragment key={item.id}>
-                            <div className="an-navigator-section-2-tag" 
-                                onClick={(obj)=>{handlerTagsSearch(item.value)}}>
-                                {item.title}
-                            </div>
-                            <span onClick={(id)=>{handlerDeleteTag(index)}}>&times;</span>
-                        </React.Fragment>
-                    )
-                })
-              }
-            </div>
-		)
-	}
+const FilterTagList = (props) =>{
+    const {tags,handlerTagsSearch,handlerDeleteTag} = props;
+    return(
+        <div className="an-navigator-section-2-tags">
+            {!tags ? 
+                <Loader/>
+            :
+            tags.map((item,index)=>{
+                return(
+                    <React.Fragment key={item.id}>
+                        <div className="an-navigator-section-2-tag" 
+                            onClick={(obj)=>{handlerTagsSearch(item.value)}}>
+                            {item.title}
+                        </div>
+                        <span onClick={(id)=>{handlerDeleteTag(index)}}>&times;</span>
+                    </React.Fragment>
+                )
+            })
+            }
+        </div>
+    )
 }
 
 
-// FilterTagList.propTypes = {
-//   greatestValue: PropTypes.array.isRequired,
-//   deleteTag: PropTypes.func.isRequired,
-//   handleTag: PropTypes.func.isRequired
-// }
+
+FilterTagList.propTypes = {
+  tags: PropTypes.array.isRequired,
+  loading: PropTypes.bool,
+  handlerTagsSearch: PropTypes.func.isRequired,
+  handlerDeleteTag: PropTypes.func.isRequired
+}
 
 export default connect((state)=>({
     tags: createSelectorTags(state),

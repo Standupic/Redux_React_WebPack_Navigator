@@ -1,8 +1,6 @@
 import React,{Component} from 'react';
-import {reduce} from 'lodash/collection';
-import {isEqual} from 'lodash/lang';
 import {getIndexTag,getObjectChecked} from '../helper';
-import {toJS} from 'immutable';
+import PropTypes from 'prop-types';
 import {handlerSetTag} from '../action/tags';
 import {connect} from 'react-redux';
 
@@ -58,7 +56,6 @@ class createTagFilter extends React.Component{
     render(){
     const {tags,toggle} = this.props;
     const {name, position, index} = this.state;
-    console.log(tags)
         return(
             <React.Fragment>
                 <form className="setTag" onSubmit={this.handleSubmit}>
@@ -113,6 +110,11 @@ const limits = {
     "position": {
         "min": 1
     }
+}
+
+
+createTagFilter.propTypes = {
+    handlerSetTag: PropTypes.func.isRequired
 }
 
 export default connect(null,{

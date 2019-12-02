@@ -30,10 +30,10 @@ const ReadMore = (props)=>{
     )
 }
 
-// ReadMore.propTypes = {
-//     data: PropTypes.array.isRequired,
-//     tarifId: PropTypes.number.isRequired,
-//     labels: PropTypes.array.isRequired
-// }
+ReadMore.propTypes = {
+    data: PropTypes.array.isRequired,
+    tarifId: PropTypes.string.isRequired,
+    labels: PropTypes.object.isRequired
+}
 
 export default ReadMore 

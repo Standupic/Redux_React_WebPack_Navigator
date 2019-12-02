@@ -93,10 +93,15 @@ class Filter extends React.Component{
 	}
 }
 
-// Filter.propTypes = {
-//     obj: PropTypes.object.isRequired,
-//     tag: PropTypes.object.isRequired
-// }
+Filter.propTypes = {
+    filtering: PropTypes.object.isRequired,
+    checked: PropTypes.object.isRequired,
+    slider: PropTypes.object.isRequired,
+    handleToggleFilter: PropTypes.func.isRequired,
+    handlerFilteringCheckbox: PropTypes.func.isRequired,
+    handlerSlider: PropTypes.func.isRequired,
+    handlerResetRadio: PropTypes.func.isRequired
+}
 
 export default connect((state) =>({
     filtering: isFiltering(state),
@@ -108,3 +113,5 @@ export default connect((state) =>({
     handlerSlider,
     handlerResetRadio,
     handlerFilteringRadio})(Filter);
+
+

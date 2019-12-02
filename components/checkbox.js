@@ -1,6 +1,5 @@
-import React,{useState} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
-import {isObjectOrArray} from '../helper';
 
 const Checkbox = (props) =>{
     const {values,hideShow,param,checked,
@@ -31,10 +30,12 @@ const Checkbox = (props) =>{
        </React.Fragment>
      )
 }
-// Checkbox.propTypes = {
-// 	item: PropTypes.object.isRequired,
-// 	name: PropTypes.string.isRequired,
-// 	index: PropTypes.number.isRequired,
-// }
+
+Checkbox.propTypes = {
+    values: PropTypes.array.isRequired,
+    param: PropTypes.string.isRequired,
+    checked: PropTypes.object.isRequired,
+    methodes: PropTypes.object.isRequired
+}
 
 export default Checkbox

@@ -36,9 +36,10 @@ const FilterList = (props) => {
             </div>
 		)
 	}
-// FilterList.propTypes = {
-	
-// }
+FilterList.propTypes = {
+    filters: PropTypes.object.isRequired,
+    loading: PropTypes.bool
+}
 
 export default connect((state)=> ({
     filters: createSelectorFilters(state),

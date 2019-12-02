@@ -35,14 +35,10 @@ const HeaderFilter = (props) =>{
         )
     }
 
-// HeaderFilter.propTypes = {
-// 	data: PropTypes.array.isRequired,
-// 	headerModalCheck: PropTypes.func.isRequired,
-// 	search: PropTypes.func.isRequired,
-//     handleSort: PropTypes.func.isRequired,
-//     toggleModal: PropTypes.func.isRequired,
-//     handlePaginationCountTarifs: PropTypes.func.isRequired
-// }
+HeaderFilter.propTypes = {
+	data: PropTypes.array.isRequired,
+    loading: PropTypes.bool
+}
 
 export default connect((state) =>({
     data: createSelectorData(state),

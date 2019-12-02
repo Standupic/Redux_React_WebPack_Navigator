@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateTagFilter from './createTagFilter';
-import {togglePopUp, hideShowFilters} from './custom_hooks';
+import {togglePopUp} from './custom_hooks';
+import PropTypes from 'prop-types';
 import Loader from './loader';
 import {handlerHideShowFilters,
         handlerResetFilters} from '../action/filters';
@@ -20,8 +21,7 @@ const Buttons = (props) =>{
            checked,
            handlerHideShowFilters,
            handlerResetFilters} = props;
-    const {isShowing, toggle} = togglePopUp();
-    const {flag, toggleFlag} = hideShowFilters();
+    const {isShowing, toggle, flag, toggleFlag} = togglePopUp();
 
     return(
         <React.Fragment>
@@ -62,6 +62,14 @@ const Buttons = (props) =>{
     )
 }
 
+Buttons.propTypes = {
+    filtering: PropTypes.object.isRequired,
+    tags: PropTypes.array.isRequired,
+    checked: PropTypes.object.isRequired,
+    handlerHideShowFilters: PropTypes.func.isRequired,
+    handlerResetFilters: PropTypes.func.isRequired,
+    loading: PropTypes.bool
+}
 
 export default connect((state)=>({
     filtering: isFiltering(state),

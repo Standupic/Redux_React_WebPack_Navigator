@@ -66,13 +66,13 @@ function Modal(props){
         )
 }
 
-// Pagination.propTypes = {
-//     toggleModal: PropTypes.bool.isRequired,
-//     data: PropTypes.array.isRequired,
-//     tarifId: PropTypes.bool.isRequired,
-//     labels: PropTypes.array.isRequired,
-//     checkboxHideShow: PropTypes.array.isRequired
-// }
+Modal.propTypes = {
+    data: PropTypes.array.isRequired,
+    labels: PropTypes.object.isRequired,
+    checkboxHideShow: PropTypes.array.isRequired,
+    hideModal: PropTypes.func.isRequired,
+    hideShowParam: PropTypes.func.isRequired
+}
 
 export default connect((state) =>({
     id: state.modal.get('id'),

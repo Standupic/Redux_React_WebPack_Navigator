@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const Radio = (props) =>{
-     const {values,name,param,checked,
+     const {values,param,checked,
             methodes} = props;
      const {handler,reset} = methodes;
     return(
@@ -33,10 +33,11 @@ const Radio = (props) =>{
     )
 }
 
-// Radio.propTypes = {
-// 	item: PropTypes.array.isRequired,
-// 	name: PropTypes.string.isRequired,
-// 	onChange: PropTypes.func.isRequired,
-// }
+Radio.propTypes = {
+	values: PropTypes.array.isRequired,
+	param: PropTypes.string.isRequired,
+    checked: PropTypes.object.isRequired,
+    methodes: PropTypes.object.isRequired
+}
 
 export default Radio;

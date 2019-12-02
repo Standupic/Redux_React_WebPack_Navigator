@@ -6,11 +6,9 @@ import {isNumeric} from '../helper';
 import {reduceObject,
        separatorPage,
        pageNumbers,
-       rangingTarifs,
-       multipleSearch,
        filteringRanging,
        hideShowFiltersInputs,
-       isEmpty} from '../helper';
+       } from '../helper';
 
 import {
 	ACS,

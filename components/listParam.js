@@ -1,5 +1,4 @@
 import React from 'react';
-import Checkbox from './checkbox';
 import PropTypes from 'prop-types';
 
 
@@ -7,14 +6,13 @@ const ListParam=(props)=>{
 
     const {checkboxHideShow,hideShowParam} = props;
 
-    const defaultParam = {
+    const defaultParam = { // get out to default param 
         "archive": false,
         "internettv": false,
         "nametariflk": false,
         "speed": false,
         "navigatorprice": false
     }
-
     return(
         <React.Fragment>
             <h3>Параметры</h3>
@@ -46,9 +44,9 @@ const ListParam=(props)=>{
     )
 }
 
-// ListParam.propTypes = {
-//     checkboxHideShow: PropTypes.array.isRequired,
-//     onChange: PropTypes.func.isRequired
-// }
+ListParam.propTypes = {
+    checkboxHideShow: PropTypes.array.isRequired,
+    hideShowParam: PropTypes.func.isRequired
+}
 
 export default ListParam
