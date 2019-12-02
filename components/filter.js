@@ -68,7 +68,7 @@ class Filter extends React.Component{
                     : 
                     "an-navigator-filter util-open"}> 
                     <div className="an-navigator-filter-header" onClick={()=>(handleToggleFilter(param))}>
-                        <img src="../dist/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
+                        <img src="../src/img/an-navigator-arrow-down.svg" className="an-navigator-arrow-up swallow"/>
                         <span className={`${filtering[param] && !active ? 
                         "an-navigator-filter-header-title filter-true"
                         : 

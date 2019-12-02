@@ -25,7 +25,7 @@ const HeaderFilter = (props) =>{
                             <QuantityDisplayTarifs/>
                         <div className="an-section-2-settings">
                             <img 
-                                src="../dist/img/an-navigator-setings.svg" 
+                                src="../src/img/an-navigator-setings.svg" 
                                 className="an-navigator-setings"
                                 onClick={(id)=>{showModal(false)}}/>
                         </div>
