@@ -328,7 +328,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": "slider",
+	  "filter": "checkbox",
 	  "name": "Скорость, Мбит/c", 
 	  "param": "speed",
 	  "read_more": true,

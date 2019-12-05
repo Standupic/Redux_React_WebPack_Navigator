@@ -1,0 +1,27 @@
+[{
+ "sort": [
+    {"default": "Cортировать:"},
+    {"value" : "ACS", "text": "По цене/возрастание"},
+    {"value": "DES", "text": "По цене/убывание"},
+    {"value": "TYPE_SUGGESTION_A_Я", "text": "Тип предложения/A-Я"},
+    {"value": "TYPE_SUGGESTION_Я_A", "text": "Тип предложения/Я-A"}
+    ],
+  "quantity": [
+    {"default": "Кол-во отобр. стр."},
+    {"value" : "8", "text": "8"},
+    {"value":  "18", "text": "18"},
+    {"value":  "24", "text": "24"},
+    {"value":  "48", "text": "48"}
+  ],
+  "housetype":[
+      {"default": "Любой"},
+      {"value": "MКД", "text": "MКД"},
+      {"value": "ЧС", "text": "ЧС"}
+  ],
+  "archive":[
+      {"default": "Любой", "text": "Любой"},
+      {"value": "Архивный", "text": "Архивный"},
+      {"value": "Действующий", "text": "Действующий"}
+  ],
+  "filters": ["housetype","archive"]
+}]
