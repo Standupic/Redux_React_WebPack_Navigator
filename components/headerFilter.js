@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Sort from './sort';
 import Search from './search';
-import QuantityDisplayTarifs from './quantityDisplayTarifs';
+import Quantity from './quantity';
 import { connect } from "react-redux";
 import Loader from './loader';
 import {showModal} from '../action/modal';
 import {createSelectorData} from '../selectors';
-
+import SelectFitlers from './selectFilters';
 
 const HeaderFilter = (props) =>{
         const {loading,showModal,data} = props;
@@ -21,15 +21,16 @@ const HeaderFilter = (props) =>{
                 <span className="an-section-title-count">{data.length}</span>
                         </div>
                             <Search/>
+                            <SelectFitlers/>
                             <Sort/>
-                            <QuantityDisplayTarifs/>
+                            <Quantity/>
                         <div className="an-section-2-settings">
                             <img 
                                 src="../src/img/an-navigator-setings.svg" 
                                 className="an-navigator-setings"
                                 onClick={(id)=>{showModal(false)}}/>
                         </div>
-                    </div>
+                </div>
                 }
             </div>
         )

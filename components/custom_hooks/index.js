@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import Sort from '../sort';
 
 export const togglePopUp = () => {
     const [isShowing, setIsShowing] = useState(false);

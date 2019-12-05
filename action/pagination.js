@@ -7,9 +7,9 @@ export const movePagination = (...param) => {
     }
 }
 
-export const setQuantityTarifs = (str) => {
+export const setQuantityTarifs = (obj) => { // {param,value}
     return{
         type: SET_QUANTITY_DISPLAY_TARIF,
-        param: str * 1
+        value: obj.value * 1
     }
 }

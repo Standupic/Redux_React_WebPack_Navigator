@@ -7,7 +7,8 @@ import {
     HANDLER_FILTERING_RADIO,
     HANDLER_SLIDER,
     TAG_SEARCH,
-    RESET_RADIO
+    RESET_RADIO,
+    SELECT_FILTER
 } from '../constans';
 import {Record, OrderedMap, List, toJS, clear} from 'immutable';
 import {objToMap,objToList} from './utils';
@@ -17,7 +18,11 @@ const StructureState = Record({
     filters: new OrderedMap({}),
     checked: new OrderedMap({}),
     hide: new OrderedMap({}),
-    slider: new OrderedMap({})
+    slider: new OrderedMap({}),
+    select: new OrderedMap({
+        housetype: [],
+        archive: []
+    })
 })
 
 const MapFilter = Record({
@@ -58,6 +63,7 @@ export default (state = new StructureState(), action)=>{
                 tag[key] ? val.update('active',v => true) : val.update('active', v => false)
             ))
         break;
+
         case HIDE_SHOW_FITLERS:
         const {flag} = action;
         const {hide} = state;
@@ -103,6 +109,15 @@ export default (state = new StructureState(), action)=>{
              item.delete(item.indexOf(checkbox.value))
              :
              item.push(checkbox.value))
+        break;
+        case SELECT_FILTER: // do not repeat!! Where is fucking mistake :-)
+        const {select} = action
+            return state
+            .updateIn(['select', select.param], item =>
+            item.indexOf(select.value) >= 0 ?
+            item.delete(item.indexOf(select.value))
+            :
+            item.push(select.value))
         break;
         case HANDLER_SLIDER:
         const {slider} = action;

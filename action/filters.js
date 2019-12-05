@@ -6,7 +6,9 @@ import {
     RESET_FILTERS,
     HANDLER_SLIDER,
     RESET_RADIO,
+    SELECT_FILTER,
 } from '../constans';
+
 
 export const handlerFilteringCheckbox = (obj) =>{ // {param:str,value:str}
    return {

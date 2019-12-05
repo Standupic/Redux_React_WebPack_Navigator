@@ -1,8 +1,8 @@
 import {SORT_TARIFS} from '../constans';
 
-export const sortTarifs = (str) => {
+export const sortTarifs = (obj) => { // {param, value}
     return{
         type: SORT_TARIFS,
-        payload: str
+        payload: obj.value
     }
 }

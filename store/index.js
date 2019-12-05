@@ -7,7 +7,7 @@ import randomId from '../middleware/randomId';
 // import {composeEnhancers} from '../middleware/dev';   
 import {composeWithDevTools} from 'redux-devtools-extension/logOnlyInProduction';
 
-const enhancer = composeWithDevTools(applyMiddleware(thunk, api, randomId))
+const enhancer = composeWithDevTools(applyMiddleware(thunk, api, randomId, logger))
 const store = createStore(reducer, enhancer);  
 
 window.store = store;

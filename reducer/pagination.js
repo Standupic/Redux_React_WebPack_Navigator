@@ -25,9 +25,9 @@ export default (state = new StructureState(), action)=>{
     const {type} = action;
     switch(type){
         case SET_QUANTITY_DISPLAY_TARIF:
-            const param = action.param;
+            const value = action.value;
             return state
-            .updateIn(['countTarifs'], v => !isNumeric(param) ? 8 : param)
+            .updateIn(['countTarifs'], v => !isNumeric(value) ? 8 : value)
         case TAG_SEARCH:
             return state
             .updateIn(['currentPage'], v => 1)

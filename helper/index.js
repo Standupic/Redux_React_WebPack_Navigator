@@ -112,6 +112,7 @@ export const hideShowFiltersInputs = (data, checked) =>{
         "region" : [],
         "location" : [],
         "localizationbasis" : [],
+        "speed": []
     }
 
      multipleFiltering(data, checked).map( item =>{
@@ -160,7 +161,14 @@ export function uniqArray(arr){
         }
         return array.uniq(allItem).sort()
     }else{
-        return arr.sort()
+        if(isNumeric(arr[1])){
+            return arr.sort((a,b)=>{
+                return a - b
+            })
+        }else{
+           return arr.sort() 
+        }
+        
     }
 }
 

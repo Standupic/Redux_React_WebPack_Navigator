@@ -29,6 +29,7 @@ export const searchSelector = (state) => state.search.search
 export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
 
+
 export const tagsSelector = (state) => state.tags.tags
 
 export const hideShowSelector = (state) => state.data.hideShowData.toIndexedSeq().toJS()

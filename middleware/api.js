@@ -4,7 +4,7 @@ import {createFilters,
         createLabels,
         createHideShowData} from '../helper';
 
-import  data from '../data/tarifsReal.json';
+import  data from '../data/tarifs.json';
 import  defaultParams from '../data/default_params.json';
 import  tags from '../data/tags.json';
 
