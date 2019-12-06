@@ -3,6 +3,7 @@ import Select from './select';
 import data from '../data/select';
 import {connect} from 'react-redux';
 import {selectFilter} from '../action/select';
+import {createSelectorSelect} from '../selectors';
 
 const selectFitlers = (props) => {
     
@@ -16,7 +17,7 @@ const selectFitlers = (props) => {
                             data={data[0][item]}
                             handler={selectFilter}
                             param={item}
-
+                            name={data[0][item][0].name}
                         />
                     </React.Fragment>
                 )
@@ -25,4 +26,7 @@ const selectFitlers = (props) => {
     )
 }
 
-export default connect(null,{selectFilter})(selectFitlers)
+
+export default connect((state)=>({
+    select: createSelectorSelect(state),
+}),{selectFilter})(selectFitlers)

@@ -104,7 +104,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": "radio",
+	  "filter": false,
 	  "name": "Статус тарифа", 
 	  "param": "archive",
 	  "read_more": true,
@@ -432,7 +432,7 @@
       "is_seen": false
 	},
 	{
-	  "filter": "radio",
+	  "filter": false,
 	  "name": "Тип дома", 
 	  "param": "housetype",
 	  "read_more": true,

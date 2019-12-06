@@ -64,7 +64,18 @@ body {
 }
 .setTag input[name="position"]{
     width: 35px;
-} 
+}
+
+.wrap-an-styler{
+    position: relative;
+}
+
+.wrap-an-styler p {
+    position: absolute;
+    top: -40px;
+    font-size: .9em;
+    color: #333;
+}
 
 @keyframes show {
     0% {

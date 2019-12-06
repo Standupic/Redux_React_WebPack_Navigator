@@ -28,7 +28,7 @@ export const searchSelector = (state) => state.search.search
 
 export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
-
+export const selectSelector = (state) => state.filters.select.toJS()
 
 export const tagsSelector = (state) => state.tags.tags
 
@@ -80,13 +80,14 @@ export const createSelectorData = createSelector(
     searchingTarifs,
     checkedSelector,
     sliderSelector,
+    selectSelector,
     searchSelector,
     sortingTarifs,
     paginationSelector,
     (searchingTarifs,
-    checkedSelector,sliderSelector
+    checkedSelector,sliderSelector,selectSelector
     ) =>{
-        return filteringRanging(searchingTarifs,checkedSelector,sliderSelector)
+        return filteringRanging(searchingTarifs,{...checkedSelector,...selectSelector},sliderSelector)
     }    
 )
 
@@ -125,7 +126,14 @@ export const createSelectorChecked = createSelector(
         return checkedSelector
     }
 )
+//SELECT
 
+export const createSelectorSelect = createSelector(
+    selectSelector,
+    (selectSelector) => {
+        return selectSelector
+    }
+)
 
 export const isFiltering = createSelector(
     checkedSelector,
@@ -174,7 +182,6 @@ export const createSelectorDivided = createSelector(
         currentPage,
         currentSectionPages
         } = paginationSelector;
-
     const getPageNumbers = pageNumbers(createSelectorData.length,countTarifs); 
     const paginationObject = separatorPage(getPageNumbers,currentSectionPages,countTarifs);
     const data = separatorPage(createSelectorData,currentPage,countTarifs).divided

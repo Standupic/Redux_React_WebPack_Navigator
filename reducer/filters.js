@@ -20,8 +20,8 @@ const StructureState = Record({
     hide: new OrderedMap({}),
     slider: new OrderedMap({}),
     select: new OrderedMap({
-        housetype: [],
-        archive: []
+        housetype: new List(),
+        archive: new List()
     })
 })
 
@@ -110,14 +110,14 @@ export default (state = new StructureState(), action)=>{
              :
              item.push(checkbox.value))
         break;
-        case SELECT_FILTER: // do not repeat!! Where is fucking mistake :-)
+        case SELECT_FILTER: 
         const {select} = action
             return state
-            .updateIn(['select', select.param], item =>
-            item.indexOf(select.value) >= 0 ?
-            item.delete(item.indexOf(select.value))
+            .updateIn(['select', select.param], item => select.value === "Любой" 
+            ? 
+            List()
             :
-            item.push(select.value))
+            List([select.value]));
         break;
         case HANDLER_SLIDER:
         const {slider} = action;
