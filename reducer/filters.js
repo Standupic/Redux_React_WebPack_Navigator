@@ -113,7 +113,7 @@ export default (state = new StructureState(), action)=>{
         case SELECT_FILTER: 
         const {select} = action
             return state
-            .updateIn(['select', select.param], item => select.value === "Любой" 
+            .updateIn(['select', select.param], item => (select.value === "Любой" || select.value === "")
             ? 
             List()
             :

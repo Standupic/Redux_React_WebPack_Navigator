@@ -130,7 +130,9 @@ export const hideShowFiltersInputs = (data, checked) =>{
         }
     })
     for(let key in hideFilters){
-        hideFilters[key] = array.uniq(hideFilters[key])
+        hideFilters[key] = array.uniq(hideFilters[key]).sort((a,b)=>{
+            return a - b;
+        })
     }
     return hideFilters
 }
