@@ -14,6 +14,7 @@ function Tarif(props){
         showModal,
         filtering,
         data,
+        search,
         loading} = props;
     if(data.length){
         useEffect(() => {
@@ -33,7 +34,7 @@ function Tarif(props){
                 :
             <div className="wrap_tarifs">
                 {
-                    !data.length && !isEmpty(filtering) ?
+                    (!data.length && !isEmpty(filtering) || (!data.length && search !== "")) ?
                     <p>Результат вашего поиска: {`${!data.length ? 0 : null}`}</p>
                     :
                     data.map((item,key)=>{
@@ -66,7 +67,7 @@ function Tarif(props){
                                 <div className="wrap-list">
                                 { Object.entries(item).map((val,k)=>{
                                         {  
-                                            if (val[0] !== "id" && !hideShowData.get(val[0]).read_more && typeof val[1] === 'object') {
+                                            if (val[0] !== "id" && hideShowData.get(val[0]) && !hideShowData.get(val[0]).read_more && typeof val[1] === 'object') {
                                             return(
                                                 <div className="an-navigator-compare-row" key={k}>
                                                     <div className="an-navigator-compare-col">{labels.get(val[0])}</div>
@@ -75,7 +76,7 @@ function Tarif(props){
 
                                             ) 
                                             } 
-                                            if (val[0] !== "id" &&  !hideShowData.get(val[0]).read_more && typeof val[1] !== 'object') {
+                                            if (val[0] !== "id" && hideShowData.get(val[0]) && !hideShowData.get(val[0]).read_more && typeof val[1] !== 'object') {
                                             return(
                                                 <div className="an-navigator-compare-row" key={k}>
                                                     <div className="an-navigator-compare-col">{labels.get(val[0])}</div>
@@ -149,6 +150,7 @@ export default connect((state) => ({
     filtering: isFiltering(state),
     hideShowData: state.data.hideShowData,
     labels: state.data.labels,
+    search: state.search.search,
     loading: state.loading
    
 }),{showModal})(Tarif);

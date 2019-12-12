@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import {toArray, toIndexedSeq, toJS} from 'immutable';
 import {filter,includes} from 'lodash/collection';
-import {isNumeric} from '../helper';
+// import {isNumeric} from '../helper';
 
 import {reduceObject,
        separatorPage,
@@ -16,6 +16,7 @@ import {
 	TYPE_SUGGESTION_A_Я,
 	TYPE_SUGGESTION_Я_A
     } from '../constans'
+import { searchHandler } from '../action/search';
 
 
 export const dataSelector = (state) => state.data.data;
@@ -45,8 +46,8 @@ export const searchingTarifs = createSelector(
     (dataSelector, searchSelector) => {
         if(searchSelector === "") return dataSelector
         return filter(dataSelector,(obj)=>{
-            const str = isNumeric(searchSelector*1) ? searchSelector*1 : searchSelector
-                return includes(obj.nametariflk,str)
+            // const str = isNumeric(searchSelector*1) ? searchSelector*1 : searchSelector
+                return includes(obj.nametariflk,searchSelector)
           })
     }
 )

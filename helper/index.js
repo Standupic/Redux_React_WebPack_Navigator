@@ -93,7 +93,6 @@ export function reduceObject(obj){
 }
 
 export function filteringRanging(data,checked,sliderObj){
-    console.log(checked)
     return rangingTarifs(Object.keys(reduceObject(sliderObj)),multipleFiltering(data,checked),sliderObj)
 }
 

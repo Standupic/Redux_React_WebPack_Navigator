@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {searchHandler} from '../action/search';
 import {searchingTarifs} from '../selectors';
+import {isNumeric} from '../helper';
 
 const search = (props) => {
     const {searchHandler} = props;
@@ -9,7 +10,14 @@ const search = (props) => {
         <React.Fragment>
             <input type="text"
                    onChange={(event)=>{
-                        searchHandler(event.target.value)
+                        let str = event.target.value;
+                        if(isNumeric(str*1)){
+                            searchHandler(str*1)
+                        }else{
+                            str.toLowerCase()
+                            str = str[0].toUpperCase() + str.slice(1)
+                            searchHandler(str)
+                        }
                     }} 
                    className="an-section-2-search" 
                    placeholder="Поиск"/>

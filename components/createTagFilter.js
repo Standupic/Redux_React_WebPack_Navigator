@@ -40,7 +40,7 @@ class createTagFilter extends React.Component{
 
     handleChange= (type) => (ev)=>{
         const {value} = ev.target;
-        if(value > limits[type].max) return
+        if(value.length > limits[type].max) return
         this.setState({
             [type]: value
         })
