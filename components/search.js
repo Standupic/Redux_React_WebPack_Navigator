@@ -15,7 +15,7 @@ const search = (props) => {
                             searchHandler(str*1)
                         }else{
                             str.toLowerCase()
-                            str = str[0].toUpperCase() + str.slice(1)
+                            str = str[0].toUpperCase() + str.slice(1).toLowerCase()
                             searchHandler(str)
                         }
                     }} 

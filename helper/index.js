@@ -3,6 +3,7 @@ import {List} from 'immutable';
 import {isEqual} from 'lodash/lang';
 import {reduce} from 'lodash/collection';
 import { isObject } from 'util';
+import { object } from 'prop-types';
 
 
 export function uniqId(){
@@ -107,15 +108,13 @@ export function rangingTarifs(keys,data,sliderObj) {
 export const hideShowFiltersInputs = (data, checked) =>{
    
     if (isEmpty(reduceObject(checked))) return false
-
     const hideFilters = {
         "region" : [],
         "location" : [],
         "localizationbasis" : [],
-        "speed": []
+         "speed": []
     }
-
-     multipleFiltering(data, checked).map( item =>{
+    multipleFiltering(data, checked).map( item =>{
         for(let key in hideFilters){
             if(item[key]){
                 if(is_Array(item[key])){

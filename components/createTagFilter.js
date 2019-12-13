@@ -23,10 +23,12 @@ class createTagFilter extends React.Component{
                 index: getIndexTag(tags, checked)
             })
         }else{
+            console.log(length)
+            console.log(position)
         const newTag = {
             value: getObjectChecked(checked),
             title: name,
-            position: length + 1 <= position ? length + 1 : position * 1 
+            position: length <= position ? length-1 : position * 1 
         }
         handlerSetTag(newTag)
         toggle()

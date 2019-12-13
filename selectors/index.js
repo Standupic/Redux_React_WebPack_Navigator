@@ -46,7 +46,6 @@ export const searchingTarifs = createSelector(
     (dataSelector, searchSelector) => {
         if(searchSelector === "") return dataSelector
         return filter(dataSelector,(obj)=>{
-            // const str = isNumeric(searchSelector*1) ? searchSelector*1 : searchSelector
                 return includes(obj.nametariflk,searchSelector)
           })
     }

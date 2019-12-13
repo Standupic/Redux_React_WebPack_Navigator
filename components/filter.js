@@ -24,6 +24,7 @@ class Filter extends React.Component{
         "radio": Radio,
         "slider": Slider,
     }
+    
     render(){
         const {param,
                name,

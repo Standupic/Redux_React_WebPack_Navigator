@@ -25,7 +25,7 @@ export default (state = new StructureState(), action) =>{
             .update('tags',(tags) => arrToRecord(response.tags,MapTag))
         break;
         case SET_TAG:
-            const {newTag} = action
+            const {newTag} = action 
             return state
             .update('tags', tags => pushElem(state.tags,newTag))
         break;
