@@ -48,8 +48,8 @@ export const SET_QUANTITY_DISPLAY_TARIF = "SET_QUANTITY_DISPLAY_TARIF";
 export const SORT_TARIFS = "SORT_TARIFS";
 export const ACS = "ACS";
 export const DES = "DES";
-export const TYPE_SUGGESTION_A_Я = "A-Я";
-export const TYPE_SUGGESTION_Я_A =  "Я-A";
+export const TYPE_SUGGESTION_A_Я = "TYPE_SUGGESTION_A_Я";
+export const TYPE_SUGGESTION_Я_A =  "TYPE_SUGGESTION_Я_A";
 export const DEFAULT_VALUE = "Сортировать:"
 
 
