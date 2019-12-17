@@ -46,7 +46,7 @@ export const searchingTarifs = createSelector(
     (dataSelector, searchSelector) => {
         if(searchSelector === "") return dataSelector
         return filter(dataSelector,(obj)=>{
-                return includes(obj.nametariflk,searchSelector)
+                return includes(obj.nametarifonyma.toLowerCase(),searchSelector)
           })
     }
 )

@@ -11,12 +11,14 @@ const search = (props) => {
             <input type="text"
                    onChange={(event)=>{
                         let str = event.target.value;
+                        if(str == ""){
+                            searchHandler(str)
+                            return
+                        }
                         if(isNumeric(str*1)){
                             searchHandler(str*1)
                         }else{
-                            str.toLowerCase()
-                            str = str[0].toUpperCase() + str.slice(1).toLowerCase()
-                            searchHandler(str)
+                            searchHandler(str.toLowerCase())
                         }
                     }} 
                    className="an-section-2-search" 

@@ -8,6 +8,7 @@ import  data from '../data/tarifs.json';
 import  defaultParams from '../data/default_params.json';
 import  tags from '../data/tags.json';
 
+
 import 
     {LOAD_DATA_BEGIN,
     LOAD_DATA_SUCCESS,
@@ -23,7 +24,7 @@ let result;
 switch(mode){
     case 'production':
 
-    result = (store) => (next) => async (action) => {
+    result = (store) => (next) => (action) => {
     if(!action.meta || action.type !== "API"){
         return next(action)
     }

@@ -19,7 +19,6 @@ import {
         SORT_TARIFS,
         HANDLER_FILTERING_CHECKBOX,
         HANDLER_SLIDER,
-        RESET_RADIO,
         HANDLER_FILTERING_RADIO,
         SELECT_FILTER
         } from '../constans';

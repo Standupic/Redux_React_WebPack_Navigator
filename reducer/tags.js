@@ -2,7 +2,7 @@ import {LOAD_TAGS,
         SET_TAG,
         DELETE_TAG} from '../constans';
 import {Record, deleteIn} from 'immutable';
-import {arrToRecord,arrToMap} from './utils';
+import {arrToRecord} from './utils';
 import {pushElem} from '../helper';
 
 const StructureState = new Record({
