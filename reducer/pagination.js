@@ -15,11 +15,22 @@ import {
         LAST_SECTION,
         NUMBER,
         TAG_SEARCH,
-        RESET_FILTERS
+        RESET_FILTERS,
+        SORT_TARIFS,
+        HANDLER_FILTERING_CHECKBOX,
+        HANDLER_SLIDER,
+        RESET_RADIO,
+        HANDLER_FILTERING_RADIO,
+        SELECT_FILTER
         } from '../constans';
 
 import {isNumeric} from '../helper/';
 
+function returnToOnePage(state){
+    return state
+    .updateIn(['currentPage'], v => 1)
+    .updateIn(['currentSectionPages'], v => 1)
+}
 
 export default (state = new StructureState(), action)=>{
     const {type} = action;
@@ -29,9 +40,17 @@ export default (state = new StructureState(), action)=>{
             return state
             .updateIn(['countTarifs'], v => !isNumeric(value) ? 8 : value)
         case TAG_SEARCH:
-            return state
-            .updateIn(['currentPage'], v => 1)
-            .updateIn(['currentSectionPages'], v => 1)
+            return returnToOnePage(state)
+        case HANDLER_FILTERING_CHECKBOX:
+            return returnToOnePage(state)
+        case HANDLER_FILTERING_RADIO:
+            return returnToOnePage(state)
+        case HANDLER_SLIDER:
+            return returnToOnePage(state)
+        case SELECT_FILTER:
+            return returnToOnePage(state)
+        case SORT_TARIFS:
+            return returnToOnePage(state)
         case RESET_FILTERS:
             return state
             .updateIn(['currentPage'], v => 1)

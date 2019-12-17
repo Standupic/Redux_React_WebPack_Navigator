@@ -3,8 +3,8 @@
     {"default": "Cортировать:"},
     {"value" : "ACS", "text": "По цене/возрастание"},
     {"value": "DES", "text": "По цене/убывание"},
-    {"value": "TYPE_SUGGESTION_A_Я", "text": "Тип предложения/A-Я"},
-    {"value": "TYPE_SUGGESTION_Я_A", "text": "Тип предложения/Я-A"}
+    {"value": "A-Я", "text": "Тип предложения/A-Я"},
+    {"value": "Я-A", "text": "Тип предложения/Я-A"}
     ],
   "quantity": [
     {"default": "Кол-во отобр. стр."},

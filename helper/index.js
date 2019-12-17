@@ -184,7 +184,7 @@ export const pageNumbers = (l,count) =>{
 export const separatorPage = (data, current, count) => {
 	const lastIndex = current  * count;
     const firstIndex = lastIndex - count;
-	const divided = data.slice(firstIndex,lastIndex);
+    const divided = data.slice(firstIndex,lastIndex);
 	const lastIndexSection = Math.ceil(data.length / count);
 		return {
             lastIndex: lastIndex,
