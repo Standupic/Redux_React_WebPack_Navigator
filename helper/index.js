@@ -2,8 +2,8 @@ import array from 'lodash/array';
 import {List} from 'immutable';
 import {isEqual} from 'lodash/lang';
 import {reduce} from 'lodash/collection';
-import { isObject } from 'util';
-import { object } from 'prop-types';
+// import { isObject } from 'util';
+// import { object } from 'prop-types';
 
 
 export function uniqId(){
@@ -94,7 +94,7 @@ export function reduceObject(obj){
 }
 
 export function filteringRanging(data,checked,sliderObj){
-    return rangingTarifs(Object.keys(reduceObject(sliderObj)),multipleFiltering(data,checked),sliderObj)
+    return rangingTarifs(Object.keys(reduceObject(sliderObj)), multipleFiltering(data,checked),sliderObj)
 }
 
 export function rangingTarifs(keys,data,sliderObj) {
@@ -105,15 +105,35 @@ export function rangingTarifs(keys,data,sliderObj) {
      }) 
 }
 
+function setHideFilter(listProperties, exception, checked){
+    const hideFilters = listProperties.reduce((acc, item)=>{
+        return {...acc,[item]:[]}
+       },{})
+
+    listProperties.map((item,i)=>{
+       if (checked[item].length){
+            delete hideFilters[exception]
+       }
+   })
+
+   return hideFilters
+}
+
+
+
 export const hideShowFiltersInputs = (data, checked) =>{
-   
+    // console.log(data, 'data')
+    // console.log(checked, "checked")
     if (isEmpty(reduceObject(checked))) return false
+    // if(Object.values(hideInputs).find((item)=> item == true)) return false
+
     const hideFilters = {
         "region" : [],
         "location" : [],
         "localizationbasis" : [],
-         "speed": []
+        "speed" : []
     }
+
     multipleFiltering(data, checked).map( item =>{
         for(let key in hideFilters){
             if(item[key]){
@@ -127,11 +147,13 @@ export const hideShowFiltersInputs = (data, checked) =>{
             }
         }
     })
+
     for(let key in hideFilters){
         hideFilters[key] = array.uniq(hideFilters[key]).sort((a,b)=>{
             return a - b;
         })
     }
+    // console.log(hideFilters,"hideFilters")
     return hideFilters
 }
 
@@ -175,20 +197,31 @@ export function uniqArray(arr){
 
 export const pageNumbers = (l,count) =>{
     const pageNumbers = [];
+    
     for(let i = 1; i <= Math.ceil(l / count); i++){
         pageNumbers.push(i)
     }
     return pageNumbers;
 }
 
-export const separatorPage = (data, current, count) => {
-	const lastIndex = current  * count;
-    const firstIndex = lastIndex - count;
-    const divided = data.slice(firstIndex,lastIndex);
+export const separatorPage = (data, section, count) => {
+
+    let l,f,x
+    if(section  > 1){
+        x = section - 2
+        l = (section * count) - section - x
+        f = l - count
+    }else{
+        l = section * count;    
+        f = l - count;
+    }
+    
+    const divided = data.slice(f,l);
+
 	const lastIndexSection = Math.ceil(data.length / count);
 		return {
-            lastIndex: lastIndex,
-            firstIndex: firstIndex,
+            lastIndex: l,
+            firstIndex: f,
             divided: divided,
             lastIndexSection: lastIndexSection,
 	    }

@@ -16,12 +16,14 @@ import {
 const Pagination =(props)=>{
     const {paginationObject,
           movePagination,loading} = props;
-
+    
     const {currentSectionPages,
         currentPage,
         divided,
         lastIndexSection,
+        countTarifs,
         length} = paginationObject;
+        console.log(divided)
 	return(
         <React.Fragment>
         {loading ? 
@@ -40,6 +42,17 @@ const Pagination =(props)=>{
                 value={"prev"}
                 onClick={(obj)=>{movePagination(PREV)}}>&lt;
             </li>
+            {   currentPage >= countTarifs + 1 && lastIndexSection >= countTarifs ?
+                <React.Fragment>
+                <li>{1}</li>
+                <li>
+                    ...
+                </li>
+                </React.Fragment>
+                :
+                null
+             
+            }
             {
                 divided.map((number, key)=>{
                     return(
@@ -50,7 +63,17 @@ const Pagination =(props)=>{
                         </li>
                     )
                 })
-            } 
+            }
+            {   currentPage > countTarifs  && length >= countTarifs ?
+                <React.Fragment>
+                <li>
+                    ...
+                </li>
+                <li>{length}</li>
+                </React.Fragment>
+                :
+                null
+            }
             <li className="next" 
                 value={"next"}
                 onClick={(obj)=>{movePagination(NEXT,length)}}>

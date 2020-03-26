@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Radio from "./radio";
 import Checkbox from './checkbox';
 import Slider from './slider';
+import MarkSlider from './sliderMarks'
 import {connect} from 'react-redux';
 
 import {
@@ -79,6 +80,7 @@ class Filter extends React.Component{
                     </div>
                     <div className="scrollFilter">
                         <div className="option util-open-to-hide">
+                            <MarkSlider/>
                             <TypeFilter 
                                 values={values}
                                 param={param}

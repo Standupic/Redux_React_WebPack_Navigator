@@ -49,12 +49,12 @@ const RangeSlider = (props) => {
 
   const defaultValues = {
       "speed": {
-            "value" : [50,1000],
-            "max": 1000,
+        "value" : [50,1000],
+        "max": 1000,
       },
       "navigatorprice": {
-          "value": [350,8500],
-          "max": 8500
+        "value": [350,8500],
+        "max": 8500
     },
   }
   const classes = wrapStyles();

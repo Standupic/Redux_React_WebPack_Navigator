@@ -2,7 +2,7 @@ import {Record} from 'immutable';
 
 const StructureState = new Record({
     currentPage: 1,
-    countTarifs: 8,
+    countTarifs: 5,
     currentSectionPages: 1
 })
 
@@ -67,11 +67,18 @@ export default (state = new StructureState(), action)=>{
                     .updateIn(['currentSectionPages'], v => action.param[1])
                 break;
                 case NEXT:
+                    let x;
                     if(state.get("currentPage") == Math.ceil(action.param[1] / state.get("countTarifs"))) return state
+                    let dis = state.get('currentSectionPages') * 2 - 2; // 4 
+                    console.log(dis)
                 return state
                     .updateIn(['currentPage'], v => v+1)
-                    .updateIn(['currentSectionPages'], v => 
-                    (state.get('countTarifs') * state.get("currentSectionPages") == state.get("currentPage")) ?
+                    .updateIn(['currentSectionPages'], v =>
+                    // v == 2 && (state.get('countTarifs') * v) - 2 == state.get('currentPage') ?
+                    // v + 1 :
+                    v >= 2 && state.get('currentSectionPages') * state.get('countTarifs') == state.get('currentPage') + dis ? 
+                    v + 1 :
+                    state.get('countTarifs') * v  == state.get("currentPage") ?
                     v+1 : v)
                 break;
                 case PREV:

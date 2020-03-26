@@ -13,7 +13,7 @@ const enhancer = applyMiddleware(thunk, api, randomId, logger);
 
 
 const store = createStore(reducer, composeWithDevTools(enhancer,
-    persistState('tags', {key:'tags', deserialize:(data)=>{
+    persistState('tags', {key:'tags', deserialize:(data) => {
         console.log(data)
         JSON.parse(data)
     }})))

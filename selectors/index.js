@@ -31,6 +31,7 @@ export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
 export const selectSelector = (state) => state.filters.select.toJS()
 
+
 export const tagsSelector = (state) => state.tags.tags
 
 export const hideShowSelector = (state) => state.data.hideShowData.toIndexedSeq().toJS()
@@ -183,11 +184,15 @@ export const createSelectorDivided = createSelector(
         currentSectionPages
         } = paginationSelector;
     const getPageNumbers = pageNumbers(createSelectorData.length,countTarifs); 
+  
+
     const paginationObject = separatorPage(getPageNumbers,currentSectionPages,countTarifs);
+
     const data = separatorPage(createSelectorData,currentPage,countTarifs).divided
 
     return {...paginationObject,
                 currentPage,
+                countTarifs,
                 length:createSelectorData.length,
                 currentSectionPages,
                 data,

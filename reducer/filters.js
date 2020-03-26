@@ -12,6 +12,8 @@ import {
 } from '../constans';
 import {Record, OrderedMap, List, toJS, clear} from 'immutable';
 import {objToMap,objToList} from './utils';
+import { checkedSelector } from '../selectors';
+import Checkbox from '../components/checkbox';
 
 
 const StructureState = Record({
