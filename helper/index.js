@@ -27,7 +27,7 @@ export function is_String(item){
 }
 
 
-export function debounce(func, wait = 250, immediate = true) {
+export function debounce(func, wait = 500, immediate = true) {
     var timeout;
     return function() {
       var context = this, args = arguments;
@@ -93,14 +93,17 @@ export function reduceObject(obj){
     },{})
 }
 
-export function filteringRanging(data,checked,sliderObj){
-    return rangingTarifs(Object.keys(reduceObject(sliderObj)), multipleFiltering(data,checked),sliderObj)
+export function filteringRanging(data,checked,slider){
+    return rangingTarifs(
+        Object.keys(reduceObject(slider)),
+        multipleFiltering(data,checked),
+        slider)
 }
 
-export function rangingTarifs(keys,data,sliderObj) {
+export function rangingTarifs(keys,data,slider) {
     return data.filter(item=>{
       return keys.every(key =>{
-        return (item[key] >= sliderObj[key][0] && item[key] <= sliderObj[key][1])
+        return (item[key] >= slider[key][0] && item[key] <= slider[key][1])
       })
      }) 
 }
@@ -291,13 +294,20 @@ export const createFilters = (defaultParams,data)=>{
         }
            return {...acc}
    },{})
-    
+   
+   const sliderMarks = defaultParams.reduce((acc,item)=>{
+    if(item['filter'] == "sliderMarks") {
+       return {...acc, [item['param']]:[]}
+    }
+       return {...acc}
+    },{})
 
     return {
         filters,
         checked,
         hide,
-        slider
+        slider,
+        sliderMarks
     }
 }
 

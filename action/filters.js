@@ -5,6 +5,7 @@ import {
     HIDE_SHOW_FITLERS,
     RESET_FILTERS,
     HANDLER_SLIDER,
+    HANDLER_SLIDER_MARKS,
     RESET_RADIO,
     SELECT_FILTER,
 } from '../constans';
@@ -40,6 +41,13 @@ export const handlerSlider = (ev,obj) => { // {param: str, value: []}
     return{
         type: HANDLER_SLIDER,
         slider: obj 
+    }
+}
+
+export const handlerSliderMarks = (ev,obj) => { // {param: str, value: []}
+    return{
+        type: HANDLER_SLIDER_MARKS,
+        sliderMarks: obj 
     }
 }
 

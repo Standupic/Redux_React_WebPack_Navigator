@@ -11,11 +11,13 @@ import {
         handlerFilteringCheckbox,
         handlerFilteringRadio,
         handlerSlider,
+        handlerSliderMarks,
         handlerResetRadio
         } from '../action/filters';
 import {createSelectorChecked,
         isFiltering,
         createSelectorSlider,
+        createSelectorSliderMarks,
         createSelectorHideShowInputs} from "../selectors";
 
 class Filter extends React.Component{
@@ -24,6 +26,7 @@ class Filter extends React.Component{
         "checkbox": Checkbox,    
         "radio": Radio,
         "slider": Slider,
+        "sliderMarks": MarkSlider
     }
     
     render(){
@@ -37,14 +40,16 @@ class Filter extends React.Component{
             handleToggleFilter,
             checked,
             slider,
+            sliderMarks,
             filtering,
             handlerFilteringCheckbox,
             handlerFilteringRadio,
             handlerSlider,
+            handlerSliderMarks,
             handlerResetRadio,
             hideShowInputs
             } = this.props;
-
+        // console.log(slider, "slider")
         const methodes = {
             "checkbox": {
                 "handler": handlerFilteringCheckbox,
@@ -56,7 +61,11 @@ class Filter extends React.Component{
             "slider": {
                 "handler": handlerSlider,
                 "value": slider,
-            } 
+            },
+            "sliderMarks":{
+                "handler": handlerSliderMarks,
+                "value": sliderMarks, 
+            }
         }
         
         let TypeFilter = this.state[filter]
@@ -80,7 +89,6 @@ class Filter extends React.Component{
                     </div>
                     <div className="scrollFilter">
                         <div className="option util-open-to-hide">
-                            <MarkSlider/>
                             <TypeFilter 
                                 values={values}
                                 param={param}
@@ -110,10 +118,12 @@ export default connect((state) =>({
     filtering: isFiltering(state),
     checked: createSelectorChecked(state),
     slider: createSelectorSlider(state),
+    sliderMarks:createSelectorSliderMarks(state),
     hideShowInputs: createSelectorHideShowInputs(state)
 }),{handleToggleFilter,
     handlerFilteringCheckbox,
     handlerSlider,
+    handlerSliderMarks,
     handlerResetRadio,
     handlerFilteringRadio})(Filter);
 

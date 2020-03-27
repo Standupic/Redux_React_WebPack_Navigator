@@ -23,7 +23,6 @@ const Pagination =(props)=>{
         lastIndexSection,
         countTarifs,
         length} = paginationObject;
-        console.log(divided)
 	return(
         <React.Fragment>
         {loading ? 

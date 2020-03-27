@@ -6,6 +6,7 @@ import {
     HANDLER_FILTERING_CHECKBOX,
     HANDLER_FILTERING_RADIO,
     HANDLER_SLIDER,
+    HANDLER_SLIDER_MARKS,
     TAG_SEARCH,
     RESET_RADIO,
     SELECT_FILTER
@@ -21,6 +22,7 @@ const StructureState = Record({
     checked: new OrderedMap({}),
     hide: new OrderedMap({}),
     slider: new OrderedMap({}),
+    sliderMarks: new OrderedMap({}),
     select: new OrderedMap({
         housetype: new List(),
         archive: new List()
@@ -46,6 +48,7 @@ export default (state = new StructureState(), action)=>{
         .update('checked', (checked) => checked.merge(objToList(response.checked)))
         .update('hide', (hide) => hide.merge(response.hide))
         .update('slider', (slider) => slider.merge(objToList(response.slider)))
+        .update('sliderMarks', (slider) => slider.merge(objToList(response.sliderMarks)))
         break;
 
         case TOGGLE_FILTER:
@@ -126,6 +129,11 @@ export default (state = new StructureState(), action)=>{
             return state
             .updateIn(['slider', slider.param], item => List(slider.value))
         break;
+        case HANDLER_SLIDER_MARKS:
+            const {sliderMarks} = action;
+                return state
+                .updateIn(['sliderMarks', sliderMarks.param], item => List(sliderMarks.value))
+            break;
         default:
             return state
     }

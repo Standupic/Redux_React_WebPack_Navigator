@@ -29,6 +29,7 @@ export const searchSelector = (state) => state.search.search
 
 export const checkedSelector = (state) => state.filters.checked.toJS()
 export const sliderSelector = (state) => state.filters.slider.toJS()
+export const sliderMarksSelector = (state) => state.filters.sliderMarks.toJS()
 export const selectSelector = (state) => state.filters.select.toJS()
 
 
@@ -82,13 +83,17 @@ export const createSelectorData = createSelector(
     checkedSelector,
     sliderSelector,
     selectSelector,
+    sliderMarksSelector,
     searchSelector,
     sortingTarifs,
     paginationSelector,
-    (searchingTarifs,
-    checkedSelector,sliderSelector,selectSelector
+    (searching,
+    checked,slider,select,sliderMarks
     ) =>{
-        return filteringRanging(searchingTarifs,{...checkedSelector,...selectSelector},sliderSelector)
+        return filteringRanging(
+            searching,
+            {...checked,...select},
+            {...slider,...sliderMarks})
     }    
 )
 
@@ -117,6 +122,14 @@ export const createSelectorSlider = createSelector(
         return sliderSelector
     }
 )
+
+export const createSelectorSliderMarks = createSelector(
+    sliderMarksSelector,
+    (sliderMarksSelector) =>{
+        return sliderMarksSelector
+    }
+)
+
 //END SLIDER
 
 //CHECKED

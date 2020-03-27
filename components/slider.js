@@ -46,7 +46,6 @@ const RangeSlider = (props) => {
   const values = checked[param];
   const {handler} = methodes;
 
-
   const defaultValues = {
       "speed": {
         "value" : [50,1000],

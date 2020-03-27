@@ -4,8 +4,8 @@ import Slider from "@material-ui/core/Slider";
 
 const wrapStyles = makeStyles({
   root: {
-    width: 170,
-    padding: "50px 22px"
+    width: 180,
+    padding: "50px 15px"
   },
   thumb: {
     height: 24,
@@ -47,9 +47,8 @@ const MySlider = withStyles({
 
 
 const MarksSlider = (props) => {
-//   const {checked, param, methodes} = props;
-//   const values = checked[param];
-//   const {handler} = methodes;
+  const {checked, param, methodes} = props;
+  const {handler} = methodes;
 
   const marks = [
     {
@@ -91,12 +90,12 @@ const MarksSlider = (props) => {
     <div className={classes.root}>
       <MySlider
         onChange={(e,obj)=>{
-        handler(event,{'param':param,'value':rangeMarks[obj.toString()]})}}
+            handler(event,{'param':param,'value':rangeMarks[obj.toString()]})}}
         defaultValue={0}
         valueLabelFormat={valuetext}
         aria-labelledby="discrete-slider-custom"
         step={250}
-        valueLabelDisplay="auto"
+        valueLabelDisplay="on"
         marks={marks}
         max={1000}
         min={0}
