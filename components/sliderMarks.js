@@ -4,8 +4,8 @@ import Slider from "@material-ui/core/Slider";
 
 const wrapStyles = makeStyles({
   root: {
-    width: 180,
-    padding: "50px 15px"
+    width: 170,
+    padding: "40px 17px"
   },
   thumb: {
     height: 24,

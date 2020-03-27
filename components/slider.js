@@ -7,7 +7,7 @@ import {debounce} from "../helper";
 const wrapStyles = makeStyles({
   root: {
     width: 170,
-    padding: "50px 22px"
+    padding: "40px 15px"
   },
   thumb: {
     height: 24,
