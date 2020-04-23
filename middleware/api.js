@@ -3,8 +3,9 @@ import {createFilters,
         greatestValue,
         createLabels,
         createHideShowData} from '../helper';
+const mode = process.env.NODE_ENV;
 
-import  data from '../data/tarifs.json';
+import  data from '../data/tarifs2.json';
 import  defaultParams from '../data/default_params.json';
 import  tags from '../data/tags.json';
 
@@ -18,103 +19,103 @@ import
     LOAD_TAGS,
     } from '../constans';
 
-const mode = process.env.NODE_ENV;
+
 let result;
 
 switch(mode){
     case 'production':
+        result = (store) => (next) => async (action) => {
 
-    result = (store) => (next) => (action) => {
-    if(!action.meta || action.type !== "API"){
-        return next(action)
-    }
-    next({
-        type: LOAD_DATA_BEGIN
-    });
-
-    try{
-        const labels = createLabels(defaultParams)
-        const hideShowData = createHideShowData(defaultParams)
-        next({
-            type: LOAD_DATA,
-            response: {
-                data,
-                labels,
-                hideShowData
+            if(!action.meta || action.type !== "API"){
+                return next(action)
             }
-        })
-        const filters  = createFilters(defaultParams, data)
-        next({
-            type: LOAD_FILTERS,
-            response: filters
-        })
-        const tagsData = greatestValue(tags)
-        next({
-            type: LOAD_TAGS,
-            response: {
-                tags: tagsData
-            }
-        })
-        next({
-           type: LOAD_DATA_SUCCESS
-        })
+            const {meta} = action
+            next({
+                type: LOAD_DATA_BEGIN
+            });
 
-    }catch(error){
-        next({
-            type: LOAD_DATA_FAILURE,
-            response: {error} 
-        })
-    }
-    }
+            try {
+                const data = await doRequest(meta[0])
+                const defaultParams = await doRequest(meta[1])
+                const labels = await createLabels(defaultParams)
+                const hideShowData = await createHideShowData(defaultParams)
+                next({
+                    type: LOAD_DATA,
+                    response: {
+                        data,
+                        labels,
+                        hideShowData
+                    }
+                })
+                const filters  = await createFilters(defaultParams, data)
+                next({
+                    type: LOAD_FILTERS,
+                    response: filters
+                })
+                const tagsParams = await doRequest(meta[2])
+                const tags = await greatestValue(tagsParams)
+                next({
+                    type: LOAD_TAGS,
+                    response: {
+                        tags
+                    },
+                })
+                next({
+                    type: LOAD_DATA_SUCCESS,
+                })
+            }catch(error){
+                next({
+                    type: LOAD_DATA_FAILURE,
+                    response: {error} // replace on error
+                })
+            };
+        }
     break;
 
     default:
+        result = (store) => (next) => (action) => {
+            if(!action.meta || action.type !== "API"){
+                return next(action)
+            }
+            next({
+                type: LOAD_DATA_BEGIN
+            });
 
-    result = (store) => (next) => async (action) => {
-        if(!action.meta || action.type !== "API"){
-            return next(action)
+            try{
+                const labels = createLabels(defaultParams)
+                const hideShowData = createHideShowData(defaultParams)
+                next({
+                    type: LOAD_DATA,
+                    response: {
+                        data,
+                        labels,
+                        hideShowData
+                    }
+                })
+                const filters  = createFilters(defaultParams, data)
+                next({
+                    type: LOAD_FILTERS,
+                    response: filters
+                })
+                const tagsData = greatestValue(tags)
+                next({
+                    type: LOAD_TAGS,
+                    response: {
+                        tags: tagsData
+                    }
+                })
+                next({
+                    type: LOAD_DATA_SUCCESS
+                })
+
+            }catch(error){
+                next({
+                    type: LOAD_DATA_FAILURE,
+                    response: {error}
+                })
+            }
         }
-        const {meta} = action
-        next({
-            type: LOAD_DATA_BEGIN
-        });
-
-        try {
-            const data = await doRequest(meta[0])
-            const defaultParams = await doRequest(meta[1])
-            const labels = await createLabels(defaultParams)
-            const hideShowData = await createHideShowData(defaultParams)
-            next({
-                type: LOAD_DATA,
-                response: {
-                    data,
-                    labels,
-                    hideShowData
-                }
-            })
-            const filters  = await createFilters(defaultParams, data)
-            next({
-                type: LOAD_FILTERS,
-                response: filters
-            })
-            const tagsParams = await doRequest(meta[2])
-            const tags = await greatestValue(tagsParams)
-            next({
-                type: LOAD_TAGS,
-                response: {
-                    tags
-                },
-            })
-            next({
-                type: LOAD_DATA_SUCCESS,
-            })
-        }catch(error){
-            next({
-                type: LOAD_DATA_FAILURE,
-                response: {error} // replace on error
-            })
-        };
-    }
+     
 
     const doRequest = async (url) =>{
         const params = await fetch(url);
@@ -122,5 +123,6 @@ switch(mode){
         return data;
     }   
 }
+
 export default result
 

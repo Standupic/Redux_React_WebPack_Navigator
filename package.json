@@ -1,5 +1,6 @@
 {
   "name": "react_webpack_babel",
+  "sideEffects": ["*/data/*.json"],
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -33,7 +34,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "style-loader": "^1.0.0",
-    "terser-webpack-plugin": "^2.2.1",
+    "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0",

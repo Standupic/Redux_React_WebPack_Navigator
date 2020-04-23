@@ -12,11 +12,8 @@ import {composeWithDevTools} from 'redux-devtools-extension/logOnlyInProduction'
 const enhancer = applyMiddleware(thunk, api, randomId);
 
 
-const store = createStore(reducer, composeWithDevTools(enhancer,
-    persistState('tags', {key:'tags', deserialize:(data) => {
-        JSON.parse(data)
-    }})))
+const store = createStore(reducer, composeWithDevTools(enhancer))
 
-window.store = store;
+// window.store = store;
 export default store;
 
