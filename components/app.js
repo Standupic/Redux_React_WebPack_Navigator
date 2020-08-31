@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import HeaderFilter from './headerFilter';
 import TagList from './tagList';
@@ -37,7 +38,8 @@ class App extends Component{
                 <section className="pagination">
 	    			<Pagination/>
 	    		</section>
-                {this.props.open ? <Modal/> : null}
+                {this.props.open ? 
+                ReactDOM.createPortal(<Modal />, document.querySelector("body")) : null}
            </React.Fragment>
         )
     }

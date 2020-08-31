@@ -39,15 +39,10 @@ export default (state = new StructureState(), action)=>{
             return state
             .updateIn(['countTarifs'], v => !isNumeric(value) ? 8 : value)
         case TAG_SEARCH:
-            return returnToOnePage(state)
         case HANDLER_FILTERING_CHECKBOX:
-            return returnToOnePage(state)
         case HANDLER_FILTERING_RADIO:
-            return returnToOnePage(state)
         case HANDLER_SLIDER:
-            return returnToOnePage(state)
         case SELECT_FILTER:
-            return returnToOnePage(state)
         case SORT_TARIFS:
             return returnToOnePage(state)
         case RESET_FILTERS:

@@ -10,9 +10,8 @@ import {createSelectorDivided,hideShowSelector} from '../selectors';
 
 function Modal(props){
 
-    const {hideModal,id,labels,data,checkboxHideShow,hideShowParam} = props;
-    let modalRef = React.createRef();
-
+   const {hideModal,context,id,labels,data,checkboxHideShow,hideShowParam} = props;
+   let modalRef = React.createRef();
    function handleKeyUp(e){
         const keys = {
             27: () => {
@@ -47,6 +46,7 @@ function Modal(props){
                 className="modal"
                 ref={modalRef}>
                 <div id="popup-ext" className="popup-close" onClick={hideModal}></div>
+                    {context}
                     { id ?        
                         <ReadMore 
                             data={data} 

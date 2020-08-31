@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="msk-webdev-web01.ti.ru" id="d667f9f0-6973-47d0-9c6d-017517dce7b1" port="22" customName="wifire" nameFormat="CUSTOM" username="vladimir.shashinov" />
+    </configs>
+  </component>
+</project>

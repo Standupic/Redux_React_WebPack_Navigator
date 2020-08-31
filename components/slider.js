@@ -64,6 +64,7 @@ const RangeSlider = (props) => {
         value={values.length ? values : defaultValues[param].value}
         max={defaultValues[param].max}
         onChange={(event,obj)=>{debounce(handler(event,{'param':param,'value':obj}))}}
+        // onChangeCommitted={(event,obj)=>{debounce(handler(event,{'param':param,'value':obj}))}}
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         defaultValue={defaultValues[param].value}

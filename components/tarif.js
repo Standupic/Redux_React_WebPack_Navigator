@@ -4,7 +4,9 @@ import {getSameHeightTarifs,setSameHeightTarifs,isEmpty} from '../helper';
 import {connect} from 'react-redux';
 import Loader from "./loader";
 import {showModal} from '../action/modal';
+import ReadMore from './readMore';
 import {createSelectorDivided,isFiltering} from '../selectors';
+import Modal  from './modal';
 
 
 function Tarif(props){
@@ -15,7 +17,8 @@ function Tarif(props){
         filtering,
         data,
         search,
-        loading} = props;
+        loading,
+        modalVisible} = props;
     if(data.length){
         useEffect(() => {
             if(!document.querySelector(".wrap_tarifs")) return
@@ -151,6 +154,7 @@ export default connect((state) => ({
     hideShowData: state.data.hideShowData,
     labels: state.data.labels,
     search: state.search.search,
-    loading: state.loading
+    loading: state.loading,
+    modalVisible: state.modal.get('open')
    
 }),{showModal})(Tarif);

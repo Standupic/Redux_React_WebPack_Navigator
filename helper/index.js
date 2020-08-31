@@ -27,7 +27,7 @@ export function is_String(item){
 }
 
 
-export function debounce(func, wait = 500, immediate = true) {
+export function debounce(func, wait = 150, immediate = true) {
     var timeout;
     return function() {
       var context = this, args = arguments;

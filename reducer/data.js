@@ -7,7 +7,7 @@ import {
     } from '../constans';
 
 import {Record, OrderedMap} from 'immutable';
-import {objToMap,arrToMap} from './utils';
+import {objToMap, arrToMap} from './utils';
 
 const StructureState = new Record({
     labels: new OrderedMap({}),
